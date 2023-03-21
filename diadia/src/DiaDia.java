@@ -99,7 +99,6 @@ public class DiaDia {
 		}
 		System.out.println(partita.getStanzaCorrente().getDescrizione());
 	}
-
 	/**
 	 * Comando "Fine".
 	 */

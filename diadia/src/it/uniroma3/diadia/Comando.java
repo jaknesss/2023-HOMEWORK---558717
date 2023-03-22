@@ -20,6 +20,8 @@ public class Comando {
     private String nome;
     private String parametro;
 
+    
+    //Integrare IOConsole --  come spezzare la riga in nome e in paramtro
     public Comando(String istruzione) {
 		Scanner scannerDiParole = new Scanner(istruzione);
 		if (scannerDiParole.hasNext()) this.nome = scannerDiParole.next(); 

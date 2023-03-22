@@ -169,9 +169,9 @@ public class Stanza {
 	 * @return true se l'attrezzo e' stato rimosso, false altrimenti
 	 */
 	
-	public boolean removeAttrezzo(Attrezzo attrezzo) {
+	public boolean removeAttrezzo(Attrezzo daRimuovere) {
 		for(int i = 0; i < numeroAttrezzi; i++) {
-			if(attrezzo.getNome().equals(attrezzi[i].getNome())) {
+			if(daRimuovere.getNome().equals(attrezzi[i].getNome())) {
 				attrezzi = this.aggiustaArray(attrezzi, i);
 				numeroAttrezzi--;
 				return true;

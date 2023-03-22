@@ -19,7 +19,7 @@ import it.uniroma3.diadia.giocatore.Giocatore;
  * @version base
  */
 
-public class DiaDia {
+public class DiaDia {	
 	
 	public IOConsole iOConsole;
 	private Partita partita;
@@ -55,20 +55,20 @@ public class DiaDia {
 	 *         altrimenti
 	 */
 	private boolean processaIstruzione(String istruzione) {
-		Comando comandoDaEseguire = new Comando(istruzione);
-		if (comandoDaEseguire.sconosciuto())
-			iOConsole.mostraMessaggio("Inserisci comando da eseguire");
-		else if(!comandoDaEseguire.hasComando(elencoComandi))
+		Comando DaEseguire = new Comando(istruzione);
+		if (DaEseguire.sconosciuto())
+			iOConsole.mostraMessaggio("Inserisci un comando da eseguire");
+		else if(!DaEseguire.hasComando(elencoComandi))
 			iOConsole.mostraMessaggio("Comando Inesistente");
-		else if (comandoDaEseguire.getNome().equals("vai"))
-			this.vai(comandoDaEseguire.getParametro());
-		else if (comandoDaEseguire.getNome().equals("aiuto"))
+		else if (DaEseguire.getNome().equals("vai"))
+			this.vai(DaEseguire.getParametro());
+		else if (DaEseguire.getNome().equals("aiuto"))
 			this.aiuto();
-		else if (comandoDaEseguire.getNome().equals("posa")) 
-			this.posa(comandoDaEseguire.getParametro());
-		else if (comandoDaEseguire.getNome().equals("prendi")) 
-			this.prendi(comandoDaEseguire.getParametro());
-		else if (comandoDaEseguire.getNome().equals("fine")) {
+		else if (DaEseguire.getNome().equals("posa")) 
+			this.posa(DaEseguire.getParametro());
+		else if (DaEseguire.getNome().equals("prendi")) 
+			this.prendi(DaEseguire.getParametro());
+		else if (DaEseguire.getNome().equals("fine")) {
 			this.fine();
 			return true;
 		}

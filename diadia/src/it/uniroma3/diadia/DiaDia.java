@@ -19,8 +19,8 @@ import it.uniroma3.diadia.giocatore.Giocatore;
  * @version base
  */
 
-public class DiaDia {	
-	
+public class DiaDia {
+
 	public IOConsole iOConsole;
 	private Partita partita;
 	static final private String[] elencoComandi = { "vai", "aiuto", "fine", "posa", "prendi" };
@@ -32,8 +32,6 @@ public class DiaDia {
 			+ "puoi raccoglierli, usarli, posarli quando ti sembrano inutili\n"
 			+ "o regalarli se pensi che possano ingraziarti qualcuno.\n\n"
 			+ "Per conoscere le istruzioni usa il comando 'aiuto'.";
-
-
 
 	public DiaDia() {
 		this.partita = new Partita();
@@ -58,15 +56,15 @@ public class DiaDia {
 		Comando DaEseguire = new Comando(istruzione);
 		if (DaEseguire.sconosciuto())
 			iOConsole.mostraMessaggio("Inserisci un comando da eseguire");
-		else if(!DaEseguire.hasComando(elencoComandi))
+		else if (!DaEseguire.hasComando(elencoComandi))
 			iOConsole.mostraMessaggio("Comando Inesistente");
 		else if (DaEseguire.getNome().equals("vai"))
 			this.vai(DaEseguire.getParametro());
 		else if (DaEseguire.getNome().equals("aiuto"))
 			this.aiuto();
-		else if (DaEseguire.getNome().equals("posa")) 
+		else if (DaEseguire.getNome().equals("posa"))
 			this.posa(DaEseguire.getParametro());
-		else if (DaEseguire.getNome().equals("prendi")) 
+		else if (DaEseguire.getNome().equals("prendi"))
 			this.prendi(DaEseguire.getParametro());
 		else if (DaEseguire.getNome().equals("fine")) {
 			this.fine();
@@ -75,8 +73,10 @@ public class DiaDia {
 		if (this.partita.vinta()) {
 			iOConsole.mostraMessaggio("---| HAI VINTO |---");
 			return true;
-		}else {
-			return false;			
+		} else {
+			iOConsole.mostraMessaggio(this.partita.getLabirinto().getStanzaCorrente().getDescrizione());
+			iOConsole.mostraMessaggio(this.partita.getGiocatore().getBorsa().toString());
+			return false;
 		}
 	}
 
@@ -85,7 +85,7 @@ public class DiaDia {
 	/**
 	 * Stampa informazioni di aiuto.
 	 */
-	
+
 	// Uso System.out.println() altrimenti formatta male i comandi di aiuto
 
 	private void aiuto() {
@@ -102,44 +102,46 @@ public class DiaDia {
 	 * nome, altrimenti stampa un messaggio di errore
 	 */
 	private void vai(String direzione) {
-		if (direzione == null) iOConsole.mostraMessaggio("Dove vuoi andare ?");
+		if (direzione == null)
+			iOConsole.mostraMessaggio("Dove vuoi andare ?");
 		Labirinto lab = partita.getLabirinto();
 		Giocatore giocatore = partita.getGiocatore();
-		Stanza prossimaStanza = lab.getStanzaCorrente().getStanzaAdiacente(direzione);
-		if (prossimaStanza == null) iOConsole.mostraMessaggio("Direzione inesistente");
-		else {
+		Stanza stanzaCorrente = lab.getStanzaCorrente();
+		Stanza prossimaStanza = stanzaCorrente.getStanzaAdiacente(direzione);
+		if (prossimaStanza != null) {
 			lab.setStanzaCorrente(prossimaStanza);
-			giocatore.setCfu(giocatore.getCfu()-1);
+			giocatore.setCfu(giocatore.getCfu() - 1);
+			return;
 		}
-		iOConsole.mostraMessaggio(lab.getStanzaCorrente().getDescrizione());
-		iOConsole.mostraMessaggio(partita.getGiocatore().getBorsa().toString());
+		iOConsole.mostraMessaggio("Non c'e' una stanza in quella direzione");
 	}
 
-	public void posa(String attrezzo) {
-		if (attrezzo == null) iOConsole.mostraMessaggio("Cosa vuoi posare?");
-		Borsa borsa = partita.getGiocatore().getBorsa(); 
+	public void posa(String nomeAttrezzo) {
+		if (nomeAttrezzo == null)
+			iOConsole.mostraMessaggio("Cosa vuoi posare?");
+		Borsa borsa = partita.getGiocatore().getBorsa();
 		Stanza stanza = partita.getLabirinto().getStanzaCorrente();
-		if (borsa.hasAttrezzo(attrezzo)) {
-			stanza.addAttrezzo(borsa.removeAttrezzo(attrezzo));
-		}else {
-			iOConsole.mostraMessaggio("Oggeto inesistente");			
+		if (borsa.hasAttrezzo(nomeAttrezzo)) {
+			stanza.addAttrezzo(borsa.removeAttrezzo(nomeAttrezzo));
+			return;
 		}
-		iOConsole.mostraMessaggio(stanza.toString());
-		iOConsole.mostraMessaggio(borsa.toString());
+		iOConsole.mostraMessaggio("Non hai questo oggetto nella borsa");
 	}
 
 	public void prendi(String nomeAttrezzo) {
-		if(nomeAttrezzo == null) iOConsole.mostraMessaggio("Cosa vuoi prendere");
-		Borsa borsa = partita.getGiocatore().getBorsa(); 
-		Stanza stanza = partita.getLabirinto().getStanzaCorrente();
-		Attrezzo attrezzo = stanza.getAttrezzo(nomeAttrezzo);
-		if (stanza.removeAttrezzo(attrezzo)) {
+		if (nomeAttrezzo == null)
+			iOConsole.mostraMessaggio("Cosa vuoi prendere");
+		Borsa borsa = partita.getGiocatore().getBorsa();
+		Stanza stanzaCorrente = partita.getLabirinto().getStanzaCorrente();
+		Attrezzo attrezzo = stanzaCorrente.getAttrezzo(nomeAttrezzo);
+		if (stanzaCorrente.hasAttrezzo(nomeAttrezzo)) {
+			stanzaCorrente.removeAttrezzo(attrezzo);
 			borsa.addAttrezzo(attrezzo);
+			return;
 		}
-		iOConsole.mostraMessaggio(stanza.toString());
-		iOConsole.mostraMessaggio(borsa.toString());
+		iOConsole.mostraMessaggio("Non c'è questo oggeto nella stanza");
 	}
-	
+
 	/**
 	 * Comando "Fine".
 	 */

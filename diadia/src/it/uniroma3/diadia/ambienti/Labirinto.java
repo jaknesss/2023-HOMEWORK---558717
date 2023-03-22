@@ -24,18 +24,18 @@ public class Labirinto {
 		Stanza biblioteca = new Stanza("Biblioteca");
 		
 		/* collega le stanze */
-		atrio.impostaStanzaAdiacente("nord", biblioteca);
-		atrio.impostaStanzaAdiacente("est", aulaN11);
-		atrio.impostaStanzaAdiacente("sud", aulaN10);
-		atrio.impostaStanzaAdiacente("ovest", laboratorio);
-		aulaN11.impostaStanzaAdiacente("est", laboratorio);
-		aulaN11.impostaStanzaAdiacente("ovest", atrio);
-		aulaN10.impostaStanzaAdiacente("nord", atrio);
-		aulaN10.impostaStanzaAdiacente("est", aulaN11);
-		aulaN10.impostaStanzaAdiacente("ovest", laboratorio);
-		laboratorio.impostaStanzaAdiacente("est", atrio);
-		laboratorio.impostaStanzaAdiacente("ovest", aulaN11);
-		biblioteca.impostaStanzaAdiacente("sud", atrio);
+		atrio.setStanzaAdiacente("nord", biblioteca);
+		atrio.setStanzaAdiacente("est", aulaN11);
+		atrio.setStanzaAdiacente("sud", aulaN10);
+		atrio.setStanzaAdiacente("ovest", laboratorio);
+		aulaN11.setStanzaAdiacente("est", laboratorio);
+		aulaN11.setStanzaAdiacente("ovest", atrio);
+		aulaN10.setStanzaAdiacente("nord", atrio);
+		aulaN10.setStanzaAdiacente("est", aulaN11);
+		aulaN10.setStanzaAdiacente("ovest", laboratorio);
+		laboratorio.setStanzaAdiacente("est", atrio);
+		laboratorio.setStanzaAdiacente("ovest", aulaN11);
+		biblioteca.setStanzaAdiacente("sud", atrio);
 
         /* pone gli attrezzi nelle stanze */
 		aulaN10.addAttrezzo(lanterna);

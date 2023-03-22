@@ -1,3 +1,4 @@
+package it.uniroma3.diadia;
 
 
 import java.util.Scanner;
@@ -21,14 +22,8 @@ public class Comando {
 
     public Comando(String istruzione) {
 		Scanner scannerDiParole = new Scanner(istruzione);
-
-		// prima parola: nome del comando
-		if (scannerDiParole.hasNext())
-			this.nome = scannerDiParole.next(); 
-
-		// seconda parola: eventuale parametro
-		if (scannerDiParole.hasNext())
-			this.parametro = scannerDiParole.next();
+		if (scannerDiParole.hasNext()) this.nome = scannerDiParole.next(); 
+		if (scannerDiParole.hasNext()) this.parametro = scannerDiParole.next();
     }
 
     public String getNome() {
@@ -41,5 +36,14 @@ public class Comando {
 
     public boolean sconosciuto() {
         return (this.nome == null);
+    }
+    
+    public boolean hasComando(String[] elencComandi) {
+    	for(int i = 0; i < elencComandi.length; i++) {
+    		if(elencComandi[i] != null && this.nome.equals(elencComandi[i])) {
+    			return true;
+    		}
+    	}
+    	return false;
     }
 }

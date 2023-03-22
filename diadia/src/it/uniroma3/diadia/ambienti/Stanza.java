@@ -50,7 +50,7 @@ public class Stanza {
 		for (int i = 0; i < this.direzioni.length; i++)
 			if (direzione.equals(this.direzioni[i])) {
 				this.stanzeAdiacenti[i] = stanza;
-				aggiornato = true;
+				aggiornato  = true;
 			}
 		if (!aggiornato)
 			if (this.numeroStanzeAdiacenti < NUMERO_MASSIMO_DIREZIONI) {
@@ -127,9 +127,8 @@ public class Stanza {
 				risultato.append(" " + direzione);
 		risultato.append("\nAttrezzi nella stanza: ");
 		for (Attrezzo attrezzo : this.attrezzi) {
-			if (attrezzo != null) {
+			if (attrezzo != null)
 				risultato.append(attrezzo.toString() + " ");
-			}
 		}
 		return risultato.toString();
 	}
@@ -169,6 +168,10 @@ public class Stanza {
 	 * @return true se l'attrezzo e' stato rimosso, false altrimenti
 	 */
 	
+	
+	
+	// TODO utilizzare getAttrezzo() invece del for
+	// Quindi fare refactor della rimozione tramite indice
 	public boolean removeAttrezzo(Attrezzo daRimuovere) {
 		for(int i = 0; i < numeroAttrezzi; i++) {
 			if(daRimuovere.getNome().equals(attrezzi[i].getNome())) {

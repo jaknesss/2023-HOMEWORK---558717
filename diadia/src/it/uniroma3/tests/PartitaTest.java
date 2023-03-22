@@ -17,13 +17,13 @@ public class PartitaTest {
 	@Test
 	public void testVinta() {
 		lab.setStanzaCorrente(lab.getStanzaVincente());
-		assertTrue(partita.vinta());
+		assertTrue(partita.isVinta());
 	}
 
 	@Test
 	public void testNonAncoraVinta() {
 		lab.setStanzaCorrente(null);
-		assertFalse(partita.vinta());
+		assertFalse(partita.isVinta());
 	}
 
 	@Test

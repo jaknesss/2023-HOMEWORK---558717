@@ -70,7 +70,7 @@ public class DiaDia {
 			this.fine();
 			return true;
 		}
-		if (this.partita.vinta()) {
+		if (this.partita.isVinta()) {
 			iOConsole.mostraMessaggio("---| HAI VINTO |---");
 			return true;
 		} else {

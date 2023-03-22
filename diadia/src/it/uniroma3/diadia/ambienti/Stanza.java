@@ -39,40 +39,6 @@ public class Stanza {
 	}
 
 	/**
-	 * Imposta una stanza adiacente.
-	 *
-	 * @param direzione direzione in cui sara' posta la stanza adiacente.
-	 * @param stanza    stanza adiacente nella direzione indicata dal primo
-	 *                  parametro.
-	 */
-	public void impostaStanzaAdiacente(String direzione, Stanza stanza) {
-		boolean aggiornato = false;
-		for (int i = 0; i < this.direzioni.length; i++)
-			if (direzione.equals(this.direzioni[i])) {
-				this.stanzeAdiacenti[i] = stanza;
-				aggiornato  = true;
-			}
-		if (!aggiornato)
-			if (this.numeroStanzeAdiacenti < NUMERO_MASSIMO_DIREZIONI) {
-				this.direzioni[numeroStanzeAdiacenti] = direzione;
-				this.stanzeAdiacenti[numeroStanzeAdiacenti] = stanza;
-				this.numeroStanzeAdiacenti++;
-			}
-	}
-
-	/**
-	 * Restituisce la stanza adiacente nella direzione specificata
-	 * 
-	 * @param direzione
-	 */
-	public Stanza getStanzaAdiacente(String direzione) {
-		for (int i = 0; i < this.numeroStanzeAdiacenti; i++)
-			if (this.direzioni[i].equals(direzione))
-				return this.stanzeAdiacenti[i];
-		return null;
-	}
-
-	/**
 	 * Restituisce la nome della stanza.
 	 * 
 	 * @return il nome della stanza
@@ -100,18 +66,107 @@ public class Stanza {
 	}
 
 	/**
+	 * Restituisce l'attrezzo nomeAttrezzo se presente nella stanza.
+	 * 
+	 * @param nomeAttrezzo
+	 * @return l'attrezzo presente nella stanza. null se l'attrezzo non e' presente.
+	 */
+	public Attrezzo getAttrezzo(String nomeAttrezzo) {
+		for (int i = 0; i < this.numeroAttrezzi; i++)
+			if (this.attrezzi[i].getNome().equals(nomeAttrezzo))
+				return attrezzi[i];
+		return null;
+	}
+
+	/**
+	 * Restituisce la stanza adiacente nella direzione specificata
+	 * 
+	 * @param direzione
+	 */
+	public Stanza getStanzaAdiacente(String direzione) {
+		for (int i = 0; i < this.numeroStanzeAdiacenti; i++)
+			if (this.direzioni[i].equals(direzione))
+				return this.stanzeAdiacenti[i];
+		return null;
+	}
+
+	/**
+	 * Restuisce tutte le direzioni possibili dalla stanza corrente
+	 * 
+	 * @return direzioni - tutte le direzioni possibili
+	 */
+
+	public String[] getDirezioni() {
+		String[] direzioni = new String[this.numeroStanzeAdiacenti];
+		for (int i = 0; i < this.numeroStanzeAdiacenti; i++)
+			direzioni[i] = this.direzioni[i];
+		return direzioni;
+	}
+
+	/**
+	 * Imposta una stanza adiacente.
+	 *
+	 * @param direzione direzione in cui sara' posta la stanza adiacente.
+	 * @param stanza    stanza adiacente nella direzione indicata dal primo
+	 *                  parametro.
+	 */
+	public void setStanzaAdiacente(String direzione, Stanza stanza) {
+		boolean aggiornato = false;
+		for (int i = 0; i < this.direzioni.length; i++)
+			if (direzione.equals(this.direzioni[i])) {
+				this.stanzeAdiacenti[i] = stanza;
+				aggiornato = true;
+			}
+		if (!aggiornato)
+			if (this.numeroStanzeAdiacenti < NUMERO_MASSIMO_DIREZIONI) {
+				this.direzioni[numeroStanzeAdiacenti] = direzione;
+				this.stanzeAdiacenti[numeroStanzeAdiacenti] = stanza;
+				this.numeroStanzeAdiacenti++;
+			}
+	}
+
+	/**
+	 * Controlla se un attrezzo esiste nella stanza (uguaglianza sul nome).
+	 * 
+	 * @return true se l'attrezzo esiste nella stanza, false altrimenti.
+	 */
+	public boolean hasAttrezzo(String nomeAttrezzo) {
+		return getAttrezzo(nomeAttrezzo) != null;
+	}
+
+	/**
 	 * Mette un attrezzo nella stanza.
 	 * 
 	 * @param attrezzo l'attrezzo da mettere nella stanza.
 	 * @return true se riesce ad aggiungere l'attrezzo, false atrimenti.
 	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
-		if (this.numeroAttrezzi >= NUMERO_MASSIMO_ATTREZZI) return false;
+		if (this.numeroAttrezzi >= NUMERO_MASSIMO_ATTREZZI)
+			return false;
 		this.attrezzi[numeroAttrezzi] = attrezzo;
 		this.numeroAttrezzi++;
 		return true;
 	}
 
+	/**
+	 * Rimuove un attrezzo dalla stanza (ricerca in base al nome).
+	 * 
+	 * @param nomeAttrezzo
+	 * @return true se l'attrezzo e' stato rimosso, false altrimenti
+	 */
+
+	public boolean removeAttrezzo(Attrezzo attrezzo) {
+		for (int i = 0; i < numeroAttrezzi; i++) {
+			if (attrezzo.getNome().equals(attrezzi[i].getNome())) {
+				attrezzi = this.aggiustaArray(attrezzi, i);
+				numeroAttrezzi--;
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
 	/**
 	 * Restituisce una rappresentazione stringa di questa stanza, stampadone la
 	 * descrizione, le uscite e gli eventuali attrezzi contenuti
@@ -127,91 +182,25 @@ public class Stanza {
 				risultato.append(" " + direzione);
 		risultato.append("\nAttrezzi nella stanza: ");
 		for (Attrezzo attrezzo : this.attrezzi) {
-			if (attrezzo != null)
+			if (attrezzo != null) {
 				risultato.append(attrezzo.toString() + " ");
+			}
 		}
 		return risultato.toString();
 	}
 
 	/**
-	 * Controlla se un attrezzo esiste nella stanza (uguaglianza sul nome).
+	 * Copia l'array del parametro in una copia escludendo l'attrezzo da rimuovere
 	 * 
-	 * @return true se l'attrezzo esiste nella stanza, false altrimenti.
+	 * @param attrezzi      - array di attrezzi
+	 * @param indiceRimosso - indice dell'attrezzo da rimuovere
+	 * @return riferimento all'array modificato
 	 */
-	public boolean hasAttrezzo(String nomeAttrezzo) {
-		return getAttrezzo(nomeAttrezzo) != null;
-	}
-
-	/**
-	 * Restituisce l'attrezzo nomeAttrezzo se presente nella stanza.
-	 * 
-	 * @param nomeAttrezzo
-	 * @return l'attrezzo presente nella stanza. null se l'attrezzo non e' presente.
-	 */
-	public Attrezzo getAttrezzo(String nomeAttrezzo) {
-		for (int i = 0; i < this.numeroAttrezzi; i++)
-			if (this.attrezzi[i].getNome().equals(nomeAttrezzo))
-				return attrezzi[i];
-		return null;
-	}
 
 	private Attrezzo[] aggiustaArray(Attrezzo[] attrezzi, int indiceRimosso) {
 		Attrezzo[] copia = new Attrezzo[attrezzi.length];
-		System.arraycopy(attrezzi, 0, copia, 0, indiceRimosso); 
-        System.arraycopy(attrezzi, indiceRimosso+1, copia, indiceRimosso, copia.length-1-indiceRimosso);
-        return copia;
+		System.arraycopy(attrezzi, 0, copia, 0, indiceRimosso);
+		System.arraycopy(attrezzi, indiceRimosso + 1, copia, indiceRimosso, copia.length - 1 - indiceRimosso);
+		return copia;
 	}
-	/**
-	 * Rimuove un attrezzo dalla stanza (ricerca in base al nome).
-	 * 
-	 * @param nomeAttrezzo
-	 * @return true se l'attrezzo e' stato rimosso, false altrimenti
-	 */
-	
-	
-	
-	// TODO utilizzare getAttrezzo() invece del for
-	// Quindi fare refactor della rimozione tramite indice
-	public boolean removeAttrezzo(Attrezzo daRimuovere) {
-		for(int i = 0; i < numeroAttrezzi; i++) {
-			if(daRimuovere.getNome().equals(attrezzi[i].getNome())) {
-				attrezzi = this.aggiustaArray(attrezzi, i);
-				numeroAttrezzi--;
-				return true;
-			}
-		}
-		return false;
-	}
-		
-	
-
-	public String[] getDirezioni() {
-		String[] direzioni = new String[this.numeroStanzeAdiacenti];
-		for (int i = 0; i < this.numeroStanzeAdiacenti; i++)
-			direzioni[i] = this.direzioni[i];
-		return direzioni;
-	}
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

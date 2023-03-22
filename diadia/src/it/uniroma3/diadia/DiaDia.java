@@ -1,6 +1,5 @@
 package it.uniroma3.diadia;
 
-import java.util.Scanner;
 
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;

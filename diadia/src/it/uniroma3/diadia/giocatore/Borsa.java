@@ -2,16 +2,31 @@ package it.uniroma3.diadia.giocatore;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
+/**
+ * Classe che gestisce la borsa del giocatore 
+ * 
+ * @author fra
+ *
+ */
+
 public class Borsa {
-	public final static int DEFAULT_PESO_MAX_BORSA = 10;
+	private final static int DEFAULT_PESO_MAX_BORSA = 10;
 	private Attrezzo[] attrezzi;
 	private int numeroAttrezzi;
 	private int pesoMax;
 
+	/**
+	 * Costruttore secondario della classe Borsa
+	 */
 	public Borsa() {
 		this(DEFAULT_PESO_MAX_BORSA);
 	}
 
+	/**
+	 * Costruttore primario della classe Borsa
+	 * 
+	 * @param pesoMax - peso massimo che la borsa può contenere
+	 */
 	public Borsa(int pesoMax) {
 		this.pesoMax = pesoMax;
 		this.attrezzi = new Attrezzo[10]; // speriamo bastino...
@@ -27,6 +42,11 @@ public class Borsa {
 		return pesoMax;
 	}
 
+	/**
+	 * Restituisce il peso complessivo della borsa
+	 * 
+	 * @return peso - peso complessivo della borsa
+	 */
 	public int getPeso() {
 		int peso = 0;
 		for (int i = 0; i < this.numeroAttrezzi; i++)
@@ -53,8 +73,6 @@ public class Borsa {
 	 * 
 	 * @param attrezzo - attrezzo da aggiungere
 	 * @return vero - l'aggiunta è andata buon fine
-	 * @return falso - il peso del nuovo attrezzo supera il peso massimo
-	 * @return falso - il numero di attrezzi massimo è stato già ragginuto
 	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
 		if (this.getPeso() + attrezzo.getPeso() > this.getPesoMax())
@@ -102,14 +120,13 @@ public class Borsa {
 	/**
 	 * Rimuove un attrezzo dalla borsa e lo restituisce
 	 * 
-	 * @param nomeAttrezzo - attrezzo da rimuovere
-	 * @return rimosso - l'oggetto dell'attrezzo rimosso
+	 * @param daPosare - attrezzo da rimuovere
 	 */
 	public void removeAttrezzo(Attrezzo daPosare) {
 		for (int i = 0; i < numeroAttrezzi; i++)
 			if (attrezzi[i] != null && daPosare.getNome().equals(attrezzi[i].getNome())) {
-				numeroAttrezzi--;
 				attrezzi = this.aggiustaArray(attrezzi, i);
+				numeroAttrezzi--;
 				return;
 			}
 	}

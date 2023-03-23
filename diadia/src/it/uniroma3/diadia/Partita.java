@@ -9,7 +9,6 @@ import it.uniroma3.diadia.giocatore.Giocatore;
  *
  * @author  docente di POO
  * @see Stanza
- * @version base
  */
 
 public class Partita {
@@ -18,6 +17,9 @@ public class Partita {
 	private Giocatore giocatore;
 	private boolean finita;
 
+	/**
+	 * Inizializza le istanze di partita
+	 */
 	public Partita(){
 		this.lab = new Labirinto();
 		this.giocatore = new Giocatore();

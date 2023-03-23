@@ -1,2 +1,2 @@
 # 2023-HOMEWORK---558717
-Lo Studio Di Caso a Suppoorto Del Corso di Programmazione Orientata agli Oggetti 2023
+Lo Studio Di Caso a Supporto Del Corso di Programmazione Orientata agli Oggetti 2023

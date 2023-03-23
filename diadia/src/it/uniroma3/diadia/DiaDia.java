@@ -20,7 +20,6 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 
 public class DiaDia {
 
-	public IOConsole iOConsole;
 	private Partita partita;
 	static final private String[] elencoComandi = { "vai", "aiuto", "fine", "posa", "prendi" };
 	static final private String MESSAGGIO_BENVENUTO = ""
@@ -34,15 +33,14 @@ public class DiaDia {
 
 	public DiaDia() {
 		this.partita = new Partita();
-		this.iOConsole = new IOConsole();
 	}
 
-	public void gioca() {
+	public void gioca(IOConsole iOConsole) {
 		iOConsole.mostraMessaggio(MESSAGGIO_BENVENUTO);
 		String istruzione;
 		do
 			istruzione = iOConsole.leggiRiga();
-		while (!processaIstruzione(istruzione));
+		while (!processaIstruzione(istruzione, iOConsole));
 	}
 
 	/**
@@ -51,22 +49,22 @@ public class DiaDia {
 	 * @return true se l'istruzione e' eseguita e il gioco continua, false
 	 *         altrimenti
 	 */
-	private boolean processaIstruzione(String istruzione) {
-		Comando DaEseguire = new Comando(istruzione);
-		if (DaEseguire.sconosciuto())
+	private boolean processaIstruzione(String istruzione, IOConsole iOConsole) {
+		Comando daEseguire = new Comando(istruzione);
+		if (daEseguire.sconosciuto())
 			iOConsole.mostraMessaggio("Inserisci un comando da eseguire");
-		else if (!DaEseguire.hasComando(elencoComandi))
+		else if (!daEseguire.hasComando(elencoComandi))
 			iOConsole.mostraMessaggio("Comando Inesistente");
-		else if (DaEseguire.getNome().equals("vai"))
-			this.vai(DaEseguire.getParametro());
-		else if (DaEseguire.getNome().equals("aiuto"))
-			this.aiuto();
-		else if (DaEseguire.getNome().equals("posa"))
-			this.posa(DaEseguire.getParametro());
-		else if (DaEseguire.getNome().equals("prendi"))
-			this.prendi(DaEseguire.getParametro());
-		else if (DaEseguire.getNome().equals("fine")) {
-			this.fine();
+		else if (daEseguire.getNome().equals("vai"))
+			this.vai(daEseguire.getParametro(), iOConsole);
+		else if (daEseguire.getNome().equals("aiuto"))
+			this.aiuto(iOConsole);
+		else if (daEseguire.getNome().equals("posa"))
+			this.posa(daEseguire.getParametro(), iOConsole);
+		else if (daEseguire.getNome().equals("prendi"))
+			this.prendi(daEseguire.getParametro(),iOConsole);
+		else if (daEseguire.getNome().equals("fine")) {
+			this.fine(iOConsole);
 			return true;
 		}
 		if (this.partita.isVinta()) {
@@ -87,7 +85,7 @@ public class DiaDia {
 
 	// Uso System.out.println() altrimenti formatta male i comandi di aiuto
 
-	private void aiuto() {
+	private void aiuto(IOConsole iOConsole) {
 		StringBuilder risultato = new StringBuilder();
 		risultato.append("Comandi disponibili: ");
 		for (int i = 0; i < elencoComandi.length; i++) {
@@ -100,7 +98,7 @@ public class DiaDia {
 	 * Cerca di andare in una direzione. Se c'e' una stanza ci entra e ne stampa il
 	 * nome, altrimenti stampa un messaggio di errore
 	 */
-	private void vai(String direzione) {
+	private void vai(String direzione, IOConsole iOConsole) {
 		if (direzione == null)
 			iOConsole.mostraMessaggio("Dove vuoi andare ?");
 		Labirinto lab = partita.getLabirinto();
@@ -115,7 +113,7 @@ public class DiaDia {
 		iOConsole.mostraMessaggio("Non c'e' una stanza in quella direzione");
 	}
 
-	public void posa(String nomeAttrezzo) {
+	public void posa(String nomeAttrezzo, IOConsole iOConsole) {
 		if (nomeAttrezzo == null)
 			iOConsole.mostraMessaggio("Cosa vuoi posare?");
 		Borsa borsaGiocatore = partita.getGiocatore().getBorsa();
@@ -126,7 +124,7 @@ public class DiaDia {
 			iOConsole.mostraMessaggio("Non hai questo oggetto nella borsa");
 	}
 
-	public void prendi(String nomeAttrezzo) {
+	public void prendi(String nomeAttrezzo, IOConsole iOConsole) {
 		if (nomeAttrezzo == null)
 			iOConsole.mostraMessaggio("Cosa vuoi prendere");
 		Borsa borsaGiocatore = partita.getGiocatore().getBorsa();
@@ -142,12 +140,13 @@ public class DiaDia {
 	/**
 	 * Comando "Fine".
 	 */
-	private void fine() {
-		System.out.println("Grazie di aver giocato!"); // si desidera smettere
+	private void fine(IOConsole iOConsole) {
+		iOConsole.mostraMessaggio("Grazie di aver giocato!"); // si desidera smettere
 	}
 
 	public static void main(String[] argc) {
 		DiaDia gioco = new DiaDia();
-		gioco.gioca();
+		IOConsole iOConsole = new IOConsole();
+		gioco.gioca(iOConsole);
 	}
 }

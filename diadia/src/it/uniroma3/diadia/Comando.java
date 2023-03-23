@@ -41,11 +41,9 @@ public class Comando {
     }
     
     public boolean hasComando(String[] elencComandi) {
-    	for(int i = 0; i < elencComandi.length; i++) {
-    		if(elencComandi[i] != null && this.nome.equals(elencComandi[i])) {
+    	for(int i = 0; i < elencComandi.length; i++)
+    		if(elencComandi[i] != null && this.nome.equals(elencComandi[i])) 
     			return true;
-    		}
-    	}
     	return false;
     }
 }

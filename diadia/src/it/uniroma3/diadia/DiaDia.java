@@ -1,6 +1,5 @@
 package it.uniroma3.diadia;
 
-
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
@@ -68,7 +67,7 @@ public class DiaDia {
 		else if (daEseguire.getNome().equals("posa"))
 			this.posa(daEseguire.getParametro(), iOConsole);
 		else if (daEseguire.getNome().equals("prendi"))
-			this.prendi(daEseguire.getParametro(),iOConsole);
+			this.prendi(daEseguire.getParametro(), iOConsole);
 		else if (daEseguire.getNome().equals("fine")) {
 			this.fine(iOConsole);
 			return true;
@@ -120,23 +119,25 @@ public class DiaDia {
 	public void posa(String nomeAttrezzo, IOConsole iOConsole) {
 		if (nomeAttrezzo == null)
 			iOConsole.mostraMessaggio("Cosa vuoi posare?");
-		Stanza stanzaCorrente = partita.getLabirinto().getStanzaCorrente();
-		if (borsa.hasAttrezzo(nomeAttrezzo))
-			stanzaCorrente.addAttrezzo(borsa.removeAttrezzo(nomeAttrezzo));
-		else
+		Stanza stanzaCorrente = lab.getStanzaCorrente();
+		if (borsa.hasAttrezzo(nomeAttrezzo)) {
+			Attrezzo daPosare = borsa.getAttrezzo(nomeAttrezzo);
+			if(stanzaCorrente.addAttrezzo(daPosare))
+				borsa.removeAttrezzo(daPosare);			
+		}else
 			iOConsole.mostraMessaggio("Non hai questo oggetto nella borsa");
 	}
 
 	public void prendi(String nomeAttrezzo, IOConsole iOConsole) {
 		if (nomeAttrezzo == null)
 			iOConsole.mostraMessaggio("Cosa vuoi prendere");
-		Stanza stanzaCorrente = partita.getLabirinto().getStanzaCorrente();
+		Stanza stanzaCorrente = lab.getStanzaCorrente();
 		if (stanzaCorrente.hasAttrezzo(nomeAttrezzo)) {
 			Attrezzo daPrendere = stanzaCorrente.getAttrezzo(nomeAttrezzo);
-			if(borsa.addAttrezzo(daPrendere))
-				stanzaCorrente.removeAttrezzo(daPrendere);				
-		}else
-			iOConsole.mostraMessaggio("Non c'è questo oggeto nella stanza");
+			if (borsa.addAttrezzo(daPrendere))
+				stanzaCorrente.removeAttrezzo(daPrendere);
+		} else
+			iOConsole.mostraMessaggio("Non c'è questo oggetto nella stanza");
 	}
 
 	/**

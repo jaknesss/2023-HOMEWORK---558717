@@ -105,15 +105,13 @@ public class Borsa {
 	 * @param nomeAttrezzo - attrezzo da rimuovere
 	 * @return rimosso - l'oggetto dell'attrezzo rimosso
 	 */
-	public Attrezzo removeAttrezzo(String nomeAttrezzo) {
-		Attrezzo rimosso = null;
+	public void removeAttrezzo(Attrezzo daPosare) {
 		for (int i = 0; i < numeroAttrezzi; i++)
-			if (attrezzi[i] != null && nomeAttrezzo.equals(attrezzi[i].getNome())) {
-				rimosso = attrezzi[i];
+			if (attrezzi[i] != null && daPosare.getNome().equals(attrezzi[i].getNome())) {
 				numeroAttrezzi--;
 				attrezzi = this.aggiustaArray(attrezzi, i);
+				return;
 			}
-		return rimosso;
 	}
 
 	public String toString() {

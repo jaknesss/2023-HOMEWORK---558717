@@ -65,12 +65,11 @@ public class Stanza {
 		return this.attrezzi;
 	}
 
-	
-
 	/**
 	 * Restituisce la stanza adiacente nella direzione specificata
 	 * 
-	 * @param direzione
+	 * @param direzione - direzione della stanza adiacente
+	 * @return stanza - stanza adiacente desiderata
 	 */
 	public Stanza getStanzaAdiacente(String direzione) {
 		for (int i = 0; i < this.numeroStanzeAdiacenti; i++)
@@ -95,8 +94,8 @@ public class Stanza {
 	/**
 	 * Imposta una stanza adiacente.
 	 *
-	 * @param direzione direzione in cui sara' posta la stanza adiacente.
-	 * @param stanza    stanza adiacente nella direzione indicata dal primo
+	 * @param direzione - direzione in cui sara' posta la stanza adiacente.
+	 * @param stanza - stanza adiacente nella direzione indicata dal primo
 	 *                  parametro.
 	 */
 	public void setStanzaAdiacente(String direzione, Stanza stanza) {
@@ -117,30 +116,35 @@ public class Stanza {
 	/**
 	 * Controlla se un attrezzo esiste nella stanza (uguaglianza sul nome).
 	 * 
-	 * @return true se l'attrezzo esiste nella stanza, false altrimenti.
+	 * @param nomeAttrezzo - nome dell'attrezzo da cercare
+	 * @return true - l'attrezzo esiste nella stanza, false altrimenti.
 	 */
+	
 	public boolean hasAttrezzo(String nomeAttrezzo) {
 		return getAttrezzo(nomeAttrezzo) != null;
 	}
+
 	/**
 	 * Restituisce l'attrezzo nomeAttrezzo se presente nella stanza.
 	 * 
-	 * @param nomeAttrezzo
+	 * @param nomeAttrezzo - nome dell'attrezzo da prendere
 	 * @return l'attrezzo presente nella stanza. null se l'attrezzo non e' presente.
 	 */
+
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
 		for (int i = 0; i < this.numeroAttrezzi; i++)
 			if (this.attrezzi[i].getNome().equals(nomeAttrezzo))
 				return attrezzi[i];
 		return null;
 	}
-	
+
 	/**
 	 * Mette un attrezzo nella stanza.
 	 * 
 	 * @param attrezzo l'attrezzo da mettere nella stanza.
 	 * @return true se riesce ad aggiungere l'attrezzo, false atrimenti.
 	 */
+
 	public boolean addAttrezzo(Attrezzo attrezzo) {
 		if (this.numeroAttrezzi >= NUMERO_MASSIMO_ATTREZZI)
 			return false;
@@ -152,8 +156,7 @@ public class Stanza {
 	/**
 	 * Rimuove un attrezzo dalla stanza (ricerca in base al nome).
 	 * 
-	 * @param nomeAttrezzo
-	 * @return true se l'attrezzo e' stato rimosso, false altrimenti
+	 * @param attrezzo - attrezzo da rimuovere
 	 */
 
 	public void removeAttrezzo(Attrezzo attrezzo) {
@@ -164,14 +167,14 @@ public class Stanza {
 				return;
 			}
 	}
-	
-	
+
 	/**
 	 * Restituisce una rappresentazione stringa di questa stanza, stampadone la
 	 * descrizione, le uscite e gli eventuali attrezzi contenuti
 	 * 
 	 * @return la rappresentazione stringa
 	 */
+
 	public String toString() {
 		StringBuilder risultato = new StringBuilder();
 		risultato.append(this.nome);

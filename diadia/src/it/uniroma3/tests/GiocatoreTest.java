@@ -30,7 +30,7 @@ public class GiocatoreTest {
 	public void testRemoveAttrezzo() {
 		Attrezzo attrezzo1 = new Attrezzo("test", 2);
 		giocatore.addAttrezzo(attrezzo1);
-		giocatore.removeAttrezzo(attrezzo1.getNome());
-		assertNull(borsa.getAttrezzo("test"));
+		giocatore.removeAttrezzo(attrezzo1);
+		assertFalse(borsa.hasAttrezzo(attrezzo1.getNome()));
 	}	
 }

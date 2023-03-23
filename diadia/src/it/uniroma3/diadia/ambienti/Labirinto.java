@@ -2,27 +2,40 @@ package it.uniroma3.diadia.ambienti;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
+/**
+ * Classe che gestisce il labirinto in cui il gioco si svolge
+ * 
+ * @author fra
+ * @see Stanza
+ */
 public class Labirinto {
 
 	private Stanza stanzaCorrente;
 	private Stanza stanzaVincente;
-	
+
+	/**
+	 * Inizializza il labirinto
+	 */
 	public Labirinto() {
 		init();
 	}
-	
+
+	/**
+	 * Alloca e collega tutte le stanza che compongono il labirinto, aggiunge
+	 * attrezzi nelle stanze
+	 */
 	private void init() {
 		/* crea gli attrezzi */
-    	Attrezzo lanterna = new Attrezzo("lanterna",3);
-		Attrezzo osso = new Attrezzo("osso",1);
-    	
+		Attrezzo lanterna = new Attrezzo("lanterna", 3);
+		Attrezzo osso = new Attrezzo("osso", 1);
+
 		/* crea stanze del labirinto */
 		Stanza atrio = new Stanza("Atrio");
 		Stanza aulaN11 = new Stanza("Aula N11");
 		Stanza aulaN10 = new Stanza("Aula N10");
 		Stanza laboratorio = new Stanza("Laboratorio Campus");
 		Stanza biblioteca = new Stanza("Biblioteca");
-		
+
 		/* collega le stanze */
 		atrio.setStanzaAdiacente("nord", biblioteca);
 		atrio.setStanzaAdiacente("est", aulaN11);
@@ -37,23 +50,38 @@ public class Labirinto {
 		laboratorio.setStanzaAdiacente("ovest", aulaN11);
 		biblioteca.setStanzaAdiacente("sud", atrio);
 
-        /* pone gli attrezzi nelle stanze */
+		/* pone gli attrezzi nelle stanze */
 		aulaN10.addAttrezzo(lanterna);
 		atrio.addAttrezzo(osso);
 
 		// il gioco comincia nell'atrio
-        this.stanzaCorrente = atrio;  
+		setStanzaCorrente(atrio);
 		this.stanzaVincente = biblioteca;
 	}
 
+	/**
+	 * Restituisce la stanza corrente in cui si trova il giocatore
+	 * 
+	 * @return stanzaCorrente - stanza corrente del giocatore
+	 */
 	public Stanza getStanzaCorrente() {
 		return stanzaCorrente;
 	}
 
+	/**
+	 * Restituisce la stanza veincente del labirinto
+	 * 
+	 * @return stanzaVincente - stanza viencente del labirinto
+	 */
 	public Stanza getStanzaVincente() {
 		return stanzaVincente;
 	}
 
+	/**
+	 * Imposta la stanza corrente del giocaotore
+	 * 
+	 * @param stanzaCorrente - stanza corrente del giocatore
+	 */
 	public void setStanzaCorrente(Stanza stanzaCorrente) {
 		this.stanzaCorrente = stanzaCorrente;
 	}

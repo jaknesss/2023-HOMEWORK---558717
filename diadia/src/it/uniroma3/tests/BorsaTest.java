@@ -37,8 +37,8 @@ public class BorsaTest {
 	public void testRemoveAttrezzo() {
 		borsa.addAttrezzo(attrezzoTest);
 		borsa.addAttrezzo(attrezzoTest2);
-		Attrezzo rimosso = borsa.removeAttrezzo("test");
-		assertEquals(attrezzoTest, rimosso);
+		borsa.removeAttrezzo(attrezzoTest);
+		assertFalse(borsa.hasAttrezzo(attrezzoTest.getNome()));
 	}
 	
 }

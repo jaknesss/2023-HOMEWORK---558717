@@ -8,7 +8,7 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
- * Per giocare crea un'istanza di questa classe e invoca il letodo gioca
+ * Per giocare crea un'istanza di questa classe e invoca il metodo gioca
  *
  * Questa e' la classe principale crea e istanzia tutte le altre
  *
@@ -16,7 +16,6 @@ import it.uniroma3.diadia.giocatore.Giocatore;
  * 
  * @version base
  */
-
 public class DiaDia {
 
 	private Partita partita;
@@ -33,6 +32,9 @@ public class DiaDia {
 			+ "o regalarli se pensi che possano ingraziarti qualcuno.\n\n"
 			+ "Per conoscere le istruzioni usa il comando 'aiuto'.";
 
+	/**
+	 * Si definiscono oggetti utili per il gioco
+	 */
 	public DiaDia() {
 		this.partita = new Partita();
 		this.lab = partita.getLabirinto();
@@ -40,6 +42,11 @@ public class DiaDia {
 		this.borsa = giocatore.getBorsa();
 	}
 
+	/**
+	 * Meotodo che gestisce l'inserimento dei comandi dell'utente
+	 * 
+	 * @param iOConsole - gestisce l'I/O del progetto
+	 */
 	public void gioca(IOConsole iOConsole) {
 		iOConsole.mostraMessaggio(MESSAGGIO_BENVENUTO);
 		String istruzione;
@@ -82,14 +89,10 @@ public class DiaDia {
 		}
 	}
 
-	// implementazioni dei comandi dell'utente:
 
 	/**
 	 * Stampa informazioni di aiuto.
 	 */
-
-	// Uso System.out.println() altrimenti formatta male i comandi di aiuto
-
 	private void aiuto(IOConsole iOConsole) {
 		StringBuilder risultato = new StringBuilder();
 		risultato.append("Comandi disponibili: ");
@@ -102,6 +105,9 @@ public class DiaDia {
 	/**
 	 * Cerca di andare in una direzione. Se c'e' una stanza ci entra e ne stampa il
 	 * nome, altrimenti stampa un messaggio di errore
+	 * 
+	 * @param direzione - direzione in cui si vorrebbe andare
+	 * @param iOConsole - gestisce l'I/O del progetto
 	 */
 	private void vai(String direzione, IOConsole iOConsole) {
 		if (direzione == null)
@@ -116,6 +122,14 @@ public class DiaDia {
 		iOConsole.mostraMessaggio("Non c'e' una stanza in quella direzione");
 	}
 
+	/**
+	 * Cerca di posare un oggetto. Se c'e' l'oggetto nella borsa lo posa e lo
+	 * aggiunnge alla stanza corrente
+	 * 
+	 * @param nomeAttrezzo - nome dell'attrezzo da prendere
+	 * @param iOConsole - gestisce l'I/O del progetto
+	 * @see Borsa
+	 */
 	public void posa(String nomeAttrezzo, IOConsole iOConsole) {
 		if (nomeAttrezzo == null)
 			iOConsole.mostraMessaggio("Cosa vuoi posare?");
@@ -127,7 +141,14 @@ public class DiaDia {
 		}else
 			iOConsole.mostraMessaggio("Non hai questo oggetto nella borsa");
 	}
-
+	/**
+	 * Cerca di prendere un oggetto. Se c'e' l'oggetto nella stanza lo prende e lo
+	 * aggiunnge alla borsa del giocatore
+	 * 
+	 * @param nomeAttrezzo - nome dell'attrezzo da prendere
+	 * @param iOConsole - gestisce l'I/O del progetto
+	 * @see Giocatore
+	 */
 	public void prendi(String nomeAttrezzo, IOConsole iOConsole) {
 		if (nomeAttrezzo == null)
 			iOConsole.mostraMessaggio("Cosa vuoi prendere");
@@ -141,12 +162,18 @@ public class DiaDia {
 	}
 
 	/**
-	 * Comando "Fine".
+	 * Comando "Fine" stampa un messaggio.
 	 */
 	private void fine(IOConsole iOConsole) {
 		iOConsole.mostraMessaggio("Grazie di aver giocato!"); // si desidera smettere
 	}
 
+	/**
+	 * Viene inizializzato e fatto partire il giooco
+	 * 
+	 * @param argc - parametri 
+	 */
+	
 	public static void main(String[] argc) {
 		DiaDia gioco = new DiaDia();
 		IOConsole iOConsole = new IOConsole();

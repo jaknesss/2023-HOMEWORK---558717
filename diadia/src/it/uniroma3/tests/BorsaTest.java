@@ -10,11 +10,11 @@ import it.uniroma3.diadia.giocatore.Borsa;
 public class BorsaTest {
 	
 	Borsa borsa = new Borsa();
-	Attrezzo attrezzoTest = new Attrezzo("test", 3);
-	Attrezzo attrezzoTest2 = new Attrezzo("bho", 2);
+	Attrezzo attrezzoTest = new Attrezzo("osso", 3);
+	Attrezzo attrezzoTest2 = new Attrezzo("lanterna", 2);
 
 	@Test
-	public void testPesoMassimoAddAttrezzo() {
+	public void testAddAttrezzoPesoMassimo() {
 		for(int i = 0; i < 3; i++) {
 			borsa.addAttrezzo(attrezzoTest);
 		}
@@ -28,7 +28,7 @@ public class BorsaTest {
 	}
 	
 	@Test
-	public void testgetAttrezzoNonEsistente() {
+	public void testGetAttrezzoNonEsistente() {
 		borsa.addAttrezzo(attrezzoTest);
 		assertFalse(borsa.hasAttrezzo("check"));
 	}

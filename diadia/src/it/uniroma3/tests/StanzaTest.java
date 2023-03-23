@@ -24,13 +24,13 @@ public class StanzaTest {
 	
 	@Test
 	public void testGetStanzaAdiacenteEsistente() {
-		stanza.impostaStanzaAdiacente("sud", adiacenteSud);
+		stanza.setStanzaAdiacente("sud", adiacenteSud);
 		assertEquals(adiacenteSud, stanza.getStanzaAdiacente("sud"));
 	}
 	
 	@Test
 	public void testGetStanzaAdiacenteNonEsistente() {
-		stanza.impostaStanzaAdiacente("sud", adiacenteSud);
+		stanza.setStanzaAdiacente("sud", adiacenteSud);
 		assertEquals(null, stanza.getStanzaAdiacente("nord"));	
 	}
 	
@@ -38,8 +38,8 @@ public class StanzaTest {
 	@Test
 	public void testImpostaStanzaAdiacente() {
 		Stanza stanzaCheRimpiazza = new Stanza("test");
-		stanza.impostaStanzaAdiacente("sud", adiacenteSud);
-		stanza.impostaStanzaAdiacente("sud", stanzaCheRimpiazza);
+		stanza.setStanzaAdiacente("sud", adiacenteSud);
+		stanza.setStanzaAdiacente("sud", stanzaCheRimpiazza);
 		assertEquals(stanzaCheRimpiazza, stanza.getStanzaAdiacente("sud"));		
 	}
 	

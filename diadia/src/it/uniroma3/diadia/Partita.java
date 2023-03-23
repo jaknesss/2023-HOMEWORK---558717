@@ -17,15 +17,14 @@ public class Partita {
 	private Labirinto lab;
 	private Giocatore giocatore;
 	private boolean finita;
-	
+
 	public Partita(){
 		this.lab = new Labirinto();
 		this.giocatore = new Giocatore();
 		this.finita = false;
 	}
-	
-	
-	
+
+
 	/**
 	 * Restituisce il giocatore
 	 * @return oggetto di tipo Giocatore del giocatore corrente
@@ -33,8 +32,8 @@ public class Partita {
 	public Giocatore getGiocatore() {
 		return this.giocatore;
 	}
-	
-	
+
+
 	/**
 	 * Restituisce il labirinto 
 	 * @return oggetto di tipo Labirinto del labirinto corrente
@@ -42,7 +41,7 @@ public class Partita {
 	public Labirinto getLabirinto() {
 		return this.lab;
 	}
-	
+
 	/**
 	 * Restituisce vero se e solo se la partita e' finita
 	 * @return vero se partita finita
@@ -58,7 +57,7 @@ public class Partita {
 	public boolean isVinta() {
 		return lab.getStanzaCorrente() == lab.getStanzaVincente();
 	}
-	
+
 	/**
 	 * Imposta la partita come finita
 	 *
@@ -66,13 +65,12 @@ public class Partita {
 	public void setFinita() {
 		this.finita = true;
 	}
-	
-	
+
+
 }
-		
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+

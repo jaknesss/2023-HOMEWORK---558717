@@ -107,13 +107,12 @@ public class Borsa {
 	 */
 	public Attrezzo removeAttrezzo(String nomeAttrezzo) {
 		Attrezzo rimosso = null;
-		for (int i = 0; i < numeroAttrezzi; i++) {
+		for (int i = 0; i < numeroAttrezzi; i++)
 			if (attrezzi[i] != null && nomeAttrezzo.equals(attrezzi[i].getNome())) {
 				rimosso = attrezzi[i];
 				numeroAttrezzi--;
 				attrezzi = this.aggiustaArray(attrezzi, i);
 			}
-		}
 		return rimosso;
 	}
 

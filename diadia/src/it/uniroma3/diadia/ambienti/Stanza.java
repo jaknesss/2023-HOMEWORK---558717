@@ -65,18 +65,7 @@ public class Stanza {
 		return this.attrezzi;
 	}
 
-	/**
-	 * Restituisce l'attrezzo nomeAttrezzo se presente nella stanza.
-	 * 
-	 * @param nomeAttrezzo
-	 * @return l'attrezzo presente nella stanza. null se l'attrezzo non e' presente.
-	 */
-	public Attrezzo getAttrezzo(String nomeAttrezzo) {
-		for (int i = 0; i < this.numeroAttrezzi; i++)
-			if (this.attrezzi[i].getNome().equals(nomeAttrezzo))
-				return attrezzi[i];
-		return null;
-	}
+	
 
 	/**
 	 * Restituisce la stanza adiacente nella direzione specificata
@@ -133,7 +122,19 @@ public class Stanza {
 	public boolean hasAttrezzo(String nomeAttrezzo) {
 		return getAttrezzo(nomeAttrezzo) != null;
 	}
-
+	/**
+	 * Restituisce l'attrezzo nomeAttrezzo se presente nella stanza.
+	 * 
+	 * @param nomeAttrezzo
+	 * @return l'attrezzo presente nella stanza. null se l'attrezzo non e' presente.
+	 */
+	public Attrezzo getAttrezzo(String nomeAttrezzo) {
+		for (int i = 0; i < this.numeroAttrezzi; i++)
+			if (this.attrezzi[i].getNome().equals(nomeAttrezzo))
+				return attrezzi[i];
+		return null;
+	}
+	
 	/**
 	 * Mette un attrezzo nella stanza.
 	 * 
@@ -156,13 +157,12 @@ public class Stanza {
 	 */
 
 	public boolean removeAttrezzo(Attrezzo attrezzo) {
-		for (int i = 0; i < numeroAttrezzi; i++) {
+		for (int i = 0; i < numeroAttrezzi; i++)
 			if (attrezzo.getNome().equals(attrezzi[i].getNome())) {
 				attrezzi = this.aggiustaArray(attrezzi, i);
 				numeroAttrezzi--;
 				return true;
 			}
-		}
 		return false;
 	}
 	
@@ -181,11 +181,9 @@ public class Stanza {
 			if (direzione != null)
 				risultato.append(" " + direzione);
 		risultato.append("\nAttrezzi nella stanza: ");
-		for (Attrezzo attrezzo : this.attrezzi) {
-			if (attrezzo != null) {
+		for (Attrezzo attrezzo : this.attrezzi)
+			if (attrezzo != null)
 				risultato.append(attrezzo.toString() + " ");
-			}
-		}
 		return risultato.toString();
 	}
 

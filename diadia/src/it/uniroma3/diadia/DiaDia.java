@@ -118,27 +118,25 @@ public class DiaDia {
 	public void posa(String nomeAttrezzo) {
 		if (nomeAttrezzo == null)
 			iOConsole.mostraMessaggio("Cosa vuoi posare?");
-		Borsa borsa = partita.getGiocatore().getBorsa();
-		Stanza stanza = partita.getLabirinto().getStanzaCorrente();
-		if (borsa.hasAttrezzo(nomeAttrezzo)) {
-			stanza.addAttrezzo(borsa.removeAttrezzo(nomeAttrezzo));
-			return;
-		}
-		iOConsole.mostraMessaggio("Non hai questo oggetto nella borsa");
+		Borsa borsaGiocatore = partita.getGiocatore().getBorsa();
+		Stanza stanzaCorrente = partita.getLabirinto().getStanzaCorrente();
+		if (borsaGiocatore.hasAttrezzo(nomeAttrezzo))
+			stanzaCorrente.addAttrezzo(borsaGiocatore.removeAttrezzo(nomeAttrezzo));
+		else
+			iOConsole.mostraMessaggio("Non hai questo oggetto nella borsa");
 	}
 
 	public void prendi(String nomeAttrezzo) {
 		if (nomeAttrezzo == null)
 			iOConsole.mostraMessaggio("Cosa vuoi prendere");
-		Borsa borsa = partita.getGiocatore().getBorsa();
+		Borsa borsaGiocatore = partita.getGiocatore().getBorsa();
 		Stanza stanzaCorrente = partita.getLabirinto().getStanzaCorrente();
-		Attrezzo attrezzo = stanzaCorrente.getAttrezzo(nomeAttrezzo);
 		if (stanzaCorrente.hasAttrezzo(nomeAttrezzo)) {
-			stanzaCorrente.removeAttrezzo(attrezzo);
-			borsa.addAttrezzo(attrezzo);
-			return;
-		}
-		iOConsole.mostraMessaggio("Non c'è questo oggeto nella stanza");
+			Attrezzo daPrendere = stanzaCorrente.getAttrezzo(nomeAttrezzo);
+			if(borsaGiocatore.addAttrezzo(daPrendere))
+				stanzaCorrente.removeAttrezzo(daPrendere);				
+		}else
+			iOConsole.mostraMessaggio("Non c'è questo oggeto nella stanza");
 	}
 
 	/**

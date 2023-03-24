@@ -113,7 +113,7 @@ public class Borsa {
 	private Attrezzo[] aggiustaArray(Attrezzo[] attrezzi, int indiceRimosso) {
 		Attrezzo[] copia = new Attrezzo[attrezzi.length];
 		System.arraycopy(attrezzi, 0, copia, 0, indiceRimosso);
-		System.arraycopy(attrezzi, indiceRimosso + 1, copia, indiceRimosso, copia.length - 1 - indiceRimosso);
+		System.arraycopy(attrezzi, indiceRimosso + 1, copia, indiceRimosso, copia.length - 1);
 		return copia;
 	}
 

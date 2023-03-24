@@ -15,9 +15,8 @@ public class BorsaTest {
 
 	@Test
 	public void testAddAttrezzoPesoMassimo() {
-		for(int i = 0; i < 3; i++) {
+		for(int i = 0; i < 3; i++) 
 			borsa.addAttrezzo(attrezzoTest);
-		}
 		assertFalse(borsa.addAttrezzo(attrezzoTest));
 	}
 	

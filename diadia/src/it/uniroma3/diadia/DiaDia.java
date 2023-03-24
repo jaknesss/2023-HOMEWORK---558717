@@ -176,7 +176,7 @@ public class DiaDia {
 	
 	public static void main(String[] argc) {
 		DiaDia gioco = new DiaDia();
-		IOConsole iOConsole = new IOConsole();
+		IOConsole iOConsole= new IOConsole();
 		gioco.gioca(iOConsole);
 	}
 }

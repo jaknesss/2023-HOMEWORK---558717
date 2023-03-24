@@ -3,12 +3,11 @@ package it.uniroma3.diadia;
 import java.util.Scanner;
 
 /**
- * Classe che gestisce l'I/O dell'intero pregetto limitando
- * l'uso di System.out/in
+ * Classe che gestisce l'I/O dell'intero pregetto limitando l'uso di
+ * System.out/in
  * 
  * @author fra
  */
-
 public class IOConsole {
 
 	/**

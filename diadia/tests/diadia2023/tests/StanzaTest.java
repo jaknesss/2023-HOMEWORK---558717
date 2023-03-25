@@ -1,13 +1,15 @@
 package diadia2023.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-public class StanzaTest {
+class StanzaTest {
 
 	Stanza stanza = new Stanza("atrio");
 	Stanza adiacenteSud = new Stanza("aulaSud");
@@ -42,5 +44,5 @@ public class StanzaTest {
 		stanza.setStanzaAdiacente("sud", stanzaCheRimpiazza);
 		assertEquals(stanzaCheRimpiazza, stanza.getStanzaAdiacente("sud"));		
 	}
-	
+
 }

@@ -1,7 +1,8 @@
-package it.uniroma3.tests;
+package diadia2023.tests;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import it.uniroma3.diadia.Partita;
@@ -9,11 +10,17 @@ import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.giocatore.Giocatore;
 
 public class PartitaTest {
+	Partita partita;
+	Giocatore giocatore;
+	Labirinto lab;
 
-	Partita partita = new Partita();
-	Labirinto lab = partita.getLabirinto();
-	Giocatore giocatore = partita.getGiocatore();
-	
+	@Before
+	public void setUp() {
+		partita = new Partita();
+		giocatore = partita.getGiocatore();
+		lab = partita.getLabirinto();
+	}
+
 	@Test
 	public void testVinta() {
 		lab.setStanzaCorrente(lab.getStanzaVincente());
@@ -22,7 +29,6 @@ public class PartitaTest {
 
 	@Test
 	public void testNonAncoraVinta() {
-		lab.setStanzaCorrente(null);
 		assertFalse(partita.isVinta());
 	}
 

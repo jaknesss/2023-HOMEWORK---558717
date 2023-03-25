@@ -1,15 +1,17 @@
 package diadia2023.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 
-public class LabirintoTest {
+class LabirintoTest {
 
-	Labirinto lab = new Labirinto();
+Labirinto lab = new Labirinto();
 	
 	@Test
 	public void testSetStanzaCorrente() {
@@ -29,6 +31,5 @@ public class LabirintoTest {
 		lab.setStanzaCorrente(null);
 		assertNull(lab.getStanzaCorrente());
 	}
-	
-	
+
 }

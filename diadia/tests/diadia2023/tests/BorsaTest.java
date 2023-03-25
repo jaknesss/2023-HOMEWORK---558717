@@ -1,14 +1,16 @@
 package diadia2023.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
 
-public class BorsaTest {
-	
+class BorsaTest {
+
 	Borsa borsa = new Borsa();
 	Attrezzo attrezzoTest = new Attrezzo("osso", 3);
 	Attrezzo attrezzoTest2 = new Attrezzo("lanterna", 2);
@@ -40,25 +42,5 @@ public class BorsaTest {
 		assertFalse(borsa.hasAttrezzo(attrezzoTest.getNome()));
 	}	
 	
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

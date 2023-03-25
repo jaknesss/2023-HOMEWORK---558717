@@ -1,15 +1,19 @@
 package diadia2023.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.giocatore.Giocatore;
 
-public class PartitaTest {
+class PartitaTest {
+
 	Partita partita;
 	Giocatore giocatore;
 	Labirinto lab;
@@ -43,4 +47,5 @@ public class PartitaTest {
 		giocatore.setCfu(0);
 		assertTrue(partita.isFinita());
 	}
+
 }

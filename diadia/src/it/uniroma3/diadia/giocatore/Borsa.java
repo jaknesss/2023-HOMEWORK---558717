@@ -112,8 +112,11 @@ public class Borsa {
 	 */
 	private Attrezzo[] aggiustaArray(Attrezzo[] attrezzi, int indiceRimosso) {
 		Attrezzo[] copia = new Attrezzo[attrezzi.length];
-		System.arraycopy(attrezzi, 0, copia, 0, indiceRimosso);
-		System.arraycopy(attrezzi, indiceRimosso+1, copia, indiceRimosso, copia.length-1-indiceRimosso);
+		for(int i = 0 , j = 0; i < attrezzi.length; i++) 
+			if(i != indiceRimosso) {
+				copia[j] = attrezzi[i];
+				j++;
+			}
 		return copia;
 	}
 
@@ -124,7 +127,7 @@ public class Borsa {
 	 */
 	public void removeAttrezzo(Attrezzo daPosare) {
 		for (int i = 0; i < numeroAttrezzi; i++)
-			if (attrezzi[i] != null && daPosare.getNome().equals(attrezzi[i].getNome())) {
+			if (daPosare.getNome().equals(attrezzi[i].getNome())) {
 				attrezzi = this.aggiustaArray(attrezzi, i);
 				numeroAttrezzi--;
 				return;

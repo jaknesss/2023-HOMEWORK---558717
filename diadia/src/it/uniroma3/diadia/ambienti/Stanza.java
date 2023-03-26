@@ -177,7 +177,7 @@ public class Stanza {
 
 	public String toString() {
 		StringBuilder risultato = new StringBuilder();
-		risultato.append(this.nome);
+		risultato.append("\n" + this.nome);
 		risultato.append("\nUscite: ");
 		for (String direzione : this.direzioni)
 			if (direzione != null)
@@ -199,8 +199,11 @@ public class Stanza {
 
 	private Attrezzo[] aggiustaArray(Attrezzo[] attrezzi, int indiceRimosso) {
 		Attrezzo[] copia = new Attrezzo[attrezzi.length];
-		System.arraycopy(attrezzi, 0, copia, 0, indiceRimosso);
-		System.arraycopy(attrezzi, indiceRimosso+1, copia, indiceRimosso, copia.length-1-indiceRimosso);
+		for(int i = 0, j = 0; i < attrezzi.length; i++)
+			if(i != indiceRimosso) {
+				copia[j] = attrezzi[i];
+				j++;
+			}
 		return copia;
 	}
 }

@@ -55,6 +55,7 @@ public class Labirinto {
 		/* pone gli attrezzi nelle stanze */
 		aulaN10.addAttrezzo(lanterna);
 		aulaN11.addAttrezzo(bastone);
+		aulaN11.addAttrezzo(osso);
 		atrio.addAttrezzo(chiave);
 
 		// il gioco comincia nell'atrio

@@ -3,7 +3,7 @@ package it.uniroma3.diadia.giocatore;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 /**
- * Classe che gestisce la borsa del giocatore 
+ * Classe che gestisce la borsa del giocatore
  * 
  * @author fra
  *
@@ -112,8 +112,8 @@ public class Borsa {
 	 */
 	private Attrezzo[] aggiustaArray(Attrezzo[] attrezzi, int indiceRimosso) {
 		Attrezzo[] copia = new Attrezzo[attrezzi.length];
-		for(int i = 0 , j = 0; i < attrezzi.length; i++) 
-			if(i != indiceRimosso) {
+		for (int i = 0, j = 0; i < attrezzi.length; i++)
+			if (i != indiceRimosso) {
 				copia[j] = attrezzi[i];
 				j++;
 			}

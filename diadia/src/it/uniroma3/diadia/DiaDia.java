@@ -81,12 +81,14 @@ public class DiaDia {
 		}
 		if (this.partita.isVinta()) {
 			iOConsole.mostraMessaggio("---| HAI VINTO |---");
-			return true;
-		} else {
+		}else if(this.partita.isFinita()) {
+			iOConsole.mostraMessaggio("---| HAI PERSO |---");
+		}else {
 			iOConsole.mostraMessaggio(lab.getStanzaCorrente().getDescrizione());
 			iOConsole.mostraMessaggio(borsa.toString());
 			return false;
 		}
+		return true;
 	}
 
 

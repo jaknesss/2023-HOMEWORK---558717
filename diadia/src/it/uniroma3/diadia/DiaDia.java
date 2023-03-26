@@ -157,6 +157,7 @@ public class DiaDia {
 			Attrezzo daPrendere = stanzaCorrente.getAttrezzo(nomeAttrezzo);
 			if (borsa.addAttrezzo(daPrendere))
 				stanzaCorrente.removeAttrezzo(daPrendere);
+			else iOConsole.mostraMessaggio("Borsa troppo pesante");
 		} else
 			iOConsole.mostraMessaggio("Non c'è questo oggetto nella stanza");
 	}

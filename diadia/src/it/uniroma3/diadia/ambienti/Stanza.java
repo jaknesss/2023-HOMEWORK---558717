@@ -199,8 +199,13 @@ public class Stanza {
 
 	private Attrezzo[] aggiustaArray(Attrezzo[] attrezzi, int indiceRimosso) {
 		Attrezzo[] copia = new Attrezzo[attrezzi.length];
-		System.arraycopy(attrezzi, 0, copia, 0, indiceRimosso);
-		System.arraycopy(attrezzi, indiceRimosso + 1, copia, indiceRimosso, copia.length-1);
+		for(int i = 0, j = 0; i < attrezzi.length; i++)
+			if(attrezzi[i] != null) {
+				copia[j] = attrezzi[i];
+				j++;
+			}
+//		System.arraycopy(attrezzi, 0, copia, 0, indiceRimosso);
+//		System.arraycopy(attrezzi, indiceRimosso + 1, copia, indiceRimosso, copia.length-1);
 		return copia;
 	}
 }

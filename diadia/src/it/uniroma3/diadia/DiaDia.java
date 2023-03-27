@@ -75,15 +75,14 @@ public class DiaDia {
 			this.posa(daEseguire.getParametro(), iOConsole);
 		else if (daEseguire.getNome().equals("prendi"))
 			this.prendi(daEseguire.getParametro(), iOConsole);
-		else if (daEseguire.getNome().equals("fine")) {
-			this.fine(iOConsole);
-			return true;
-		}
-		if (this.partita.isVinta()) {
+		
+		if (this.partita.isVinta())
 			iOConsole.mostraMessaggio("---| HAI VINTO |---");
-		}else if(this.partita.isFinita()) {
+		else if(this.partita.isFinita())
 			iOConsole.mostraMessaggio("---| HAI PERSO |---");
-		}else {
+		else if (daEseguire.getNome().equals("fine"))
+			this.fine(iOConsole);
+		else {
 			iOConsole.mostraMessaggio(lab.getStanzaCorrente().getDescrizione());
 			iOConsole.mostraMessaggio(borsa.toString());
 			return false;
@@ -116,12 +115,12 @@ public class DiaDia {
 			iOConsole.mostraMessaggio("Dove vuoi andare ?");
 		Stanza stanzaCorrente = lab.getStanzaCorrente();
 		Stanza prossimaStanza = stanzaCorrente.getStanzaAdiacente(direzione);
-		if (prossimaStanza != null) {
+		if (prossimaStanza == null)
+			iOConsole.mostraMessaggio("Non c'e' una stanza in quella direzione");
+		else {
 			lab.setStanzaCorrente(prossimaStanza);
-			giocatore.setCfu(giocatore.getCfu() - 1);
-			return;
+			giocatore.setCfu(giocatore.getCfu() - 1);			
 		}
-		iOConsole.mostraMessaggio("Non c'e' una stanza in quella direzione");
 	}
 
 	/**
@@ -179,7 +178,7 @@ public class DiaDia {
 	
 	public static void main(String[] argc) {
 		DiaDia gioco = new DiaDia();
-		IOConsole iOConsole= new IOConsole();
+		IOConsole iOConsole = new IOConsole();
 		gioco.gioca(iOConsole);
 	}
 }

@@ -63,24 +63,25 @@ public class DiaDia {
 	 */
 	private boolean processaIstruzione(String istruzione, IOConsole iOConsole) {
 		Comando daEseguire = new Comando(istruzione);
+		String nome = daEseguire.getNome();
 		if (daEseguire.sconosciuto())
 			iOConsole.mostraMessaggio("Inserisci un comando da eseguire");
 		else if (!daEseguire.hasComando(elencoComandi))
 			iOConsole.mostraMessaggio("Comando Inesistente");
-		else if ("vai".equals(daEseguire.getNome()))
+		else if ("vai".equals(nome))
 			this.vai(daEseguire.getParametro(), iOConsole);
-		else if ("aiuto".equals(daEseguire.getNome()))
+		else if ("aiuto".equals(nome))
 			this.aiuto(iOConsole);
-		else if ("posa".equals(daEseguire.getNome()))
+		else if ("posa".equals(nome))
 			this.posa(daEseguire.getParametro(), iOConsole);
-		else if ("prendi".equals(daEseguire.getNome()))
+		else if ("prendi".equals(nome))
 			this.prendi(daEseguire.getParametro(), iOConsole);
 		
 		if (this.partita.isVinta())
 			iOConsole.mostraMessaggio("---| HAI VINTO |---");
 		else if(this.partita.isFinita())
-			iOConsole.mostraMessaggio("---|  |---");
-		else if ("fine".equals(daEseguire.getNome()))
+			iOConsole.mostraMessaggio("---| HAI PERSO |---");
+		else if ("fine".equals(nome))
 			this.fine(iOConsole);
 		else {
 			iOConsole.mostraMessaggio(lab.getStanzaCorrente().getDescrizione());

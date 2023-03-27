@@ -79,7 +79,7 @@ public class DiaDia {
 		if (this.partita.isVinta())
 			iOConsole.mostraMessaggio("---| HAI VINTO |---");
 		else if(this.partita.isFinita())
-			iOConsole.mostraMessaggio("---| HAI PERSO |---");
+			iOConsole.mostraMessaggio("---|  |---");
 		else if (daEseguire.getNome().equals("fine"))
 			this.fine(iOConsole);
 		else {
@@ -111,15 +111,17 @@ public class DiaDia {
 	 * @param iOConsole - gestisce l'I/O del progetto
 	 */
 	private void vai(String direzione, IOConsole iOConsole) {
-		if (direzione == null)
+		if (direzione == null) {
 			iOConsole.mostraMessaggio("Dove vuoi andare ?");
+			return;
+		}
 		Stanza stanzaCorrente = lab.getStanzaCorrente();
 		Stanza prossimaStanza = stanzaCorrente.getStanzaAdiacente(direzione);
-		if (prossimaStanza == null)
-			iOConsole.mostraMessaggio("Non c'e' una stanza in quella direzione");
-		else {
+		if (prossimaStanza != null){
 			lab.setStanzaCorrente(prossimaStanza);
 			giocatore.setCfu(giocatore.getCfu() - 1);			
+		}else {
+			iOConsole.mostraMessaggio("Non c'e' una stanza in quella direzione");
 		}
 	}
 
@@ -132,8 +134,10 @@ public class DiaDia {
 	 * @see Borsa
 	 */
 	public void posa(String nomeAttrezzo, IOConsole iOConsole) {
-		if (nomeAttrezzo == null)
+		if (nomeAttrezzo == null){
 			iOConsole.mostraMessaggio("Cosa vuoi posare?");
+			return;
+		}
 		Stanza stanzaCorrente = lab.getStanzaCorrente();
 		if (borsa.hasAttrezzo(nomeAttrezzo)) {
 			Attrezzo daPosare = borsa.getAttrezzo(nomeAttrezzo);
@@ -146,13 +150,15 @@ public class DiaDia {
 	 * Cerca di prendere un oggetto. Se c'e' l'oggetto nella stanza lo prende e lo
 	 * aggiunnge alla borsa del giocatore
 	 * 
-	 * @param nomeAttrezzo - nome dell'attrezzo da prendere
+	 * @param nomeAttrezzo - no	me dell'attrezzo da prendere
 	 * @param iOConsole - gestisce l'I/O del progetto
 	 * @see Giocatore
 	 */
 	public void prendi(String nomeAttrezzo, IOConsole iOConsole) {
-		if (nomeAttrezzo == null)
+		if (nomeAttrezzo == null) {
 			iOConsole.mostraMessaggio("Cosa vuoi prendere");
+			return;
+		}
 		Stanza stanzaCorrente = lab.getStanzaCorrente();
 		if (stanzaCorrente.hasAttrezzo(nomeAttrezzo)) {
 			Attrezzo daPrendere = stanzaCorrente.getAttrezzo(nomeAttrezzo);

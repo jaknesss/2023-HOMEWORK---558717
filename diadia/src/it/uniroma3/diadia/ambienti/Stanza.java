@@ -156,13 +156,14 @@ public class Stanza {
 	 * @param attrezzo - attrezzo da rimuovere
 	 */
 
-	public void removeAttrezzo(Attrezzo attrezzo) {
+	public boolean removeAttrezzo(Attrezzo attrezzo) {
 		for (int i = 0; i < numeroAttrezzi; i++)
 			if (attrezzo.getNome().equals(attrezzi[i].getNome())) {
 				attrezzi = this.aggiustaArray(attrezzi, i);
 				numeroAttrezzi--;
-				return;
+				return true;
 			}
+		return false;
 	}
 
 	/**

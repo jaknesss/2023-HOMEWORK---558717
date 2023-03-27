@@ -57,8 +57,8 @@ public class Giocatore {
 	 * 
 	 * @param attrezzo - attrezzo da voler rimuovere dalla borsa
 	 */
-	public void removeAttrezzo(Attrezzo attrezzo) {
-		borsa.removeAttrezzo(attrezzo);
+	public boolean removeAttrezzo(Attrezzo attrezzo) {
+		return borsa.removeAttrezzo(attrezzo);
 	}
 
 	/**

@@ -59,8 +59,7 @@ class GiocatoreTest {
 	
 	@Test
 	public void testRemoveAttrezzoBorsaVuota() {
-		giocatore.removeAttrezzo(null);
-		assertFalse(borsa.hasAttrezzo(ATTREZZO));
+		assertFalse(giocatore.removeAttrezzo(null));
 	}
 	
 	@Test
@@ -68,15 +67,15 @@ class GiocatoreTest {
 		Attrezzo attrezzo = new Attrezzo(ATTREZZO, 1);
 		giocatore.addAttrezzo(attrezzo);
 		assertTrue(borsa.hasAttrezzo(ATTREZZO));
-		giocatore.removeAttrezzo(attrezzo);
-		assertFalse(borsa.hasAttrezzo(ATTREZZO));
+		assertTrue(giocatore.removeAttrezzo(attrezzo));
 	}
 	
 	@Test
 	public void testRemoveAttrezzoInesistente() {
 		Attrezzo attrezzo = new Attrezzo(ATTREZZO, 1);
-		giocatore.removeAttrezzo(attrezzo);
-		assertFalse(borsa.hasAttrezzo(ATTREZZO));
+		Attrezzo attrezzo1 = new Attrezzo("nonAggiunto", 1);
+		giocatore.addAttrezzo(attrezzo);
+		assertFalse(giocatore.removeAttrezzo(attrezzo1));
 	}
 	
 }

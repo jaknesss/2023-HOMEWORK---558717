@@ -125,13 +125,14 @@ public class Borsa {
 	 * 
 	 * @param daPosare - attrezzo da rimuovere
 	 */
-	public void removeAttrezzo(Attrezzo daPosare) {
+	public boolean removeAttrezzo(Attrezzo daPosare) {
 		for (int i = 0; i < this.numeroAttrezzi; i++)
 			if (daPosare.getNome().equals(attrezzi[i].getNome())) {
 				attrezzi = this.aggiustaArray(attrezzi, i);
 				numeroAttrezzi--;
-				return;
+				return true;
 			}
+		return false;
 	}
 
 	public String toString() {

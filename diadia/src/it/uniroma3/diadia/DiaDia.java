@@ -67,20 +67,20 @@ public class DiaDia {
 			iOConsole.mostraMessaggio("Inserisci un comando da eseguire");
 		else if (!daEseguire.hasComando(elencoComandi))
 			iOConsole.mostraMessaggio("Comando Inesistente");
-		else if (daEseguire.getNome().equals("vai"))
+		else if ("vai".equals(daEseguire.getNome()))
 			this.vai(daEseguire.getParametro(), iOConsole);
-		else if (daEseguire.getNome().equals("aiuto"))
+		else if ("aiuto".equals(daEseguire.getNome()))
 			this.aiuto(iOConsole);
-		else if (daEseguire.getNome().equals("posa"))
+		else if ("posa".equals(daEseguire.getNome()))
 			this.posa(daEseguire.getParametro(), iOConsole);
-		else if (daEseguire.getNome().equals("prendi"))
+		else if ("prendi".equals(daEseguire.getNome()))
 			this.prendi(daEseguire.getParametro(), iOConsole);
 		
 		if (this.partita.isVinta())
 			iOConsole.mostraMessaggio("---| HAI VINTO |---");
 		else if(this.partita.isFinita())
 			iOConsole.mostraMessaggio("---|  |---");
-		else if (daEseguire.getNome().equals("fine"))
+		else if ("fine".equals(daEseguire.getNome()))
 			this.fine(iOConsole);
 		else {
 			iOConsole.mostraMessaggio(lab.getStanzaCorrente().getDescrizione());

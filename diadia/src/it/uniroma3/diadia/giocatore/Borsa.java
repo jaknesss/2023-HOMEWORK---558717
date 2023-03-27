@@ -63,7 +63,7 @@ public class Borsa {
 
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
 		for (int i = 0; i < this.numeroAttrezzi; i++)
-			if (this.attrezzi[i].getNome().equals(nomeAttrezzo))
+			if (nomeAttrezzo.equals(attrezzi[i].getNome()))
 				return attrezzi[i];
 		return null;
 	}
@@ -126,7 +126,7 @@ public class Borsa {
 	 * @param daPosare - attrezzo da rimuovere
 	 */
 	public void removeAttrezzo(Attrezzo daPosare) {
-		for (int i = 0; i < numeroAttrezzi; i++)
+		for (int i = 0; i < this.numeroAttrezzi; i++)
 			if (daPosare.getNome().equals(attrezzi[i].getNome())) {
 				attrezzi = this.aggiustaArray(attrezzi, i);
 				numeroAttrezzi--;
@@ -140,8 +140,7 @@ public class Borsa {
 			s.append("Contenuto borsa (" + this.getPeso() + "kg/" + this.getPesoMax() + "kg): ");
 			for (int i = 0; i < this.numeroAttrezzi; i++)
 				s.append(attrezzi[i].toString() + " ");
-		} else
-			s.append("Borsa vuota");
+		}else s.append("Borsa vuota");
 		return s.toString();
 	}
 }

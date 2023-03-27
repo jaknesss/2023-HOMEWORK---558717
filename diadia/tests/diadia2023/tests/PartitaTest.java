@@ -1,11 +1,12 @@
 package diadia2023.tests;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.Partita;
@@ -14,11 +15,11 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 
 class PartitaTest {
 
-	Partita partita;
-	Giocatore giocatore;
-	Labirinto lab;
+	private Partita partita;
+	private Giocatore giocatore;
+	private Labirinto lab;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		partita = new Partita();
 		giocatore = partita.getGiocatore();

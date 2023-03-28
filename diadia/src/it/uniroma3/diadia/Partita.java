@@ -15,6 +15,7 @@ public class Partita {
 
 	private Labirinto lab;
 	private Giocatore giocatore;
+	private Stanza stanzaCorrente;
 	private boolean finita;
 
 	/**
@@ -24,6 +25,7 @@ public class Partita {
 		this.lab = new Labirinto();
 		this.giocatore = new Giocatore();
 		this.finita = false;
+		this.stanzaCorrente = lab.getStanzaIniziale();
 	}
 
 
@@ -36,6 +38,10 @@ public class Partita {
 	}
 
 
+	public Stanza getStanzaCorrente() {
+		return this.stanzaCorrente;
+	}
+	
 	/**
 	 * Restituisce il labirinto 
 	 * @return oggetto di tipo Labirinto del labirinto corrente
@@ -57,9 +63,18 @@ public class Partita {
 	 * @return vero se partita vinta
 	 */
 	public boolean isVinta() {
-		return lab.getStanzaCorrente() == lab.getStanzaVincente();
+		return this.stanzaCorrente == lab.getStanzaVincente();
 	}
 
+	/**
+	 * Imposta la stanza corrente del giocaotore
+	 * 
+	 * @param stanzaCorrente - stanza corrente del giocatore
+	 */
+	public void setStanzaCorrente(Stanza stanzaCorrente) {
+		this.stanzaCorrente = stanzaCorrente;
+	}
+	
 	/**
 	 * Imposta la partita come finita
 	 *
@@ -67,6 +82,7 @@ public class Partita {
 	public void setFinita() {
 		this.finita = true;
 	}
+	
 }
 
 

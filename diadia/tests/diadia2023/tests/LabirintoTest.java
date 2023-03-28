@@ -20,22 +20,13 @@ class LabirintoTest {
 	}
 	
 	@Test
-	public void testSetStanzaCorrente() {
-		Stanza stanza = new Stanza("test");
-		lab.setStanzaCorrente(stanza);
-		assertEquals(stanza, lab.getStanzaCorrente());
+	public void testGetStanzaVincente() {
+		assertEquals("biblioteca", lab.getStanzaVincente());
 	}
 
 	@Test
-	public void testGetStanzaVincente() {
-		Stanza stanza = lab.getStanzaVincente();
-		assertEquals(stanza, lab.getStanzaVincente());
-	}
-	
-	@Test
-	public void testGetStanzaCorrenteNull() {
-		lab.setStanzaCorrente(null);
-		assertNull(lab.getStanzaCorrente());
+	public void testGetStanzaIngresso() {
+		assertEquals("ingresso", lab.getStanzaVincente());
 	}
 
 }

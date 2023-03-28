@@ -1,6 +1,5 @@
 package it.uniroma3.diadia;
 
-import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
@@ -19,7 +18,6 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 public class DiaDia {
 
 	private Partita partita;
-	private Labirinto lab;
 	private Giocatore giocatore;
 	private Borsa borsa;
 	static final private String[] elencoComandi = { "vai", "aiuto", "fine", "posa", "prendi" };
@@ -37,7 +35,6 @@ public class DiaDia {
 	 */
 	public DiaDia() {
 		this.partita = new Partita();
-		this.lab = partita.getLabirinto();
 		this.giocatore = partita.getGiocatore();
 		this.borsa = giocatore.getBorsa();
 	}
@@ -84,7 +81,7 @@ public class DiaDia {
 		else if ("fine".equals(nome))
 			this.fine(iOConsole);
 		else {
-			iOConsole.mostraMessaggio(lab.getStanzaCorrente().getDescrizione());
+			iOConsole.mostraMessaggio(partita.getStanzaCorrente().getDescrizione());
 			iOConsole.mostraMessaggio(borsa.toString());
 			return false;
 		}
@@ -116,10 +113,10 @@ public class DiaDia {
 			iOConsole.mostraMessaggio("Dove vuoi andare ?");
 			return;
 		}
-		Stanza stanzaCorrente = lab.getStanzaCorrente();
+		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		Stanza prossimaStanza = stanzaCorrente.getStanzaAdiacente(direzione);
 		if (prossimaStanza != null){
-			lab.setStanzaCorrente(prossimaStanza);
+			partita.setStanzaCorrente(prossimaStanza);
 			giocatore.setCfu(giocatore.getCfu() - 1);			
 		}else {
 			iOConsole.mostraMessaggio("Non c'e' una stanza in quella direzione");
@@ -139,7 +136,7 @@ public class DiaDia {
 			iOConsole.mostraMessaggio("Cosa vuoi posare?");
 			return;
 		}
-		Stanza stanzaCorrente = lab.getStanzaCorrente();
+		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		if (borsa.hasAttrezzo(nomeAttrezzo)) {
 			Attrezzo daPosare = borsa.getAttrezzo(nomeAttrezzo);
 			if(stanzaCorrente.addAttrezzo(daPosare))
@@ -160,7 +157,7 @@ public class DiaDia {
 			iOConsole.mostraMessaggio("Cosa vuoi prendere");
 			return;
 		}
-		Stanza stanzaCorrente = lab.getStanzaCorrente();
+		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		if (stanzaCorrente.hasAttrezzo(nomeAttrezzo)) {
 			Attrezzo daPrendere = stanzaCorrente.getAttrezzo(nomeAttrezzo);
 			if (borsa.addAttrezzo(daPrendere))

@@ -21,24 +21,21 @@ public class Labirinto {
 	}
 
 	/**
-	 * Alloca e collega tutte le stanza che compongono il labirinto, aggiunge
+	 * Alloca e collega tutte  le stanza che compongono il labirinto, aggiunge
 	 * attrezzi nelle stanze
 	 */
 	private void init() {
-		/* crea gli attrezzi */
 		Attrezzo lanterna = new Attrezzo("lanterna", 3);
 		Attrezzo osso = new Attrezzo("osso", 1);
 		Attrezzo chiave = new Attrezzo("chiave", 3);
 		Attrezzo bastone = new Attrezzo("bastone", 6);
 
-		/* crea stanze del labirinto */
 		Stanza atrio = new Stanza("Atrio");
 		Stanza aulaN11 = new Stanza("Aula N11");
 		Stanza aulaN10 = new Stanza("Aula N10");
 		Stanza laboratorio = new Stanza("Laboratorio Campus");
 		Stanza biblioteca = new Stanza("Biblioteca");
 
-		/* collega le stanze */
 		atrio.setStanzaAdiacente("nord", biblioteca);
 		atrio.setStanzaAdiacente("est", aulaN11);
 		atrio.setStanzaAdiacente("sud", aulaN10);
@@ -52,13 +49,11 @@ public class Labirinto {
 		laboratorio.setStanzaAdiacente("ovest", aulaN11);
 		biblioteca.setStanzaAdiacente("sud", atrio);
 
-		/* pone gli attrezzi nelle stanze */
 		aulaN10.addAttrezzo(lanterna);
 		aulaN11.addAttrezzo(bastone);
 		aulaN11.addAttrezzo(osso);
 		atrio.addAttrezzo(chiave);
 
-		// il gioco comincia nell'atrio
 		this.stanzaIniziale = atrio;
 		this.stanzaVincente = biblioteca;
 	}

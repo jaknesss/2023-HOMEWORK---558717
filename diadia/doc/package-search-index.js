@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"it.uniroma3.diadia"},{"l":"it.uniroma3.diadia.ambienti"},{"l":"it.uniroma3.diadia.attrezzi"},{"l":"it.uniroma3.diadia.giocatore"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"it.uniroma3.diadia"}];updateSearchResults();

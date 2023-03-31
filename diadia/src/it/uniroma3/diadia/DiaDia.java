@@ -118,9 +118,8 @@ public class DiaDia {
 		if (prossimaStanza != null){
 			partita.setStanzaCorrente(prossimaStanza);
 			giocatore.setCfu(giocatore.getCfu() - 1);			
-		}else {
+		}else
 			iOConsole.mostraMessaggio("Non c'e' una stanza in quella direzione");
-		}
 	}
 
 	/**

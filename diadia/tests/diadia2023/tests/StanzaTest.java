@@ -1,6 +1,8 @@
 package diadia2023.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +17,7 @@ class StanzaTest {
 	private final String STANZA = "StanzaTest";
 	private final String STANZA_ADIACENTE = "StanzaAdiacente";
 	protected Stanza stanza;
-	
+ 	
 	@BeforeEach
 	public void setUp() throws Exception {
 		this.stanza = new Stanza(STANZA);
@@ -99,13 +101,13 @@ class StanzaTest {
 		assertFalse(stanza.hasAttrezzo("nonEsiste"));
 	}
 	
-	
+	@Test
 	private Stanza creaStanzaEdImpostaAdiacente(Stanza diPartenza, String nomeStanza, String direzione){
 		Stanza adiacente = new Stanza(nomeStanza);
 		diPartenza.setStanzaAdiacente(direzione, adiacente);
 		return adiacente;
-	}
-	
+	}		
+		
 }
 
 

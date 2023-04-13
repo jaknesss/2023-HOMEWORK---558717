@@ -3,6 +3,7 @@ package it.uniroma3.comandi;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.giocatore.Borsa;
 
 public class ComandoPosa implements Comando {
 
@@ -20,10 +21,11 @@ public class ComandoPosa implements Comando {
 			return;
 		}
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
-		if (partita.getGiocatore().getBorsa().hasAttrezzo(nomeOggetto)) {
-			Attrezzo daPosare = partita.getGiocatore().getBorsa().getAttrezzo(nomeOggetto);
+		Borsa borsa = partita.getGiocatore().getBorsa();
+		if (borsa.hasAttrezzo(nomeOggetto)) {
+			Attrezzo daPosare = borsa.getAttrezzo(nomeOggetto);
 			if (stanzaCorrente.addAttrezzo(daPosare))
-				partita.getGiocatore().removeAttrezzo(daPosare);
+				borsa.removeAttrezzo(daPosare);
 			else 
 				System.out.println("Stanza troppo piena! Oggetto non aggiunto");
 		} else

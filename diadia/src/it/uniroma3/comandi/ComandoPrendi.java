@@ -3,6 +3,7 @@ package it.uniroma3.comandi;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.giocatore.Borsa;
 
 public class ComandoPrendi implements Comando {
 
@@ -20,9 +21,10 @@ public class ComandoPrendi implements Comando {
 			return;
 		}
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
+		Borsa borsa = partita.getGiocatore().getBorsa();
 		if (stanzaCorrente.hasAttrezzo(nomeOggetto)) {
 			Attrezzo daPrendere = stanzaCorrente.getAttrezzo(nomeOggetto);
-			if (partita.getGiocatore().addAttrezzo(daPrendere))
+			if (borsa.addAttrezzo(daPrendere))
 				stanzaCorrente.removeAttrezzo(daPrendere);
 			else
 				System.out.println("Borsa troppo pesante!");

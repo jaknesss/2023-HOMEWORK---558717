@@ -11,6 +11,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Borsa {
 	private final static int DEFAULT_PESO_MAX_BORSA = 10;
+	private final static int MAX_CAPIENZA_BORSA = 10;
 	private Attrezzo[] attrezzi;
 	private int numeroAttrezzi;
 	private int pesoMax;
@@ -29,7 +30,7 @@ public class Borsa {
 	 */
 	public Borsa(int pesoMax) {
 		this.pesoMax = pesoMax;
-		this.attrezzi = new Attrezzo[10]; // speriamo bastino...
+		this.attrezzi = new Attrezzo[MAX_CAPIENZA_BORSA]; // speriamo bastino...
 		this.numeroAttrezzi = 0;
 	}
 

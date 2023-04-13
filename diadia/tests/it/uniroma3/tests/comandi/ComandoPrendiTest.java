@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import it.uniroma3.comandi.Comando;
 import it.uniroma3.comandi.FabbricaDiComandi;
 import it.uniroma3.comandi.FabbricaDiComandiFisarmonica;
+import it.uniroma3.diadia.IO;
+import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
@@ -24,6 +26,7 @@ class ComandoPrendiTest {
 	private Stanza stanzaCorrente;
 	private Borsa borsa;
 	private Attrezzo attrezzo;
+	private IO io;
 	
 	
 	@BeforeEach
@@ -31,6 +34,7 @@ class ComandoPrendiTest {
 		partita = new Partita();
 		factory = new FabbricaDiComandiFisarmonica();
 		attrezzo = new Attrezzo(NOME_OGGETTO, PESO_OGGETTO);
+		io = new IOConsole();
 		borsa = partita.getGiocatore().getBorsa();
 		stanzaCorrente = partita.getStanzaCorrente();
 	}
@@ -74,7 +78,7 @@ class ComandoPrendiTest {
 	
 	private void eseguiComando(String COMANDO, String NOME_OGGETTO) {
 		comando = factory.costruisciComando(COMANDO+" "+NOME_OGGETTO);
-		comando.esegui(partita);
+		comando.esegui(partita, io);
 	}
 	
 }

@@ -16,7 +16,6 @@ class ComandoVaiTest {
 	private Partita partita;
 	private FabbricaDiComandi factory;
 	private Comando comando;
-	private Stanza stanzaCorrente;
 	private Stanza stanzaIniziale;
 	private final String COMANDO = "vai "; 
 	private final String COMANDO_SCONOSCIUTO = "test "; 
@@ -26,7 +25,6 @@ class ComandoVaiTest {
 	@BeforeEach
 	void setUp() {
 		partita = new Partita();
-		stanzaCorrente = partita.getStanzaCorrente();
 		stanzaIniziale = partita.getLabirinto().getStanzaIniziale();
 		factory = new FabbricaDiComandiFisarmonica();
 	}

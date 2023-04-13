@@ -32,8 +32,6 @@ public class DiaDia {
 		FabbricaDiComandi factory = new FabbricaDiComandiFisarmonica();
 		Comando comandoDaEseguire = factory.costruisciComando(istruzione);
 		comandoDaEseguire.esegui(this.partita);
-		//System.out.println(partita.getStanzaCorrente().getDescrizione() + "\n" +
-						//   partita.getGiocatore().getBorsa().toString());
 		if (this.partita.isVinta())
 			System.out.println("Hai vinto!");
 		if (this.partita.giocatoreIsMorto())

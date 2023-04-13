@@ -10,7 +10,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  */
 
 public class Giocatore {
-	static final private int CFU_INIZIALI = 3;
+	static final private int CFU_INIZIALI = 10;
 	private int cfu;
 	private Borsa borsa;
 
@@ -70,4 +70,12 @@ public class Giocatore {
 		return this.borsa;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder s = new StringBuilder("");
+		s.append(getBorsa().toString());
+		s.append("\nCFU: " + getCfu());
+		return s.toString();
+	}
+	
 }

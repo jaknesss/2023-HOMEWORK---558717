@@ -1,4 +1,4 @@
-package diadia2023.tests;
+package it.uniroma3.tests;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,12 +18,12 @@ class LabirintoTest {
 	
 	@Test
 	public void testGetStanzaVincente() {
-		assertEquals("biblioteca", lab.getStanzaVincente());
+		assertEquals("Biblioteca", lab.getStanzaVincente().getNome());
 	}
 
 	@Test
 	public void testGetStanzaIngresso() {
-		assertEquals("ingresso", lab.getStanzaVincente());
+		assertEquals("Atrio", lab.getStanzaIniziale().getNome());
 	}
 
 }

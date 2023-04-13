@@ -1,12 +1,14 @@
 package it.uniroma3.comandi;
 
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.giocatore.Borsa;
 
 public class ComandoPosa implements Comando {
 
-	String nomeOggetto;
+	private String nomeOggetto;
 
 	@Override
 	public void setParametro(String parametro) {
@@ -14,17 +16,20 @@ public class ComandoPosa implements Comando {
 	}
 
 	@Override
-	public void esegui(Partita partita) {
+	public void esegui(Partita partita, IO io) {
 		if (nomeOggetto == null) {
-			System.out.println("Cosa vuoi posare?");
+			io.mostraMessaggio("Cosa vuoi posare?");
 			return;
 		}
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
-		if (partita.getGiocatore().getBorsa().hasAttrezzo(nomeOggetto)) {
-			Attrezzo daPosare = partita.getGiocatore().getBorsa().getAttrezzo(nomeOggetto);
+		Borsa borsa = partita.getGiocatore().getBorsa();
+		if (borsa.hasAttrezzo(nomeOggetto)) {
+			Attrezzo daPosare = borsa.getAttrezzo(nomeOggetto);
 			if (stanzaCorrente.addAttrezzo(daPosare))
-				partita.getGiocatore().removeAttrezzo(daPosare);
+				borsa.removeAttrezzo(daPosare);
+			else 
+				io.mostraMessaggio("Stanza troppo piena! Oggetto non aggiunto");
 		} else
-			System.out.println("Non hai questo oggetto nella borsa");
+			io.mostraMessaggio("Non hai questo oggetto nella borsa");
 	}
 }

@@ -8,7 +8,7 @@ import java.util.Scanner;
  * 
  * @author fra
  */
-public class IOConsole {
+public class IOConsole implements IO{
 
 	/**
 	 * Stampa il messaggio di input

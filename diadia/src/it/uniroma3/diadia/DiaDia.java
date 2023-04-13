@@ -16,33 +16,33 @@ public class DiaDia {
 			+ "o regalarli se pensi che possano ingraziarti qualcuno.\n\n"
 			+ "Per conoscere le istruzioni usa il comando 'aiuto'.";
 
-	public DiaDia() {
+	public DiaDia(IO io) {
 		this.partita = new Partita();
 	}
 
-	public void gioca(IOConsole iOConsole) {
-		iOConsole.mostraMessaggio(MESSAGGIO_BENVENUTO);
+	public void gioca(IO io) {
+		io.mostraMessaggio(MESSAGGIO_BENVENUTO);
 		String istruzione;
 		do {
-			istruzione = iOConsole.leggiRiga();
-		}while (!processaIstruzione(istruzione));
+			istruzione = io.leggiRiga();
+		}while (!processaIstruzione(istruzione, io));
 	}
 
-	private boolean processaIstruzione(String istruzione) {
+	private boolean processaIstruzione(String istruzione, IO io) {
 		FabbricaDiComandi factory = new FabbricaDiComandiFisarmonica();
 		Comando comandoDaEseguire = factory.costruisciComando(istruzione);
-		comandoDaEseguire.esegui(this.partita);
+		comandoDaEseguire.esegui(this.partita, io);
 		if (this.partita.isVinta())
-			System.out.println("Hai vinto!");
+			io.mostraMessaggio("Hai vinto!");
 		if (this.partita.giocatoreIsMorto())
-			System.out.println("Hai esaurito i CFU...");
+			io.mostraMessaggio("Hai esaurito i CFU...");
 		return this.partita.isFinita();
 	}
 
 
 	public static void main(String[] argc) {
-		DiaDia gioco = new DiaDia();
-		IOConsole iOConsole = new IOConsole();
-		gioco.gioca(iOConsole);
+		IO io = new IOConsole();
+		DiaDia gioco = new DiaDia(io);
+		gioco.gioca(io);
 	}
 }

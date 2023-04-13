@@ -70,4 +70,12 @@ public class Giocatore {
 		return this.borsa;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder s = new StringBuilder("");
+		s.append(getBorsa().toString());
+		s.append("\nCFU: " + getCfu());
+		return s.toString();
+	}
+	
 }

@@ -62,7 +62,7 @@ public class Partita {
 	 * @return vero se partita finita
 	 */
 	public boolean isFinita() {
-		return finita || isVinta() || (giocatore.getCfu() == 0);
+		return finita || isVinta() || giocatoreIsMorto();
 	}
 
 	/**
@@ -73,6 +73,12 @@ public class Partita {
 	public boolean isVinta() {
 		return this.stanzaCorrente == lab.getStanzaVincente();
 	}
+	
+	
+	public boolean giocatoreIsMorto() {
+		return giocatore.getCfu() == 0;
+	}
+	
 
 	/**
 	 * Imposta la stanza corrente del giocaotore

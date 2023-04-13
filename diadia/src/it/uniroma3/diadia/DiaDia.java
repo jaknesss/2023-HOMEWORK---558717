@@ -1,8 +1,8 @@
 package it.uniroma3.diadia;
 
-import it.uniroma3.diadia.comandi.Comando;
-import it.uniroma3.diadia.comandi.FabbricaDiComandi;
-import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
+import it.uniroma3.comandi.Comando;
+import it.uniroma3.comandi.FabbricaDiComandi;
+import it.uniroma3.comandi.FabbricaDiComandiFisarmonica;
 
 public class DiaDia {
 
@@ -32,8 +32,8 @@ public class DiaDia {
 		FabbricaDiComandi factory = new FabbricaDiComandiFisarmonica();
 		Comando comandoDaEseguire = factory.costruisciComando(istruzione);
 		comandoDaEseguire.esegui(this.partita);
-		System.out.println(partita.getStanzaCorrente().getDescrizione() + "\n" +
-						   partita.getGiocatore().getBorsa().toString());
+		//System.out.println(partita.getStanzaCorrente().getDescrizione() + "\n" +
+						//   partita.getGiocatore().getBorsa().toString());
 		if (this.partita.isVinta())
 			System.out.println("Hai vinto!");
 		if (this.partita.giocatoreIsMorto())

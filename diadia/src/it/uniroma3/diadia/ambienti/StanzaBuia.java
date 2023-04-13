@@ -14,7 +14,7 @@ public class StanzaBuia extends Stanza{
 		if(this.hasAttrezzo(nomeAttrezzoChiave))
 			return super.getDescrizione();
 		System.out.println("Qui c'è buio pesto!" + 
-			               "hoi bisogno di " + 
+			               "\nHai bisogno di " + 
 							nomeAttrezzoChiave);
 		return null;
 	}

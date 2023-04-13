@@ -14,16 +14,16 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
 
 class ComandoPrendiTest {
+	private final int MAX_CAPIENZA_BORSA= 10;
+	private final int PESO_OGGETTO = 1;
+	private final String COMANDO = "prendi"; 
+	private final String NOME_OGGETTO = "OggettoTest";
 	private FabbricaDiComandi factory;
 	private Comando comando;
 	private Partita partita;
 	private Stanza stanzaCorrente;
 	private Borsa borsa;
 	private Attrezzo attrezzo;
-	private final int MAX_CAPIENZA_BORSA= 10;
-	private final int PESO_OGGETTO = 1;
-	private final String COMANDO = "prendi "; 
-	private final String NOME_OGGETTO = "OggettoTest";
 	
 	
 	@BeforeEach
@@ -73,7 +73,7 @@ class ComandoPrendiTest {
 	}
 	
 	private void eseguiComando(String COMANDO, String NOME_OGGETTO) {
-		comando = factory.costruisciComando(COMANDO + NOME_OGGETTO);
+		comando = factory.costruisciComando(COMANDO+" "+NOME_OGGETTO);
 		comando.esegui(partita);
 	}
 	

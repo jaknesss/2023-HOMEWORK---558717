@@ -7,7 +7,7 @@ import it.uniroma3.diadia.giocatore.Borsa;
 
 public class ComandoPosa implements Comando {
 
-	String nomeOggetto;
+	private String nomeOggetto;
 
 	@Override
 	public void setParametro(String parametro) {
@@ -31,4 +31,6 @@ public class ComandoPosa implements Comando {
 		} else
 			System.out.println("Non hai questo oggetto nella borsa");
 	}
+	
+	
 }

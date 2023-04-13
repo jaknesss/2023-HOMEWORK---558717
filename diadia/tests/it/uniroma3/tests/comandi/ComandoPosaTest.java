@@ -16,7 +16,7 @@ import it.uniroma3.diadia.giocatore.Borsa;
 class ComandoPosaTest {
 	private final int MAX_CAPIENZA_STANZA = 10;
 	private final int PESO_OGGETTO = 1;
-	private final String COMANDO = "posa "; 
+	private final String COMANDO = "posa"; 
 	private final String NOME_OGGETTO = "OggettoTest"; 
 	private FabbricaDiComandi factory;
 	private Comando comando;
@@ -68,7 +68,7 @@ class ComandoPosaTest {
 	}
 	
 	private void eseguiComando(String COMANDO, String NOME_OGGETTO) {
-		comando = factory.costruisciComando(COMANDO + NOME_OGGETTO);
+		comando = factory.costruisciComando(COMANDO+" "+NOME_OGGETTO);
 		comando.esegui(partita);
 	}
 	

@@ -15,7 +15,7 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 
 class GiocatoreTest {
 	
-	private final int MAX_CFU = 20;
+	private final int MAX_CFU = 10;
 	private final int MAX_ATTREZZI = 10;
 	private final String ATTREZZO = "attrezzoTest";
 	private Giocatore giocatore;

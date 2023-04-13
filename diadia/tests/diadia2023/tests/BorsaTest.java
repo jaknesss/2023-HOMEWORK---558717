@@ -31,18 +31,15 @@ class BorsaTest {
 
 	@Test
 	public void testAddAttrezzoMaxCapacita() {
-		for (int i = 0; i < MAX_ATTREZZI; i++) {
+		for (int i = 0; i < MAX_ATTREZZI; i++)
 			assertTrue(borsa.addAttrezzo(new Attrezzo(ATTREZZO, 1)));
-		}
 		assertFalse(borsa.addAttrezzo(new Attrezzo(ATTREZZO, 1)));
-		
 	}
 
 	@Test
 	public void testAddAttrezzoMaxPeso() {
-		for (int i = 0; i < MAX_ATTREZZI - 1; i++) {
+		for (int i = 0; i < MAX_ATTREZZI - 1; i++) 
 			assertTrue(borsa.addAttrezzo(new Attrezzo(ATTREZZO, 1)));
-		}
 		assertFalse(borsa.addAttrezzo(new Attrezzo(ATTREZZO, 2)));
 	}
 

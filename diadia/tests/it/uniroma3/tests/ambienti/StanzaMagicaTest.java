@@ -15,6 +15,12 @@ class StanzaMagicaTest {
 	private final int PESO_OGGETTO = 2;
 	private final String NOME_STANZA = "atrio";
 	private final String NOME_ATTR = "chiave";
+	private final String NOME_ATTR_INV = "evaihc";
+	private StringBuilder nomeDaInvertire;
+	private String nomeInvertito;
+	private Attrezzo attrDaTestare;
+	
+	
 	private Stanza stanza;
 	private Attrezzo attrezzo;
 	
@@ -23,21 +29,35 @@ class StanzaMagicaTest {
 	void setUp(){
 		stanza = new StanzaMagica(NOME_STANZA);
 		attrezzo = new Attrezzo(NOME_ATTR, PESO_OGGETTO);
+		nomeDaInvertire = new StringBuilder(NOME_ATTR);
+		nomeInvertito = nomeDaInvertire.reverse().toString();
+		attrDaTestare = new Attrezzo(NOME_ATTR, PESO_OGGETTO);
 	}
 
 	@Test
-	void testAddAttrezzoSingoloPesoSogliaDefault() {
+	void testPeso_NonRaddoppiato() {
 		assertTrue(stanza.addAttrezzo(attrezzo));
 		assertEquals(PESO_OGGETTO, stanza.getAttrezzo(NOME_ATTR).getPeso() ); 
 	}
+
+	@Test
+	void testNome_NonInvertito() {
+		assertTrue(stanza.addAttrezzo(attrezzo));
+		assertEquals(NOME_ATTR, stanza.getAttrezzo(NOME_ATTR).getNome()); 
+	}
 	
 	@Test
-	void testAddAttrezziOltreSogliaDefault() {
-		StringBuilder nomeDaInvertire = new StringBuilder("nome");
-		Attrezzo attrDaTestare = new Attrezzo(nomeDaInvertire.toString(), PESO_OGGETTO);
+	void testPeso_Raddoppiato() {
+		raggiungiSoglia();
+		stanza.addAttrezzo(attrDaTestare);
+		assertEquals(NOME_ATTR_INV, stanza.getAttrezzo(nomeInvertito).getNome()); 
+	}
+	
+	
+	
+	void raggiungiSoglia() {
 		for(int i = 0; i < SOGLIA_MAGICA-1; i++)
 			assertTrue(stanza.addAttrezzo(attrezzo));	
-		stanza.addAttrezzo(attrDaTestare);
-		assertEquals(PESO_OGGETTO*2, stanza.getAttrezzo(nomeDaInvertire.reverse().toString()).getPeso()); 
 	}
+	
 }

@@ -13,18 +13,19 @@ public class StanzaBloccata extends Stanza{
 	
 	@Override
 	public Stanza getStanzaAdiacente(String direzione) {
-		if(this.hasAttrezzo(nomeOggettoChiave))
-			return super.getStanzaAdiacente(direzione);
-		return this;
+		if(direzioneBloccata.equals(direzione)
+		    && !hasAttrezzo(nomeOggettoChiave))
+			return this;
+		return super.getStanzaAdiacente(direzione);
 	}
 	
 	@Override
 	public String getDescrizione() {
-		if(this.hasAttrezzo(nomeOggettoChiave))
-			return super.getDescrizione();
-		else
-			System.out.println("\nNon puoi andare verso [" + direzioneBloccata
-				         	+ "] hai bisongo di [" + nomeOggettoChiave + "]");
+		if(!this.hasAttrezzo(nomeOggettoChiave))
+			System.out.println("\nLa stanza a [" 
+							  + direzioneBloccata
+							  + "] è bloccata hai bisongo di [" 
+							  + nomeOggettoChiave + "]");
 		return super.getDescrizione();
 	}
 	

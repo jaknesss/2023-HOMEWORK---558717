@@ -22,10 +22,9 @@ public class StanzaBloccata extends Stanza{
 	public String getDescrizione() {
 		if(this.hasAttrezzo(nomeOggettoChiave))
 			return super.getDescrizione();
-		System.out.println("Non puoi andare verso" 
-				          + direzioneBloccata 
-				          + "hai bisongo di "
-				          + nomeOggettoChiave);
+		else
+			System.out.println("\nNon puoi andare verso [" + direzioneBloccata
+				         	+ "] hai bisongo di [" + nomeOggettoChiave + "]");
 		return super.getDescrizione();
 	}
 	

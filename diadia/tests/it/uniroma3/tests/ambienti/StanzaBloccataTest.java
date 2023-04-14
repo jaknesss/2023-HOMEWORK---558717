@@ -12,9 +12,9 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 class StanzaBloccataTest {
 	
-	private Stanza stanza1;
-	private Stanza stanza2;
-	private Stanza corrente;
+	private Stanza stanzaIniziale;
+	private Stanza stanzaVincente;
+	private Stanza stanzaCorrente;
 	private Attrezzo attrezzoChiave;
 	private final String DIR_BLOCCATA = "nord";
 	private final String NOME_STANZA = "ingresso";
@@ -24,24 +24,24 @@ class StanzaBloccataTest {
 	
 	@BeforeEach
 	void setUp(){
-		stanza1 = new StanzaBloccata(NOME_STANZA, NOME_OGG_CHIAVE, DIR_BLOCCATA);
-		stanza2 = new Stanza("Biblioteca");
-		corrente = stanza1;
-		stanza1.setStanzaAdiacente(DIR_BLOCCATA, stanza2);
+		stanzaIniziale = new StanzaBloccata(NOME_STANZA, NOME_OGG_CHIAVE, DIR_BLOCCATA);
+		stanzaVincente = new Stanza("Biblioteca");
+		stanzaCorrente = stanzaIniziale;
+		stanzaIniziale.setStanzaAdiacente(DIR_BLOCCATA, stanzaVincente);
 		attrezzoChiave = new Attrezzo(NOME_OGG_CHIAVE, PESO_ATTR);
 	}
 
 	@Test
 	void testStanzaContieneOggChiave() {
-		stanza1.addAttrezzo(attrezzoChiave);
-		corrente = stanza1.getStanzaAdiacente(DIR_BLOCCATA); 
-		assertEquals(stanza2, corrente);
+		stanzaIniziale.addAttrezzo(attrezzoChiave);
+		stanzaCorrente = stanzaIniziale.getStanzaAdiacente(DIR_BLOCCATA); 
+		assertEquals(stanzaVincente, stanzaCorrente);
 	}
 	
 	@Test
 	void testStanzaNonContieneOggChiave() {
-		corrente = stanza1.getStanzaAdiacente(DIR_BLOCCATA);
-		assertEquals(stanza1, corrente);
+		stanzaCorrente = stanzaIniziale.getStanzaAdiacente(DIR_BLOCCATA);
+		assertEquals(stanzaIniziale, stanzaCorrente);
 	}
 
 }

@@ -25,7 +25,7 @@ public class ComandoPosa implements Comando {
 		Borsa borsa = partita.getGiocatore().getBorsa();
 		if (borsa.hasAttrezzo(nomeOggetto)) {
 			Attrezzo daPosare = borsa.getAttrezzo(nomeOggetto);
-			if (stanzaCorrente.addAttrezzo(daPosare))
+			if (stanzaCorrente.addAttrezzo(daPosare, io))
 				borsa.removeAttrezzo(daPosare);
 			else 
 				io.mostraMessaggio("Stanza troppo piena! Oggetto non aggiunto");

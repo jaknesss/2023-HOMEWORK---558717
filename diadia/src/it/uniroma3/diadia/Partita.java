@@ -21,8 +21,8 @@ public class Partita {
 	/**
 	 * Inizializza le istanze di partita
 	 */
-	public Partita() {
-		this.lab = new Labirinto();
+	public Partita(IO io) {
+		this.lab = new Labirinto(io);
 		this.giocatore = new Giocatore();
 		this.finita = false;
 		this.stanzaCorrente = lab.getStanzaIniziale();

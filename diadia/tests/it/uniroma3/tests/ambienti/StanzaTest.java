@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.IO;
+import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
@@ -16,11 +18,13 @@ class StanzaTest {
 	private final String ATTREZZO = "AttrezzoTest";
 	private final String STANZA = "StanzaTest";
 	private final String STANZA_ADIACENTE = "StanzaAdiacente";
-	protected Stanza stanza;
+	private Stanza stanza;
+	private IO io;
  	
 	@BeforeEach
 	public void setUp() throws Exception {
 		this.stanza = new Stanza(STANZA);
+		io = new IOConsole();
 	}
 
 	@Test
@@ -66,7 +70,7 @@ class StanzaTest {
 	@Test
 	public void testAddAttrezzoSingolo() {
 		Attrezzo attrezzo = new Attrezzo(ATTREZZO, 1);
-		assertTrue(stanza.addAttrezzo(attrezzo));
+		assertTrue(stanza.addAttrezzo(attrezzo, io));
 		assertEquals(attrezzo, stanza.getAttrezzo(ATTREZZO));
 	}
 	
@@ -75,10 +79,10 @@ class StanzaTest {
 	public void testAddAttrezzoMaxCapienza() {
 		for(int i = 0; i < MAX_ATTREZZI; i++) {
 			Attrezzo attrezzo = new Attrezzo(ATTREZZO, 1);			
-			assertTrue(stanza.addAttrezzo(attrezzo));
+			assertTrue(stanza.addAttrezzo(attrezzo, io));
 		}
 		Attrezzo diTroppo = new Attrezzo("diTroppo", 2);
-		assertFalse(stanza.addAttrezzo(diTroppo));
+		assertFalse(stanza.addAttrezzo(diTroppo, io));
 	}
 	
 	@Test
@@ -90,14 +94,14 @@ class StanzaTest {
 	@Test
 	public void testHasAttrezzo() {
 		Attrezzo attrezzo = new Attrezzo(ATTREZZO, 1);
-		stanza.addAttrezzo(attrezzo);
+		stanza.addAttrezzo(attrezzo, io);
 		assertTrue(stanza.hasAttrezzo(ATTREZZO));
 	}
 	
 	@Test
 	public void testHasAttrezzoInesistente() {
 		Attrezzo attrezzo = new Attrezzo(ATTREZZO, 1);
-		stanza.addAttrezzo(attrezzo);
+		stanza.addAttrezzo(attrezzo, io);
 		assertFalse(stanza.hasAttrezzo("nonEsiste"));
 	}
 	

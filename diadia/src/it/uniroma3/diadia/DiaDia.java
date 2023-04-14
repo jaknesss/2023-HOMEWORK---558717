@@ -17,7 +17,7 @@ public class DiaDia {
 			+ "Per conoscere le istruzioni usa il comando 'aiuto'.";
 
 	public DiaDia(IO io) {
-		this.partita = new Partita();
+		this.partita = new Partita(io);
 	}
 
 	public void gioca(IO io) {

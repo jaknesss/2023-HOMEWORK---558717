@@ -30,7 +30,8 @@ class ComandoPosaTest {
 
 	@BeforeEach
 	void setUp() {
-		partita = new Partita();
+		io = new IOConsole();
+		partita = new Partita(io);
 		factory = new FabbricaDiComandiFisarmonica();
 		attrezzo = new Attrezzo(NOME_OGGETTO, PESO_OGGETTO);
 		io = new IOConsole();
@@ -68,7 +69,7 @@ class ComandoPosaTest {
 	
 	private void riempiStanzaDiOggetti() {
 		for(int i = 0; i < MAX_CAPIENZA_STANZA; i++) 
-			stanzaCorrente.addAttrezzo(attrezzo);
+			stanzaCorrente.addAttrezzo(attrezzo, io);
 	}
 	
 	private void eseguiComando(String COMANDO, String NOME_OGGETTO) {

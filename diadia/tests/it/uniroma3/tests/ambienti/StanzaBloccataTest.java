@@ -7,41 +7,53 @@ import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.ambienti.StanzaBloccata;
-import it.uniroma3.diadia.ambienti.StanzaBuia;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 class StanzaBloccataTest {
 	
-	private Stanza stanza1;
-	private Stanza stanza2;
-	private Stanza corrente;
+	private StanzaBloccata stanzaIniziale;
+	private Stanza stanzaVincente;
+	private Stanza stanzaCorrente;
 	private Attrezzo attrezzoChiave;
 	private final String DIR_BLOCCATA = "nord";
-	private final String NOME_STANZA = "ingresso";
+	private final String NOME_STANZA = "Ingresso";
 	private final String NOME_OGG_CHIAVE = "lanterna";
 	private final int PESO_ATTR = 1;
 	
 	
 	@BeforeEach
 	void setUp(){
-		stanza1 = new StanzaBloccata(NOME_STANZA, NOME_OGG_CHIAVE, DIR_BLOCCATA);
-		stanza2 = new Stanza("Biblioteca");
-		corrente = stanza1;
-		stanza1.setStanzaAdiacente(DIR_BLOCCATA, stanza2);
+		stanzaIniziale = new StanzaBloccata(NOME_STANZA, NOME_OGG_CHIAVE, DIR_BLOCCATA);
+		stanzaVincente = new Stanza("Biblioteca");
+		stanzaCorrente = stanzaIniziale;
+		stanzaIniziale.setStanzaAdiacente(DIR_BLOCCATA, stanzaVincente);
 		attrezzoChiave = new Attrezzo(NOME_OGG_CHIAVE, PESO_ATTR);
 	}
 
 	@Test
 	void testStanzaContieneOggChiave() {
-		stanza1.addAttrezzo(attrezzoChiave);
-		corrente = stanza1.getStanzaAdiacente(DIR_BLOCCATA); 
-		assertEquals(stanza2, corrente);
+		stanzaIniziale.addAttrezzo(attrezzoChiave);
+		assertTrue(stanzaIniziale.hasAttrezzo(NOME_OGG_CHIAVE));
+		assertTrue(attrezzoChiave.getNome().equals(stanzaIniziale.getNomeAttrezzoChiave()));
+		stanzaCorrente = stanzaIniziale.getStanzaAdiacente(DIR_BLOCCATA);
+		assertEquals(stanzaVincente, stanzaCorrente);
+	}
+	
+	@Test
+	void testStanzaContieneOggChiaveSbagliato() {
+		Attrezzo attrSbagliato = new Attrezzo("sbagliato", PESO_ATTR);
+		stanzaIniziale.addAttrezzo(attrSbagliato);
+		assertTrue(stanzaIniziale.hasAttrezzo(attrSbagliato.getNome()));
+		assertFalse(attrSbagliato.getNome().equals(stanzaIniziale.getNomeAttrezzoChiave()));
+		stanzaCorrente = stanzaIniziale.getStanzaAdiacente(DIR_BLOCCATA);
+		assertEquals(stanzaIniziale, stanzaCorrente);
 	}
 	
 	@Test
 	void testStanzaNonContieneOggChiave() {
-		corrente = stanza1.getStanzaAdiacente(DIR_BLOCCATA);
-		assertEquals(stanza1, corrente);
+		assertFalse(stanzaIniziale.hasAttrezzo(NOME_OGG_CHIAVE));
+		stanzaCorrente = stanzaIniziale.getStanzaAdiacente(DIR_BLOCCATA);
+		assertEquals(stanzaIniziale, stanzaCorrente);
 	}
 
 }

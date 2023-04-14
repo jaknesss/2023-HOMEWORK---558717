@@ -2,7 +2,6 @@ package it.uniroma3.comandi;
 
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
-import it.uniroma3.diadia.ambienti.Stanza;
 
 public class ComandoGuarda implements Comando{
 	@Override

@@ -11,7 +11,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 class StanzaBuiaTest {
 	
-	private Stanza ingresso;
+	private StanzaBuia ingresso;
 	private Attrezzo attrezzoChiave;
 	private final String NOME_STANZA = "ingresso";
 	private final String NOME_OGG_CHIAVE = "lanterna";
@@ -26,19 +26,19 @@ class StanzaBuiaTest {
 
 	@Test
 	void testStanzaNonContieneOggChiave() {
-		assertNull(ingresso.getDescrizione());
+		assertFalse(ingresso.hasAttrezzo(NOME_OGG_CHIAVE));
 	}
 	
 	@Test
 	void testStanzaContieneOggChiave() {
 		ingresso.addAttrezzo(attrezzoChiave);
-		System.out.println(ingresso.getDescrizione());
+		assertTrue(attrezzoChiave.getNome().equals(ingresso.getNomeAttrezzoChiave()));
 	}
 	
 	@Test
 	void testStanzaContieneOggChiaveSbagliato() {
 		Attrezzo attrSbagliato = new Attrezzo("sbagliato", PESO_ATTR);
 		ingresso.addAttrezzo(attrSbagliato);
-		assertNull(ingresso.getDescrizione());
+		assertFalse(attrSbagliato.getNome().equals(ingresso.getNomeAttrezzoChiave()));
 	}
 }

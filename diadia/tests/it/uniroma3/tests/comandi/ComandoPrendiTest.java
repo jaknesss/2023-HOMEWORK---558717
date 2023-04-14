@@ -16,9 +16,9 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
 
 class ComandoPrendiTest {
-	private final int MAX_CAPIENZA_BORSA= 10;
+	private final int MAX_CAPIENZA_BORSA = 10;
 	private final int PESO_OGGETTO = 1;
-	private final String COMANDO = "prendi"; 
+	private final String COMANDO = "prendi";
 	private final String NOME_OGGETTO = "OggettoTest";
 	private FabbricaDiComandi factory;
 	private Comando comando;
@@ -27,58 +27,52 @@ class ComandoPrendiTest {
 	private Borsa borsa;
 	private Attrezzo attrezzo;
 	private IO io;
-	
-	
+
 	@BeforeEach
 	void setUp() throws Exception {
-		partita = new Partita();
+		io = new IOConsole();
+		partita = new Partita(io);
 		factory = new FabbricaDiComandiFisarmonica();
 		attrezzo = new Attrezzo(NOME_OGGETTO, PESO_OGGETTO);
-		io = new IOConsole();
 		borsa = partita.getGiocatore().getBorsa();
 		stanzaCorrente = partita.getStanzaCorrente();
+		stanzaCorrente.addAttrezzo(attrezzo, io);
 	}
 
 	@Test
 	void testNonPrendiOggetto() {
-		stanzaCorrente.addAttrezzo(attrezzo);
-		assertTrue(stanzaCorrente.hasAttrezzo(NOME_OGGETTO));		
+		assertTrue(stanzaCorrente.hasAttrezzo(NOME_OGGETTO));
 		eseguiComando(COMANDO, null);
 		assertTrue(stanzaCorrente.hasAttrezzo(NOME_OGGETTO));
 		assertFalse(borsa.hasAttrezzo(NOME_OGGETTO));
 	}
-	
-	
+
 	@Test
 	void testPrendiOggetto() {
-		stanzaCorrente.addAttrezzo(attrezzo);
 		assertTrue(stanzaCorrente.hasAttrezzo(NOME_OGGETTO));
 		eseguiComando(COMANDO, NOME_OGGETTO);
 		assertFalse(stanzaCorrente.hasAttrezzo(NOME_OGGETTO));
 		assertTrue(borsa.hasAttrezzo(NOME_OGGETTO));
 	}
-	
+
 	@Test
 	void testPrendiOggettoConBorsaPiena() {
-		stanzaCorrente.addAttrezzo(attrezzo);
 		assertTrue(stanzaCorrente.hasAttrezzo(NOME_OGGETTO));
 		riempiBorsa();
 		eseguiComando(COMANDO, NOME_OGGETTO);
 		assertTrue(stanzaCorrente.hasAttrezzo(NOME_OGGETTO));
 		assertFalse(borsa.hasAttrezzo(NOME_OGGETTO));
 	}
-	
-	
-	
+
 	private void riempiBorsa() {
 		Attrezzo fill = new Attrezzo("filler", PESO_OGGETTO);
-		for(int i = 0; i < MAX_CAPIENZA_BORSA; i++)
+		for (int i = 0; i < MAX_CAPIENZA_BORSA; i++)
 			borsa.addAttrezzo(fill);
 	}
-	
+
 	private void eseguiComando(String COMANDO, String NOME_OGGETTO) {
-		comando = factory.costruisciComando(COMANDO+" "+NOME_OGGETTO);
+		comando = factory.costruisciComando(COMANDO + " " + NOME_OGGETTO);
 		comando.esegui(partita, io);
 	}
-	
+
 }

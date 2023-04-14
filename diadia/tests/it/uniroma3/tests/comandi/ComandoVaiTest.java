@@ -27,10 +27,10 @@ class ComandoVaiTest {
 	
 	@BeforeEach
 	void setUp() {
-		partita = new Partita();
+		io = new IOConsole();
+		partita = new Partita(io);
 		stanzaIniziale = partita.getLabirinto().getStanzaIniziale();
 		factory = new FabbricaDiComandiFisarmonica();
-		io = new IOConsole();
 	}
 	
 	@Test

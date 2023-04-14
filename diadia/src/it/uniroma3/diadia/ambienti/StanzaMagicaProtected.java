@@ -1,5 +1,6 @@
 package it.uniroma3.diadia.ambienti;
 
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class StanzaMagicaProtected extends StanzaProtected{
@@ -19,11 +20,11 @@ public class StanzaMagicaProtected extends StanzaProtected{
 	}
 	
 	@Override
-	public boolean addAttrezzo(Attrezzo attrezzo) {	
+	public boolean addAttrezzo(Attrezzo attrezzo, IO io) {	
 		this.contatoreAttrezziPosati++;
 		if(contatoreAttrezziPosati >= sogliaMagica) {
 			attrezzo = this.modificaAttrezzo(attrezzo);
-			System.out.println("E' successo qualcosa di strano all'oggetto!");
+			io.mostraMessaggio("E' successo qulacosa di strano!\n");
 		}
 		if (this.numeroAttrezzi >= attrezzi.length)
 			return false;

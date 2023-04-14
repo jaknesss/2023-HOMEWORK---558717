@@ -1,5 +1,6 @@
 package it.uniroma3.diadia.ambienti;
 
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 /**
@@ -52,7 +53,7 @@ public class Stanza {
 	 * 
 	 * @return la descrizione della stanza
 	 */
-	public String getDescrizione() {
+	public String getDescrizione(IO io) {
 		return this.toString();
 	}
 
@@ -142,7 +143,7 @@ public class Stanza {
 	 * @return true se riesce ad aggiungere l'attrezzo, false atrimenti.
 	 */
 
-	public boolean addAttrezzo(Attrezzo attrezzo) {
+	public boolean addAttrezzo(Attrezzo attrezzo, IO io) {
 		if (this.numeroAttrezzi >= NUMERO_MASSIMO_ATTREZZI)
 			return false;
 		this.attrezzi[numeroAttrezzi] = attrezzo;

@@ -1,5 +1,6 @@
 package it.uniroma3.diadia.ambienti;
 
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class StanzaProtected {
@@ -72,7 +73,7 @@ public class StanzaProtected {
 		return null;
 	}
 
-	public boolean addAttrezzo(Attrezzo attrezzo) {
+	public boolean addAttrezzo(Attrezzo attrezzo, IO io) {
 		if (this.numeroAttrezzi >= NUMERO_MASSIMO_ATTREZZI)
 			return false;
 		this.attrezzi[numeroAttrezzi] = attrezzo;

@@ -1,5 +1,7 @@
 package it.uniroma3.diadia.ambienti;
 
+import it.uniroma3.diadia.IO;
+
 public class StanzaBloccata extends Stanza {
 
 	private String nomeOggettoChiave;
@@ -19,11 +21,12 @@ public class StanzaBloccata extends Stanza {
 	}
 
 	@Override
-	public String getDescrizione() {
+	public String getDescrizione(IO io) {
 		if (!this.hasAttrezzo(nomeOggettoChiave))
-			System.out.println(
-					"\nLa stanza a [" + direzioneBloccata + "] è bloccata hai bisongo di [" + nomeOggettoChiave + "]");
-		return super.getDescrizione();
+			io.mostraMessaggio("\nLa stanza a [" + direzioneBloccata + 
+							   "] è bloccata hai bisongo di [" + 
+							   nomeOggettoChiave + "]");
+		return super.getDescrizione(io);
 	}
 
 	// per i test

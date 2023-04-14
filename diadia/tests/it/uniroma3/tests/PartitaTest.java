@@ -8,6 +8,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.IO;
+import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
@@ -18,10 +20,12 @@ class PartitaTest {
 	private Partita partita;
 	private Giocatore giocatore;
 	private Labirinto lab;
+	private IO io;
 
 	@BeforeEach
 	public void setUp() {
-		partita = new Partita();
+		io = new IOConsole();
+		partita = new Partita(io);
 		giocatore = partita.getGiocatore();
 		lab = partita.getLabirinto();
 	}

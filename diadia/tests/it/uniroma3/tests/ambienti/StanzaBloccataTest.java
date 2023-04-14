@@ -11,12 +11,12 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 class StanzaBloccataTest {
 	
-	private Stanza stanzaIniziale;
+	private StanzaBloccata stanzaIniziale;
 	private Stanza stanzaVincente;
 	private Stanza stanzaCorrente;
 	private Attrezzo attrezzoChiave;
 	private final String DIR_BLOCCATA = "nord";
-	private final String NOME_STANZA = "ingresso";
+	private final String NOME_STANZA = "Ingresso";
 	private final String NOME_OGG_CHIAVE = "lanterna";
 	private final int PESO_ATTR = 1;
 	
@@ -33,12 +33,25 @@ class StanzaBloccataTest {
 	@Test
 	void testStanzaContieneOggChiave() {
 		stanzaIniziale.addAttrezzo(attrezzoChiave);
-		stanzaCorrente = stanzaIniziale.getStanzaAdiacente(DIR_BLOCCATA); 
+		assertTrue(stanzaIniziale.hasAttrezzo(NOME_OGG_CHIAVE));
+		assertTrue(attrezzoChiave.getNome().equals(stanzaIniziale.getNomeAttrezzoChiave()));
+		stanzaCorrente = stanzaIniziale.getStanzaAdiacente(DIR_BLOCCATA);
 		assertEquals(stanzaVincente, stanzaCorrente);
 	}
 	
 	@Test
+	void testStanzaContieneOggChiaveSbagliato() {
+		Attrezzo attrSbagliato = new Attrezzo("sbagliato", PESO_ATTR);
+		stanzaIniziale.addAttrezzo(attrSbagliato);
+		assertTrue(stanzaIniziale.hasAttrezzo(attrSbagliato.getNome()));
+		assertFalse(attrSbagliato.getNome().equals(stanzaIniziale.getNomeAttrezzoChiave()));
+		stanzaCorrente = stanzaIniziale.getStanzaAdiacente(DIR_BLOCCATA);
+		assertEquals(stanzaIniziale, stanzaCorrente);
+	}
+	
+	@Test
 	void testStanzaNonContieneOggChiave() {
+		assertFalse(stanzaIniziale.hasAttrezzo(NOME_OGG_CHIAVE));
 		stanzaCorrente = stanzaIniziale.getStanzaAdiacente(DIR_BLOCCATA);
 		assertEquals(stanzaIniziale, stanzaCorrente);
 	}

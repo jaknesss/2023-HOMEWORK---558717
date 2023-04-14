@@ -16,6 +16,11 @@ class StanzaMagicaTest {
 	private final String NOME_STANZA = "atrio";
 	private final String NOME_ATTR = "chiave";
 	private final String NOME_ATTR_INV = "evaihc";
+	private StringBuilder nomeDaInvertire;
+	private String nomeInvertito;
+	private Attrezzo attrDaTestare;
+	
+	
 	private Stanza stanza;
 	private Attrezzo attrezzo;
 	
@@ -24,6 +29,9 @@ class StanzaMagicaTest {
 	void setUp(){
 		stanza = new StanzaMagica(NOME_STANZA);
 		attrezzo = new Attrezzo(NOME_ATTR, PESO_OGGETTO);
+		nomeDaInvertire = new StringBuilder(NOME_ATTR);
+		nomeInvertito = nomeDaInvertire.reverse().toString();
+		attrDaTestare = new Attrezzo(NOME_ATTR, PESO_OGGETTO);
 	}
 
 	@Test
@@ -32,16 +40,6 @@ class StanzaMagicaTest {
 		assertEquals(PESO_OGGETTO, stanza.getAttrezzo(NOME_ATTR).getPeso() ); 
 	}
 
-	
-	@Test
-	void testPeso_Raddoppiato() {
-		StringBuilder nomeDaInvertire = new StringBuilder("nome");
-		Attrezzo attrDaTestare = new Attrezzo(nomeDaInvertire.toString(), PESO_OGGETTO);
-		raggiungiSoglia();
-		stanza.addAttrezzo(attrDaTestare);
-		assertEquals(PESO_OGGETTO*2, stanza.getAttrezzo(nomeDaInvertire.reverse().toString()).getPeso()); 
-	}
-	
 	@Test
 	void testNome_NonInvertito() {
 		assertTrue(stanza.addAttrezzo(attrezzo));
@@ -49,12 +47,10 @@ class StanzaMagicaTest {
 	}
 	
 	@Test
-	void testNome_Invertito() {
-		StringBuilder nomeDaInvertire = new StringBuilder(NOME_ATTR);
-		Attrezzo attrDaTestare = new Attrezzo(nomeDaInvertire.toString(), PESO_OGGETTO);
+	void testPeso_Raddoppiato() {
 		raggiungiSoglia();
 		stanza.addAttrezzo(attrDaTestare);
-		assertEquals(NOME_ATTR_INV, stanza.getAttrezzo(nomeDaInvertire.reverse().toString()).getNome()); 
+		assertEquals(NOME_ATTR_INV, stanza.getAttrezzo(nomeInvertito).getNome()); 
 	}
 	
 	

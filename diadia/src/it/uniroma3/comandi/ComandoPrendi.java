@@ -8,7 +8,8 @@ import it.uniroma3.diadia.giocatore.Borsa;
 
 public class ComandoPrendi implements Comando {
 
-	String nomeOggetto;
+	private final String NOME_COMANDO = "prendi";
+	private String nomeOggetto;
 
 	@Override
 	public void setParametro(String parametro) {
@@ -32,4 +33,14 @@ public class ComandoPrendi implements Comando {
 		} else
 			io.mostraMessaggio("Non c'è questo oggetto nella stanza");
 	}
+	
+	@Override
+	public String getNome() {
+		return NOME_COMANDO;
+	}
+	@Override
+	public String getParam() {
+		return nomeOggetto;
+	}
+	
 }

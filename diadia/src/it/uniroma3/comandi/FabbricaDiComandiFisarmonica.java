@@ -4,16 +4,13 @@ import java.util.Scanner;
 
 public class FabbricaDiComandiFisarmonica implements FabbricaDiComandi{
 	
-	private Scanner scannerDiParole;
-	private String nomeComando;
-	private String parametro;
+	private Comando comando;
+	String nomeComando;
+	String parametro;
 	
 	@Override
 	public Comando costruisciComando(String istruzione) {
-		Comando comando = null;
-		scannerDiParole = new Scanner(istruzione);
-		nomeComando = null;
-		parametro = null;
+		Scanner scannerDiParole = new Scanner(istruzione);
 		
 		if (scannerDiParole.hasNext())
 			nomeComando = scannerDiParole.next(); // prima parola: nome del comando
@@ -39,13 +36,15 @@ public class FabbricaDiComandiFisarmonica implements FabbricaDiComandi{
 		return comando;
 	} 
 	
-	@Override
 	public String getNome() {
 		return nomeComando;
 	}
 	
-	@Override
 	public String getParam() {
 		return parametro;
+	}
+	
+	public Comando getComando() {
+		return comando;
 	}
 }

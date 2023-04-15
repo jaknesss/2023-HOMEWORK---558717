@@ -10,7 +10,7 @@ public class StanzaMagica extends Stanza{
 	
 	public StanzaMagica(String nome) {
 		this(nome, SOGLIA_MAGICA_DEFAULT);
-		contatoreAttrezziPosati = 0;
+		this.contatoreAttrezziPosati = 0;
 	}
 	
 	public StanzaMagica(String nome, int soglia) {
@@ -22,20 +22,36 @@ public class StanzaMagica extends Stanza{
 	@Override
 	public boolean addAttrezzo(Attrezzo attrezzo, IO io) {
 		this.contatoreAttrezziPosati++;
-		if(contatoreAttrezziPosati >= sogliaMagica) {
+		if(this.contatoreAttrezziPosati >= this.sogliaMagica) {
 			attrezzo = this.modificaAttrezzo(attrezzo);
-			io.mostraMessaggio("E' successo qulacosa di strano!\n");
+			io.mostraMessaggio("E' successo qualcosa di strano!\n");
 		}
 		return super.addAttrezzo(attrezzo, io);
 	}
+//	@Override
+//	public boolean addAttrezzo(Attrezzo attrezzo, IO io) {
+//		this.contatoreAttrezziPosati++;
+//		if(this.contatoreAttrezziPosati >= this.sogliaMagica) {
+//			this.modificaAttrezzo(attrezzo);
+//			io.mostraMessaggio("E' successo qualcosa di strano!\n");
+//		}
+//		return super.addAttrezzo(attrezzo, io);
+//	}
 	
 	private Attrezzo modificaAttrezzo(Attrezzo attrezzo) {
 		StringBuilder nomeDaInvertire = new StringBuilder(attrezzo.getNome());
+		String nomeInvertito = nomeDaInvertire.reverse().toString();
 		int pesoDoppio = attrezzo.getPeso() * 2;
-		nomeDaInvertire = nomeDaInvertire.reverse();
-		Attrezzo attrModificato = new Attrezzo(nomeDaInvertire.toString(), pesoDoppio);
+		Attrezzo attrModificato = new Attrezzo(nomeInvertito, pesoDoppio);
 		return attrModificato;
 	}
+	
+//	private void modificaAttrezzo(Attrezzo attrezzo) {
+//		StringBuilder nomeDaInvertire = new StringBuilder(attrezzo.getNome());
+//		String nomeInvertito = nomeDaInvertire.reverse().toString();
+//		int pesoDoppio = attrezzo.getPeso() * 2;
+//		attrezzo = new Attrezzo(nomeInvertito, pesoDoppio);
+//	}
 	
 	public int getSogliaMagica(){
 		return this.sogliaMagica;

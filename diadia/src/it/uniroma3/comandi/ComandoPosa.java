@@ -8,28 +8,40 @@ import it.uniroma3.diadia.giocatore.Borsa;
 
 public class ComandoPosa implements Comando {
 
-	private String nomeOggetto;
+	private final String NOME_COMANDO = "posa";
+	private String parametro;
 
 	@Override
 	public void setParametro(String parametro) {
-		this.nomeOggetto = parametro;
+		this.parametro = parametro;
 	}
 
 	@Override
 	public void esegui(Partita partita, IO io) {
-		if (nomeOggetto == null) {
+		if (parametro == null) {
 			io.mostraMessaggio("Cosa vuoi posare?");
 			return;
 		}
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		Borsa borsa = partita.getGiocatore().getBorsa();
-		if (borsa.hasAttrezzo(nomeOggetto)) {
-			Attrezzo daPosare = borsa.getAttrezzo(nomeOggetto);
+		if (borsa.hasAttrezzo(parametro)) {
+			Attrezzo daPosare = borsa.getAttrezzo(parametro);
 			if (stanzaCorrente.addAttrezzo(daPosare, io))
 				borsa.removeAttrezzo(daPosare);
-			else 
+			else
 				io.mostraMessaggio("Stanza troppo piena! Oggetto non aggiunto");
 		} else
 			io.mostraMessaggio("Non hai questo oggetto nella borsa");
 	}
+
+	@Override
+	public String getNome() {
+		return NOME_COMANDO;
+	}
+
+	@Override
+	public String getParam() {
+		return parametro;
+	}
+
 }

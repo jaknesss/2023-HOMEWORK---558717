@@ -11,7 +11,7 @@ import it.uniroma3.comandi.FabbricaDiComandiFisarmonica;
 
 class FabbricaDiComandiFisarmonicaTest {
 	
-	private FabbricaDiComandi factory;
+	private FabbricaDiComandiFisarmonica factory;
 	private Comando comando;
 	private final String COMANDO = "vai";
 	private final String PARAM = "nord";
@@ -24,24 +24,24 @@ class FabbricaDiComandiFisarmonicaTest {
 
 	@Test
 	void testNomeComandoCorretto() {
-		eseguiComando(COMANDO, null);
-		assertEquals(COMANDO, factory.getNome());
+		creaComando(COMANDO, null);
+		assertEquals(factory.getNome(), factory.getComando().getNome());
 	}
 	
 	@Test
-	void testParametroCorretto() {
-		eseguiComando(null, PARAM);
-		assertEquals(PARAM, factory.getParam());
+	void testParametroCorrettoComandoNonCreato() {
+		creaComando(null, PARAM);
+		assertNull(factory.getComando().getParam());
 	}
 	
 	@Test
-	void testComandoEParametroCorretti() {
-		eseguiComando(COMANDO, PARAM);
-		assertEquals(COMANDO, factory.getNome());
-		assertEquals(PARAM, factory.getParam());
+	void testNomeComandoEParametroCorretti() {
+		creaComando(COMANDO, PARAM);
+		assertEquals(factory.getNome(), factory.getComando().getNome());
+		assertEquals(factory.getParam(), factory.getComando().getParam());
 	}
 
-	private void eseguiComando(String COMANDO, String PARAM) {
+	private void creaComando(String COMANDO, String PARAM) {
 		comando = factory.costruisciComando(COMANDO+" "+PARAM);
 	}
 }

@@ -25,7 +25,7 @@ public class DiaDia {
 		String istruzione;
 		do {
 			istruzione = io.leggiRiga();
-		}while (!processaIstruzione(istruzione, io));
+		} while (!processaIstruzione(istruzione, io));
 	}
 
 	private boolean processaIstruzione(String istruzione, IO io) {
@@ -38,7 +38,6 @@ public class DiaDia {
 			io.mostraMessaggio("Hai esaurito i CFU...");
 		return this.partita.isFinita();
 	}
-
 
 	public static void main(String[] argc) {
 		IO io = new IOConsole();

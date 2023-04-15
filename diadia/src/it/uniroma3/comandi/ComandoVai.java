@@ -6,7 +6,8 @@ import it.uniroma3.diadia.ambienti.Stanza;
 
 public class ComandoVai implements Comando {
 
-	String direzione;
+	private final String NOME_COMANDO = "vai";
+	private String direzione;
 
 	@Override
 	public void setParametro(String parametro) {
@@ -27,5 +28,15 @@ public class ComandoVai implements Comando {
 		}
 		partita.setStanzaCorrente(prossimaStanza);
 		partita.getGiocatore().setCfu(partita.getGiocatore().getCfu() - 1);
+	}
+
+	@Override
+	public String getNome() {
+		return NOME_COMANDO;
+	}
+
+	@Override
+	public String getParam() {
+		return direzione;
 	}
 }

@@ -198,7 +198,7 @@ public class Stanza {
 		risultato.append("\nUscite: ");
 		for (String direzione : this.direzioniPossibili)
 			if (direzione != null)
-				risultato.append(" " + direzione);
+				risultato.append("[" + direzione + "] ");
 		risultato.append("\nAttrezzi nella stanza: ");
 		for (Attrezzo attrezzo : this.attrezzi)
 			if (attrezzo != null)

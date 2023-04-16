@@ -31,7 +31,7 @@ public class Labirinto {
 		Attrezzo chiave = new Attrezzo("chiave", 3);
 		Attrezzo bastone = new Attrezzo("bastone", 5);
 
-		Stanza atrio = new StanzaBloccata("Atrio", "chiave", "nord");
+		Stanza atrio = new StanzaBloccata("Atrio", "evaihc", "nord");
 		Stanza aulaN11 = new StanzaMagica("Aula N11");
 		Stanza aulaN10 = new StanzaBuia("Aula N10", "lanterna");
 		Stanza laboratorio = new Stanza("Laboratorio Campus");

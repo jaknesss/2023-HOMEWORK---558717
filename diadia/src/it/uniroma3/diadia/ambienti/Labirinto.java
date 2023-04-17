@@ -51,8 +51,8 @@ public class Labirinto {
 		biblioteca.setStanzaAdiacente("sud", atrio);
 
 		aulaN10.addAttrezzo(chiave, io);
-		aulaN11.addAttrezzo(bastone, io);
-		aulaN11.addAttrezzo(osso, io);
+		atrio.addAttrezzo(bastone, io);
+		atrio.addAttrezzo(osso, io);
 		atrio.addAttrezzo(lanterna, io);
 
 		this.stanzaIniziale = atrio;

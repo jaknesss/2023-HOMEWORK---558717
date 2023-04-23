@@ -10,11 +10,14 @@ import java.util.Scanner;
  */
 public class IOConsole implements IO{
 
+	
+	
 	/**
 	 * Stampa il messaggio di input
 	 * 
 	 * @param msg - messaggio da stampare
 	 */
+	@Override
 	public void mostraMessaggio(String msg) {
 		System.out.println(msg);
 	}
@@ -24,6 +27,7 @@ public class IOConsole implements IO{
 	 * 
 	 * @return riga - riga letta dallo scanner
 	 */
+	@Override
 	public String leggiRiga() {
 		Scanner scannerDiLinee = new Scanner(System.in);
 		String riga = scannerDiLinee.nextLine();

@@ -31,7 +31,7 @@ public class Labirinto {
 		Attrezzo chiave = new Attrezzo("chiave", 3);
 		Attrezzo bastone = new Attrezzo("bastone", 5);
 
-		Stanza atrio = new StanzaBloccata("Atrio", "chiave", "nord");
+		Stanza atrio = new StanzaBloccata("Atrio", "evaihc", "nord");
 		Stanza aulaN11 = new StanzaMagica("Aula N11");
 		Stanza aulaN10 = new StanzaBuia("Aula N10", "lanterna");
 		Stanza laboratorio = new Stanza("Laboratorio Campus");
@@ -51,8 +51,8 @@ public class Labirinto {
 		biblioteca.setStanzaAdiacente("sud", atrio);
 
 		aulaN10.addAttrezzo(chiave, io);
-		aulaN11.addAttrezzo(bastone, io);
-		aulaN11.addAttrezzo(osso, io);
+		atrio.addAttrezzo(bastone, io);
+		atrio.addAttrezzo(osso, io);
 		atrio.addAttrezzo(lanterna, io);
 
 		this.stanzaIniziale = atrio;

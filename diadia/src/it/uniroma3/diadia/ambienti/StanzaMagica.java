@@ -6,7 +6,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 public class StanzaMagica extends Stanza{
 	private int contatoreAttrezziPosati;
 	private int sogliaMagica;
-	private static final int SOGLIA_MAGICA_DEFAULT = 3;
+	public static final int SOGLIA_MAGICA_DEFAULT = 3;
 	
 	public StanzaMagica(String nome) {
 		this(nome, SOGLIA_MAGICA_DEFAULT);
@@ -28,6 +28,12 @@ public class StanzaMagica extends Stanza{
 		}
 		return super.addAttrezzo(attrezzo, io);
 	}
+	private Attrezzo modificaAttrezzo(Attrezzo attrezzo) {
+		StringBuilder nomeDaInvertire = new StringBuilder(attrezzo.getNome());
+		String nomeInvertito = nomeDaInvertire.reverse().toString();
+		return new Attrezzo(nomeInvertito, attrezzo.getPeso() * 2);
+	}
+	
 //	@Override
 //	public boolean addAttrezzo(Attrezzo attrezzo, IO io) {
 //		this.contatoreAttrezziPosati++;
@@ -37,24 +43,13 @@ public class StanzaMagica extends Stanza{
 //		}
 //		return super.addAttrezzo(attrezzo, io);
 //	}
-	
-	private Attrezzo modificaAttrezzo(Attrezzo attrezzo) {
-		StringBuilder nomeDaInvertire = new StringBuilder(attrezzo.getNome());
-		String nomeInvertito = nomeDaInvertire.reverse().toString();
-		int pesoDoppio = attrezzo.getPeso() * 2;
-		Attrezzo attrModificato = new Attrezzo(nomeInvertito, pesoDoppio);
-		return attrModificato;
-	}
+
 	
 //	private void modificaAttrezzo(Attrezzo attrezzo) {
 //		StringBuilder nomeDaInvertire = new StringBuilder(attrezzo.getNome());
 //		String nomeInvertito = nomeDaInvertire.reverse().toString();
-//		int pesoDoppio = attrezzo.getPeso() * 2;
-//		attrezzo = new Attrezzo(nomeInvertito, pesoDoppio);
+//		attrezzo = new Attrezzo(nomeInvertito, attrezzo.getPeso() * 2);
 //	}
 	
-	public int getSogliaMagica(){
-		return this.sogliaMagica;
-	}
 	
 }

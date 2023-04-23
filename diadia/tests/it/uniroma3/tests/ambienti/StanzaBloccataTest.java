@@ -13,11 +13,11 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 class StanzaBloccataTest {
 	
+	private IO io;
 	private StanzaBloccata stanzaIniziale;
 	private Stanza stanzaVincente;
 	private Stanza stanzaCorrente;
 	private Attrezzo attrezzoChiave;
-	private IO io;
 	private final String DIR_BLOCCATA = "nord";
 	private final String NOME_STANZA = "Ingresso";
 	private final String NOME_OGG_CHIAVE = "lanterna";

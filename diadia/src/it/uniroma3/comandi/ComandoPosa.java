@@ -10,6 +10,7 @@ public class ComandoPosa implements Comando {
 
 	private final String NOME_COMANDO = "posa";
 	private String parametro;
+	private Attrezzo daPosare;
 
 	@Override
 	public void setParametro(String parametro) {
@@ -24,12 +25,10 @@ public class ComandoPosa implements Comando {
 		}
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		Borsa borsa = partita.getGiocatore().getBorsa();
-		if (borsa.hasAttrezzo(parametro)) {
-			Attrezzo daPosare = borsa.getAttrezzo(parametro);
-			if (stanzaCorrente.addAttrezzo(daPosare, io))
-				borsa.removeAttrezzo(daPosare);
-			else
-				io.mostraMessaggio("Stanza troppo piena! Oggetto non aggiunto");
+		daPosare = borsa.getAttrezzo(parametro);
+		if (daPosare != null) {
+			stanzaCorrente.addAttrezzo(daPosare, io);
+			borsa.removeAttrezzo(daPosare);
 		} else
 			io.mostraMessaggio("Non hai questo oggetto nella borsa");
 	}

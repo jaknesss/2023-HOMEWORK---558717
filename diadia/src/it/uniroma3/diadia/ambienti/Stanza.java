@@ -1,6 +1,10 @@
 package it.uniroma3.diadia.ambienti;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import it.uniroma3.diadia.IO;
@@ -9,66 +13,62 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 public class Stanza {
 
 	private String nome;
-	private Set<Attrezzo> attrezzi;
-	private Set<Stanza> stanzeAdiacenti;
-	private Set<String> direzioniPossibili;
+	private Map<String, Attrezzo> attrezzi;
+	private List<String> direzioniPossibili;
+	private Map<String, Stanza> stanzeAdiacenti;
 
 	public Stanza(String nome) {
 		this.nome = nome;
-		this.attrezzi = new HashSet<>();
-		this.direzioniPossibili = new HashSet<>();
-		this.stanzeAdiacenti = new HashSet<>();
+		this.attrezzi = new HashMap<>();
+		this.direzioniPossibili = new LinkedList<>();
+		this.stanzeAdiacenti = new HashMap<>();
 	}
 
 	public String getNome() {
-		return this.nome;
+		return nome;
 	}
 
 	public String getDescrizione(IO io) {
 		return this.toString();
 	}
 
-	public HashSet<Attrezzo> getAttrezzi() {
-		return (HashSet<Attrezzo>) this.attrezzi;
+	public HashMap<String, Attrezzo> getAttrezzi() {
+		return (HashMap<String, Attrezzo>) attrezzi;
 	}
 
-	public HashSet<String> getDirezioni() {
-		return (HashSet<String>) this.direzioniPossibili;
+	public LinkedList<String> getDirezioni() {
+		return (LinkedList<String>) direzioniPossibili;
 	}
 
 	public Stanza getStanzaAdiacente(String direzione) {
-		for (Stanza stanza : stanzeAdiacenti)
-			if(direzioniPossibili.contains(direzione))
-				return stanza;
-		return this;
+		if(stanzeAdiacenti.isEmpty()) return null;
+		return stanzeAdiacenti.get(direzione);
 	}
 
 	public void setStanzaAdiacente(String direzione, Stanza stanza) {
 		if (direzioniPossibili.contains(direzione)) {
-			stanzeAdiacenti.add(stanza);
+			stanzeAdiacenti.put(direzione, stanza);
 			return;
 		}
 		this.direzioniPossibili.add(direzione);
-		this.stanzeAdiacenti.add(stanza);
+		this.stanzeAdiacenti.put(direzione, stanza);
 	}
 
 	public boolean hasAttrezzo(Attrezzo attrezzo) {
-		return attrezzi.contains(attrezzo);
+		return attrezzi.get(attrezzo.getNome()) != null;
 	}
-	
+
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
-		for (Attrezzo attr : attrezzi)
-			if (nomeAttrezzo.equals(attr.getNome()))
-				return attr;
-		return null;
+		return attrezzi.get(nomeAttrezzo);
 	}
 
 	public boolean addAttrezzo(Attrezzo attrezzo, IO io) {
-		return attrezzi.add(attrezzo);
+		return attrezzi.put(attrezzo.getNome(), attrezzo) == null;
 	}
-	
+
 	public boolean removeAttrezzo(Attrezzo attrezzo) {
-		return attrezzi.remove(attrezzo);
+		if(attrezzi.isEmpty()) return false;
+		return attrezzi.remove(attrezzo.getNome()) == null;
 	}
 
 	@Override
@@ -79,8 +79,8 @@ public class Stanza {
 		for (String direzione : this.direzioniPossibili)
 			risultato.append("[" + direzione + "] ");
 		risultato.append("\nAttrezzi nella stanza: ");
-		for (Attrezzo attrezzo : this.attrezzi)
-			risultato.append(attrezzo.toString() + " ");
+		for (Attrezzo attr : attrezzi.values())
+			risultato.append(attr.toString() + " ");
 		return risultato.toString();
 	}
 

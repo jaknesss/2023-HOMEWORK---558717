@@ -42,6 +42,6 @@ class FabbricaDiComandiFisarmonicaTest {
 	}
 
 	private void creaComando(String COMANDO, String PARAM) {
-		comando = factory.costruisciComando(COMANDO+" "+PARAM);
+		comando = factory.costruisciComando(COMANDO+ " " +PARAM);
 	}
 }

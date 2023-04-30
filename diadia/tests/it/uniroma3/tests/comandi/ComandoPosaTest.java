@@ -16,10 +16,10 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
 
 class ComandoPosaTest {
-	private final int MAX_CAPIENZA_STANZA = 10;
-	private final int PESO_OGGETTO = 1;
+
 	private final String COMANDO = "posa"; 
-	private final String NOME_OGGETTO = "OggettoTest"; 
+	private final String NOME_OGGETTO = "attrezzo"; 
+	private final int PESO = 1;
 	private FabbricaDiComandi factory;
 	private Comando comando;
 	private Partita partita;
@@ -33,46 +33,33 @@ class ComandoPosaTest {
 		io = new IOConsole();
 		partita = new Partita(io);
 		factory = new FabbricaDiComandiFisarmonica();
-		attrezzo = new Attrezzo(NOME_OGGETTO, PESO_OGGETTO);
+		attrezzo = new Attrezzo(NOME_OGGETTO, PESO);
 		borsa = partita.getGiocatore().getBorsa();
+		borsa.addAttrezzo(attrezzo);
 		stanzaCorrente = partita.getStanzaCorrente();
 	}
 
 	@Test
-	void testPosaNessunOggetto() {
-		borsa.addAttrezzo(attrezzo);
+	void testPosaOggettoNonPresenteNellaBorsa() {
 		assertTrue(borsa.hasAttrezzo(attrezzo));
-		eseguiComando(COMANDO, null);
-		assertEquals(attrezzo, borsa.getAttrezzo(NOME_OGGETTO));
+		eseguiComando(COMANDO, "oggettoInesitstente");
+		assertEquals(attrezzo, borsa.getAttrezzo(attrezzo.getNome()));
 	}
 	
 	
 	@Test
 	void testPosaOggetto() {
-		borsa.addAttrezzo(attrezzo);
-		assertTrue(borsa.hasAttrezzo(NOME_OGGETTO));
+		assertTrue(borsa.hasAttrezzo(attrezzo));
 		eseguiComando(COMANDO, NOME_OGGETTO);
-		assertFalse(borsa.hasAttrezzo(NOME_OGGETTO));
+		assertFalse(borsa.hasAttrezzo(attrezzo));
 		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo));
 	}
 	
 	
-	@Test
-	void testPosaTroppiOggetti() {
-		borsa.addAttrezzo(attrezzo);
-		assertTrue(borsa.hasAttrezzo(NOME_OGGETTO));	
-		riempiStanzaDiOggetti();
-		eseguiComando(COMANDO, NOME_OGGETTO);
-		assertTrue(borsa.hasAttrezzo(NOME_OGGETTO));		
-	}
-	
-	private void riempiStanzaDiOggetti() {
-		for(int i = 0; i < MAX_CAPIENZA_STANZA; i++) 
-			stanzaCorrente.addAttrezzo(attrezzo, io);
-	}
-	
-	private void eseguiComando(String COMANDO, String NOME_OGGETTO) {
-		comando = factory.costruisciComando(COMANDO+" "+NOME_OGGETTO);
+	private void eseguiComando(String nomeComando, String nomeOggetto) {
+		System.out.println(nomeComando);
+		System.out.println(nomeOggetto);
+		comando = factory.costruisciComando(nomeComando + " " + nomeOggetto);
 		comando.esegui(partita, io);
 	}
 	

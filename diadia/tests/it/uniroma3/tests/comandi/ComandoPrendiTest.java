@@ -16,8 +16,8 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
 
 class ComandoPrendiTest {
-	private final int MAX_CAPIENZA_BORSA = 10;
 	private final int PESO_OGGETTO = 1;
+	private final int PESO_OGGETTO_MAX = 10;
 	private final String COMANDO = "prendi";
 	private final String NOME_OGGETTO = "OggettoTest";
 	private FabbricaDiComandi factory;
@@ -57,17 +57,11 @@ class ComandoPrendiTest {
 
 	@Test
 	void testPrendiOggettoConBorsaPiena() {
-		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo));
-		riempiBorsa();
-		eseguiComando(COMANDO, NOME_OGGETTO);
-		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo));
-		assertFalse(borsa.hasAttrezzo(attrezzo));
-	}
-
-	private void riempiBorsa() {
-		Attrezzo fill = new Attrezzo("filler", PESO_OGGETTO);
-		for (int i = 0; i < MAX_CAPIENZA_BORSA; i++)
-			borsa.addAttrezzo(fill);
+		Attrezzo troppoPesante = new Attrezzo("troppoPesante", PESO_OGGETTO_MAX);
+		assertTrue(stanzaCorrente.addAttrezzo(troppoPesante, io));
+		eseguiComando(COMANDO, troppoPesante.getNome());
+		assertTrue(stanzaCorrente.hasAttrezzo(troppoPesante));
+		assertFalse(borsa.hasAttrezzo(troppoPesante));
 	}
 
 	private void eseguiComando(String COMANDO, String NOME_OGGETTO) {

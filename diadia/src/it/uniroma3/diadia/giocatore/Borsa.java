@@ -1,13 +1,16 @@
 package it.uniroma3.diadia.giocatore;
 
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.SortedSet;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Borsa {
 	private final static int DEFAULT_PESO_MAX_BORSA = 10;
-	private Set<Attrezzo> attrezzi;
+	private Map<String, Attrezzo> attrezzi;
 	private int pesoMax;
 
 	public Borsa() {
@@ -16,7 +19,7 @@ public class Borsa {
 
 	public Borsa(int pesoMax) {
 		this.pesoMax = pesoMax;
-		this.attrezzi = new HashSet<>();
+		this.attrezzi = new HashMap<>();
 	}
 
 	public int getPesoMax() {
@@ -25,22 +28,19 @@ public class Borsa {
 
 	public int getPeso() {
 		int peso = 0;
-		for (Attrezzo attr : attrezzi)
+		for (Attrezzo attr : attrezzi.values())
 			peso += attr.getPeso();
 		return peso;
 	}
 
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
-		for (Attrezzo attr : attrezzi)
-			if (nomeAttrezzo.equals(attr.getNome()))
-				return attr;
-		return null;
+		return attrezzi.get(nomeAttrezzo);
 	}
 
 	public boolean addAttrezzo(Attrezzo attrezzo) {
 		if (this.getPeso() + attrezzo.getPeso() > this.getPesoMax())
 			return false;
-		return attrezzi.add(attrezzo);
+		return attrezzi.put(attrezzo.getNome(), attrezzo) == null;
 	}
 
 	public boolean isEmpty() {
@@ -48,11 +48,23 @@ public class Borsa {
 	}
 
 	public boolean hasAttrezzo(Attrezzo attrezzo) {
-		return attrezzi.contains(attrezzo);
+		return attrezzi.get(attrezzo.getNome()) != null;
+	}
+
+	public boolean removeAttrezzo(Attrezzo attrezzo) {
+		return attrezzi.remove(attrezzo.getNome()) != null;
+	}
+
+	public List<Attrezzo> getContenutoOrdinatoPerPeso(){
+		
 	}
 	
-	public boolean removeAttrezzo(Attrezzo attrezzo) {
-		return attrezzi.remove(attrezzo);
+	public SortedSet<Attrezzo> getContenutoOrdinatoPerNome(){
+		
+	}
+	
+	public Map<Integer,Set<Attrezzo>> getContenutoRaggruppatoPerPeso(){
+		
 	}
 	
 	@Override
@@ -60,9 +72,10 @@ public class Borsa {
 		StringBuilder s = new StringBuilder();
 		if (!this.isEmpty()) {
 			s.append("\nContenuto borsa (" + this.getPeso() + "kg/" + this.getPesoMax() + "kg): ");
-			for (Attrezzo attr : attrezzi)
+			for (Attrezzo attr : attrezzi.values())
 				s.append(attr.toString() + " ");
-		}else s.append("\nBorsa vuota");
+		} else
+			s.append("\nBorsa vuota");
 		return s.toString();
 	}
 }

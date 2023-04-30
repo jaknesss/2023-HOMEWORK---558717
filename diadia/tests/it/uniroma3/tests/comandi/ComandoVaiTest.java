@@ -15,15 +15,15 @@ import it.uniroma3.diadia.ambienti.Stanza;
 
 class ComandoVaiTest {
 
-	private Partita partita;
-	private FabbricaDiComandi factory;
-	private Comando comando;
-	private Stanza stanzaIniziale;
 	private final String NOME_COMANDO = "vai";
-	private final String NOME_OMANDO_SCONOSCIUTO = "test";
+	private final String NOME_COMANDO_SCONOSCIUTO = "test";
 	private final String DIREZIONE = "sud";
 	private final String DIREZIONE_SCONOSCIUTA = "sud-est";
+	private FabbricaDiComandi factory;
+	private Comando comando;
 	private IO io;
+	private Partita partita;
+	private Stanza stanzaIniziale;
 
 	@BeforeEach
 	void setUp() {
@@ -53,7 +53,7 @@ class ComandoVaiTest {
 
 	@Test
 	void testComandoNonValido() {
-		eseguiComando(NOME_OMANDO_SCONOSCIUTO, DIREZIONE);
+		eseguiComando(NOME_COMANDO_SCONOSCIUTO, DIREZIONE);
 		assertEquals(stanzaIniziale.getNome(), partita.getStanzaCorrente().getNome());
 	}
 
@@ -71,11 +71,15 @@ class ComandoVaiTest {
 
 	@Test
 	void testDirezioneValida() {
+		System.out.println(stanzaIniziale.getStanzaAdiacente(DIREZIONE).getNome());
 		eseguiComando(NOME_COMANDO, DIREZIONE);
+		System.out.println(stanzaIniziale.getStanzaAdiacente(DIREZIONE).getNome());
 		assertEquals(stanzaIniziale.getStanzaAdiacente(DIREZIONE).getNome(), partita.getStanzaCorrente().getNome());
 	}
 
 	private void eseguiComando(String nomeComando, String parametro) {
+		System.out.println(nomeComando);
+		System.out.println(parametro);
 		comando = factory.costruisciComando(nomeComando + " " + parametro);
 		comando.esegui(partita, io);
 	}

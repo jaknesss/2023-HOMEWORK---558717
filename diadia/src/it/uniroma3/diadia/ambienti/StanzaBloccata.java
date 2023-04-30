@@ -24,7 +24,7 @@ public class StanzaBloccata extends Stanza {
 	public String getDescrizione(IO io) {
 		if (!this.hasAttrezzo(this.oggettoChiave))
 			io.mostraMessaggio("\nLa stanza a [" + direzioneBloccata + 
-			"] è bloccata hai bisongo di [" + oggettoChiave.getNome() + "]");
+			"] è bloccata, hai bisongo di [" + oggettoChiave.getNome() + "] !");
 		return super.toString();
 	}
 

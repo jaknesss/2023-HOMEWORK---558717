@@ -16,14 +16,16 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 class GiocatoreTest {
 	
 	private final int MAX_CFU = 10;
-	private final int MAX_ATTREZZI = 10;
+	private final int PESO = 1;
 	private final String ATTREZZO = "attrezzoTest";
 	private Giocatore giocatore;
 	private Borsa borsa;
+	private Attrezzo attrezzo;
 	
 	@BeforeEach
 	public void setUp() {
 		giocatore = new Giocatore();
+		attrezzo = new Attrezzo(ATTREZZO, PESO);
 		borsa = giocatore.getBorsa();			
 	}
 	
@@ -35,47 +37,28 @@ class GiocatoreTest {
 	
 	@Test
 	public void testAddAttrezzoSingolo() {
-		Attrezzo attrezzo1 = new Attrezzo(ATTREZZO, 1);
-		giocatore.addAttrezzo(attrezzo1);
-		assertEquals(attrezzo1, borsa.getAttrezzo(ATTREZZO));
+		giocatore.addAttrezzo(attrezzo);
+		assertEquals(attrezzo, borsa.getAttrezzo(ATTREZZO));
 	}
-	
-	@Test
-	public void testAddAttrezzoMaxCapacita() {
-		for(int i = 0; i < MAX_ATTREZZI; i++) {
-			assertTrue(giocatore.addAttrezzo(new Attrezzo(ATTREZZO, 1)));			
-		}
-		assertFalse(giocatore.addAttrezzo(new Attrezzo(ATTREZZO, 1)));
-	}
-	
-	@Test
-	public void testAddAttrezzoMaxPeso() {
-		for(int i = 0; i < MAX_ATTREZZI-1; i++) {
-			assertTrue(giocatore.addAttrezzo(new Attrezzo(ATTREZZO, 1)));			
-		}
-		assertFalse(giocatore.addAttrezzo(new Attrezzo(ATTREZZO, 2)));
-	}
-	
 	
 	@Test
 	public void testRemoveAttrezzoBorsaVuota() {
-		assertFalse(giocatore.removeAttrezzo(null));
+		Attrezzo attrezzoNonAggiunto = new Attrezzo("nonAggiunto", PESO);
+		assertFalse(giocatore.removeAttrezzo(attrezzoNonAggiunto));
 	}
 	
 	@Test
 	public void testRemoveAttrezzoSingolo() {
-		Attrezzo attrezzo = new Attrezzo(ATTREZZO, 1);
 		giocatore.addAttrezzo(attrezzo);
-		assertTrue(borsa.hasAttrezzo(ATTREZZO));
+		assertTrue(borsa.hasAttrezzo(attrezzo));
 		assertTrue(giocatore.removeAttrezzo(attrezzo));
 	}
 	
 	@Test
 	public void testRemoveAttrezzoInesistente() {
-		Attrezzo attrezzo = new Attrezzo(ATTREZZO, 1);
-		Attrezzo attrezzo1 = new Attrezzo("nonAggiunto", 1);
+		Attrezzo attrezzoNonAggiunto = new Attrezzo("nonAggiunto", 1);
 		giocatore.addAttrezzo(attrezzo);
-		assertFalse(giocatore.removeAttrezzo(attrezzo1));
+		assertFalse(giocatore.removeAttrezzo(attrezzoNonAggiunto));
 	}
 	
 }

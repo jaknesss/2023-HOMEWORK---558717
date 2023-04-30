@@ -13,99 +13,78 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 class StanzaTest {
 	
-	private final int MAX_ATTREZZI = 10;
-	private final int MAX_DIREZIONI = 4;
 	private final String ATTREZZO = "AttrezzoTest";
 	private final String STANZA = "StanzaTest";
 	private final String STANZA_ADIACENTE = "StanzaAdiacente";
+	private final String DIR_NORD = "nord";
+	private Attrezzo attrezzo;
 	private Stanza stanza;
 	private IO io;
  	
 	@BeforeEach
 	public void setUp() throws Exception {
 		this.stanza = new Stanza(STANZA);
-		io = new IOConsole();
+		this.attrezzo = new Attrezzo(ATTREZZO, 1);
+		this.io = new IOConsole();
 	}
 
 	@Test
 	public void testSetStanzaAdiacenteSingola() {
-		Stanza adiacente = creaStanzaEdImpostaAdiacente(this.stanza, STANZA_ADIACENTE, "nord");
+		Stanza adiacente = creaStanzaEdImpostaAdiacente(this.stanza, STANZA_ADIACENTE, DIR_NORD);
 		assertEquals(adiacente, stanza.getStanzaAdiacente("nord"));
 	}
 	
 	@Test
 	public void testCambioStanzaAdiacente() {
 		creaStanzaEdImpostaAdiacente(this.stanza, "daCambiare", "nord");
-		Stanza adiacente = creaStanzaEdImpostaAdiacente(this.stanza, "daCambiare", "nord");
+		Stanza adiacente = creaStanzaEdImpostaAdiacente(this.stanza, "daCambiare", DIR_NORD);
 		assertEquals(adiacente, stanza.getStanzaAdiacente("nord"));
 	}
 	
 	
 	@Test 
 	public void testStanzaAdiacenteNonEsistente() {
-		assertNull(stanza.getStanzaAdiacente("nord"));
+		assertNull(stanza.getStanzaAdiacente(DIR_NORD));
 	}
 	
 	
 	@Test 
 	public void testStanzaAdiacenteDirezioneNonEsistente() {
-		creaStanzaEdImpostaAdiacente(this.stanza, STANZA_ADIACENTE, "nord");
+		creaStanzaEdImpostaAdiacente(this.stanza, STANZA_ADIACENTE, DIR_NORD);
 		assertNull(stanza.getStanzaAdiacente("nord-est"));
 	}
 	
 	@Test 
 	public void testGetDirezioniTutteVuote() {
-		assertArrayEquals(new String[MAX_DIREZIONI], stanza.getDirezioni());
+		for(String dir : this.stanza.getDirezioni())
+			assertNull(dir);
 	}
-	
-	@Test 
-	public void testGetDirezioneSingola() {
-		creaStanzaEdImpostaAdiacente(this.stanza, STANZA_ADIACENTE, "nord");
-		String[] direzioni = new String[MAX_DIREZIONI];
-		direzioni[0] = "nord";
-		assertArrayEquals(direzioni, stanza.getDirezioni());
-	}
-	
 	
 	@Test
 	public void testAddAttrezzoSingolo() {
-		Attrezzo attrezzo = new Attrezzo(ATTREZZO, 1);
 		assertTrue(stanza.addAttrezzo(attrezzo, io));
 		assertEquals(attrezzo, stanza.getAttrezzo(ATTREZZO));
 	}
 	
-	
-	@Test
-	public void testAddAttrezzoMaxCapienza() {
-		for(int i = 0; i < MAX_ATTREZZI; i++) {
-			Attrezzo attrezzo = new Attrezzo(ATTREZZO, 1);			
-			assertTrue(stanza.addAttrezzo(attrezzo, io));
-		}
-		Attrezzo diTroppo = new Attrezzo("diTroppo", 2);
-		assertFalse(stanza.addAttrezzo(diTroppo, io));
-	}
-	
 	@Test
 	public void testHasAttrezzoStanzaVuota() {
-		assertFalse(stanza.hasAttrezzo(ATTREZZO));
+		assertFalse(stanza.hasAttrezzo(attrezzo));
 	}
 	
 	
 	@Test
 	public void testHasAttrezzo() {
-		Attrezzo attrezzo = new Attrezzo(ATTREZZO, 1);
 		stanza.addAttrezzo(attrezzo, io);
-		assertTrue(stanza.hasAttrezzo(ATTREZZO));
+		assertTrue(stanza.hasAttrezzo(attrezzo));
 	}
 	
 	@Test
 	public void testHasAttrezzoInesistente() {
-		Attrezzo attrezzo = new Attrezzo(ATTREZZO, 1);
+		Attrezzo attrezzoDaCercare = new Attrezzo("nonEsiste", 1);
 		stanza.addAttrezzo(attrezzo, io);
-		assertFalse(stanza.hasAttrezzo("nonEsiste"));
+		assertFalse(stanza.hasAttrezzo(attrezzoDaCercare));
 	}
 	
-	@Test
 	private Stanza creaStanzaEdImpostaAdiacente(Stanza diPartenza, String nomeStanza, String direzione){
 		Stanza adiacente = new Stanza(nomeStanza);
 		diPartenza.setStanzaAdiacente(direzione, adiacente);

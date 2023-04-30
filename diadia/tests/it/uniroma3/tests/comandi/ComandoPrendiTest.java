@@ -41,27 +41,27 @@ class ComandoPrendiTest {
 
 	@Test
 	void testNonPrendiOggetto() {
-		assertTrue(stanzaCorrente.hasAttrezzo(NOME_OGGETTO));
+		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo));
 		eseguiComando(COMANDO, null);
-		assertTrue(stanzaCorrente.hasAttrezzo(NOME_OGGETTO));
-		assertFalse(borsa.hasAttrezzo(NOME_OGGETTO));
+		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo));
+		assertFalse(borsa.hasAttrezzo(attrezzo));
 	}
 
 	@Test
 	void testPrendiOggetto() {
-		assertTrue(stanzaCorrente.hasAttrezzo(NOME_OGGETTO));
+		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo));
 		eseguiComando(COMANDO, NOME_OGGETTO);
-		assertFalse(stanzaCorrente.hasAttrezzo(NOME_OGGETTO));
-		assertTrue(borsa.hasAttrezzo(NOME_OGGETTO));
+		assertFalse(stanzaCorrente.hasAttrezzo(attrezzo));
+		assertTrue(borsa.hasAttrezzo(attrezzo));
 	}
 
 	@Test
 	void testPrendiOggettoConBorsaPiena() {
-		assertTrue(stanzaCorrente.hasAttrezzo(NOME_OGGETTO));
+		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo));
 		riempiBorsa();
 		eseguiComando(COMANDO, NOME_OGGETTO);
-		assertTrue(stanzaCorrente.hasAttrezzo(NOME_OGGETTO));
-		assertFalse(borsa.hasAttrezzo(NOME_OGGETTO));
+		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo));
+		assertFalse(borsa.hasAttrezzo(attrezzo));
 	}
 
 	private void riempiBorsa() {

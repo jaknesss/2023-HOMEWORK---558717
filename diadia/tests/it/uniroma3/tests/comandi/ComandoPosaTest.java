@@ -34,7 +34,6 @@ class ComandoPosaTest {
 		partita = new Partita(io);
 		factory = new FabbricaDiComandiFisarmonica();
 		attrezzo = new Attrezzo(NOME_OGGETTO, PESO_OGGETTO);
-		io = new IOConsole();
 		borsa = partita.getGiocatore().getBorsa();
 		stanzaCorrente = partita.getStanzaCorrente();
 	}
@@ -42,7 +41,7 @@ class ComandoPosaTest {
 	@Test
 	void testPosaNessunOggetto() {
 		borsa.addAttrezzo(attrezzo);
-		assertTrue(borsa.hasAttrezzo(NOME_OGGETTO));
+		assertTrue(borsa.hasAttrezzo(attrezzo));
 		eseguiComando(COMANDO, null);
 		assertEquals(attrezzo, borsa.getAttrezzo(NOME_OGGETTO));
 	}
@@ -54,7 +53,7 @@ class ComandoPosaTest {
 		assertTrue(borsa.hasAttrezzo(NOME_OGGETTO));
 		eseguiComando(COMANDO, NOME_OGGETTO);
 		assertFalse(borsa.hasAttrezzo(NOME_OGGETTO));
-		assertTrue(stanzaCorrente.hasAttrezzo(NOME_OGGETTO));
+		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo));
 	}
 	
 	

@@ -8,8 +8,7 @@ public class ComandoGuarda implements Comando {
 	private final String NOME_COMANDO = "guarda";
 
 	@Override
-	public void setParametro(String parametro) {
-	}
+	public void setParametro(String parametro) {}
 
 	@Override
 	public void esegui(Partita partita, IO io) {

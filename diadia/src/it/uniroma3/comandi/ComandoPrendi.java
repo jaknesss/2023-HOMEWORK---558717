@@ -9,6 +9,7 @@ import it.uniroma3.diadia.giocatore.Borsa;
 public class ComandoPrendi implements Comando {
 
 	private final String NOME_COMANDO = "prendi";
+	private Attrezzo oggetto;
 	private String nomeOggetto;
 
 	@Override
@@ -23,8 +24,9 @@ public class ComandoPrendi implements Comando {
 			return;
 		}
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
+		oggetto = stanzaCorrente.getAttrezzo(nomeOggetto);
 		Borsa borsa = partita.getGiocatore().getBorsa();
-		if (stanzaCorrente.hasAttrezzo(nomeOggetto)) {
+		if (stanzaCorrente.hasAttrezzo(oggetto)) {
 			Attrezzo daPrendere = stanzaCorrente.getAttrezzo(nomeOggetto);
 			if (borsa.addAttrezzo(daPrendere))
 				stanzaCorrente.removeAttrezzo(daPrendere);

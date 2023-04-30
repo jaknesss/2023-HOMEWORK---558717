@@ -26,19 +26,19 @@ class StanzaBloccataTest {
 	
 	@BeforeEach
 	void setUp(){
-		stanzaIniziale = new StanzaBloccata(NOME_STANZA, NOME_OGG_CHIAVE, DIR_BLOCCATA);
+		attrezzoChiave = new Attrezzo(NOME_OGG_CHIAVE, PESO_ATTR);
+		stanzaIniziale = new StanzaBloccata(NOME_STANZA, attrezzoChiave, DIR_BLOCCATA);
 		stanzaVincente = new Stanza("Biblioteca");
 		stanzaCorrente = stanzaIniziale;
 		stanzaIniziale.setStanzaAdiacente(DIR_BLOCCATA, stanzaVincente);
-		attrezzoChiave = new Attrezzo(NOME_OGG_CHIAVE, PESO_ATTR);
 		io = new IOConsole();
 	}
 
 	@Test
 	void testStanzaContieneOggChiave() {
 		stanzaIniziale.addAttrezzo(attrezzoChiave, io);
-		assertTrue(stanzaIniziale.hasAttrezzo(NOME_OGG_CHIAVE));
-		assertTrue(attrezzoChiave.getNome().equals(stanzaIniziale.getNomeAttrezzoChiave()));
+		assertTrue(stanzaIniziale.hasAttrezzo(attrezzoChiave));
+		System.out.println(stanzaIniziale.getStanzaAdiacente(DIR_BLOCCATA));
 		stanzaCorrente = stanzaIniziale.getStanzaAdiacente(DIR_BLOCCATA);
 		assertEquals(stanzaVincente, stanzaCorrente);
 	}
@@ -47,17 +47,15 @@ class StanzaBloccataTest {
 	void testStanzaContieneOggChiaveSbagliato() {
 		Attrezzo attrSbagliato = new Attrezzo("sbagliato", PESO_ATTR);
 		stanzaIniziale.addAttrezzo(attrSbagliato, io);
-		assertTrue(stanzaIniziale.hasAttrezzo(attrSbagliato.getNome()));
-		assertFalse(attrSbagliato.getNome().equals(stanzaIniziale.getNomeAttrezzoChiave()));
+		assertTrue(stanzaIniziale.hasAttrezzo(attrSbagliato));
 		stanzaCorrente = stanzaIniziale.getStanzaAdiacente(DIR_BLOCCATA);
 		assertEquals(stanzaIniziale, stanzaCorrente);
 	}
 	
 	@Test
 	void testStanzaNonContieneOggChiave() {
-		assertFalse(stanzaIniziale.hasAttrezzo(NOME_OGG_CHIAVE));
+		assertFalse(stanzaIniziale.hasAttrezzo(attrezzoChiave));
 		stanzaCorrente = stanzaIniziale.getStanzaAdiacente(DIR_BLOCCATA);
 		assertEquals(stanzaIniziale, stanzaCorrente);
 	}
-
 }

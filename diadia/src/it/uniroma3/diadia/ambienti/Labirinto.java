@@ -30,10 +30,14 @@ public class Labirinto {
 		Attrezzo osso = new Attrezzo("osso", 1);
 		Attrezzo chiave = new Attrezzo("chiave", 3);
 		Attrezzo bastone = new Attrezzo("bastone", 5);
-
-		Stanza atrio = new StanzaBloccata("Atrio", "evaihc", "nord");
+		
+		StringBuilder string = new StringBuilder(chiave.getNome());
+		Attrezzo invertito = new Attrezzo(string.reverse().toString(), 3);
+			
+		
+		Stanza atrio = new StanzaBloccata("Atrio", invertito, "nord");
 		Stanza aulaN11 = new StanzaMagica("Aula N11");
-		Stanza aulaN10 = new StanzaBuia("Aula N10", "lanterna");
+		Stanza aulaN10 = new StanzaBuia("Aula N10", lanterna);
 		Stanza laboratorio = new Stanza("Laboratorio Campus");
 		Stanza biblioteca = new Stanza("Biblioteca");
 

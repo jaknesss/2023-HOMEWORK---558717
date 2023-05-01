@@ -2,6 +2,7 @@ package it.uniroma3.diadia.giocatore;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -75,7 +76,17 @@ public class Borsa {
 		return new TreeSet<Attrezzo>(attrezzi.values());
 	}
 	
-	public Map<Integer,Set<Attrezzo>> getContenutoRaggruppatoPerPeso(){}
+	public Map<Integer, Set<Attrezzo>> getContenutoRaggruppatoPerPeso(){
+		Map<Integer, Set<Attrezzo>> map = new HashMap<>();
+		for(Attrezzo attr : attrezzi.values()) {
+			if(!map.containsKey(attr.getPeso())) {
+				Set<Attrezzo> currentSet = new HashSet<>();
+				currentSet.add(attr);
+				map.put(attr.getPeso(), currentSet);
+			}else map.get(attr.getPeso()).add(attr);
+		}
+		return map;
+	}
 	
 	@Override
 	public String toString() {

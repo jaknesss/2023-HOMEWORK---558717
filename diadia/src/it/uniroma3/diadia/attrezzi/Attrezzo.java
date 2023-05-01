@@ -26,7 +26,8 @@ public class Attrezzo {
 	public boolean equals(Object obj) {
 		if (obj == null) return false;
 		Attrezzo that = (Attrezzo) obj;
-		return this.getNome().equals(that.getNome()) && this.getPeso() == that.getPeso();
+		return this.getNome().equals(that.getNome()) 
+			&& this.getPeso() == that.getPeso();
 	}
 
 }

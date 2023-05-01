@@ -33,13 +33,13 @@ class StanzaBuiaTest {
 	@Test
 	void testStanzaNonContieneOggChiave() {
 		stanza.addAttrezzo(attrezzoGenerico, io);
-		assertFalse(stanza.hasAttrezzo(attrezzoChiave));
+		assertFalse(stanza.hasAttrezzo(NOME_OGG_CHIAVE));
 	}
 	
 	@Test
 	void testStanzaContieneOggChiave() {
 		stanza.addAttrezzo(attrezzoChiave, io);
-		assertTrue(stanza.hasAttrezzo(attrezzoChiave));
+		assertTrue(stanza.hasAttrezzo(NOME_OGG_CHIAVE));
 		assertTrue(attrezzoChiave.getNome().equals(NOME_OGG_CHIAVE));
 	}
 }

@@ -52,13 +52,11 @@ class ComandoPosaTest {
 		assertTrue(borsa.hasAttrezzo(attrezzo));
 		eseguiComando(COMANDO, NOME_OGGETTO);
 		assertFalse(borsa.hasAttrezzo(attrezzo));
-		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo));
+		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo.getNome()));
 	}
 	
 	
 	private void eseguiComando(String nomeComando, String nomeOggetto) {
-		System.out.println(nomeComando);
-		System.out.println(nomeOggetto);
 		comando = factory.costruisciComando(nomeComando + " " + nomeOggetto);
 		comando.esegui(partita, io);
 	}

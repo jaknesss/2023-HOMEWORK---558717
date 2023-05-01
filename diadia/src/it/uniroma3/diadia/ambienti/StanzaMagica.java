@@ -27,6 +27,7 @@ public class StanzaMagica extends Stanza{
 		}
 		return super.addAttrezzo(attrezzo, io);
 	}
+	
 	private Attrezzo modificaAttrezzo(Attrezzo attrezzo) {
 		StringBuilder nomeDaInvertire = new StringBuilder(attrezzo.getNome());
 		String nomeInvertito = nomeDaInvertire.reverse().toString();

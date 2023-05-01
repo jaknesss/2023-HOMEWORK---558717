@@ -13,7 +13,7 @@ public class StanzaBuia extends Stanza{
 	}
 	
 	public String getDescrizione(IO io) {
-		if(this.hasAttrezzo(oggettoChiave))
+		if(this.hasAttrezzo(oggettoChiave.getNome()))
 			return super.toString();
 		return "\nQui c'è buio pesto!\nCosa potresti usare?\n\n" 
 			 + "???????????";

@@ -37,7 +37,7 @@ class StanzaBloccataTest {
 	@Test
 	void testStanzaContieneOggChiave() {
 		stanzaIniziale.addAttrezzo(attrezzoChiave, io);
-		assertTrue(stanzaIniziale.hasAttrezzo(attrezzoChiave));
+		assertTrue(stanzaIniziale.hasAttrezzo(NOME_OGG_CHIAVE));
 		System.out.println(stanzaIniziale.getStanzaAdiacente(DIR_BLOCCATA));
 		stanzaCorrente = stanzaIniziale.getStanzaAdiacente(DIR_BLOCCATA);
 		assertEquals(stanzaVincente, stanzaCorrente);
@@ -47,14 +47,14 @@ class StanzaBloccataTest {
 	void testStanzaContieneOggChiaveSbagliato() {
 		Attrezzo attrSbagliato = new Attrezzo("sbagliato", PESO_ATTR);
 		stanzaIniziale.addAttrezzo(attrSbagliato, io);
-		assertTrue(stanzaIniziale.hasAttrezzo(attrSbagliato));
+		assertTrue(stanzaIniziale.hasAttrezzo(attrSbagliato.getNome()));
 		stanzaCorrente = stanzaIniziale.getStanzaAdiacente(DIR_BLOCCATA);
 		assertEquals(stanzaIniziale, stanzaCorrente);
 	}
 	
 	@Test
 	void testStanzaNonContieneOggChiave() {
-		assertFalse(stanzaIniziale.hasAttrezzo(attrezzoChiave));
+		assertFalse(stanzaIniziale.hasAttrezzo(NOME_OGG_CHIAVE));
 		stanzaCorrente = stanzaIniziale.getStanzaAdiacente(DIR_BLOCCATA);
 		assertEquals(stanzaIniziale, stanzaCorrente);
 	}

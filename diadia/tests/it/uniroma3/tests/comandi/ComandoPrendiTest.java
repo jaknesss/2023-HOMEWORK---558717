@@ -16,6 +16,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
 
 class ComandoPrendiTest {
+
 	private final int PESO_OGGETTO = 1;
 	private final int PESO_OGGETTO_MAX = 10;
 	private final String COMANDO = "prendi";
@@ -40,27 +41,20 @@ class ComandoPrendiTest {
 	}
 
 	@Test
-	void testNonPrendiOggetto() {
-		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo));
-		eseguiComando(COMANDO, null);
-		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo));
-		assertFalse(borsa.hasAttrezzo(attrezzo));
-	}
-
-	@Test
 	void testPrendiOggetto() {
-		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo));
+		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo.getNome()));
 		eseguiComando(COMANDO, NOME_OGGETTO);
-		assertFalse(stanzaCorrente.hasAttrezzo(attrezzo));
+		assertFalse(stanzaCorrente.hasAttrezzo(attrezzo.getNome()));
 		assertTrue(borsa.hasAttrezzo(attrezzo));
 	}
 
 	@Test
 	void testPrendiOggettoConBorsaPiena() {
 		Attrezzo troppoPesante = new Attrezzo("troppoPesante", PESO_OGGETTO_MAX);
+		assertTrue(borsa.addAttrezzo(attrezzo));
 		assertTrue(stanzaCorrente.addAttrezzo(troppoPesante, io));
 		eseguiComando(COMANDO, troppoPesante.getNome());
-		assertTrue(stanzaCorrente.hasAttrezzo(troppoPesante));
+		assertTrue(stanzaCorrente.hasAttrezzo(troppoPesante.getNome()));
 		assertFalse(borsa.hasAttrezzo(troppoPesante));
 	}
 

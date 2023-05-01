@@ -1,25 +1,31 @@
 package it.uniroma3.diadia.giocatore;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
+import java.util.TreeSet;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.attrezzi.ComparatoreAttrezziPerPeso;
 
 public class Borsa {
 	private final static int DEFAULT_PESO_MAX_BORSA = 10;
 	private Map<String, Attrezzo> attrezzi;
 	private int pesoMax;
+	private int pesoCorrente;
 
 	public Borsa() {
 		this(DEFAULT_PESO_MAX_BORSA);
 	}
-
+	
 	public Borsa(int pesoMax) {
 		this.pesoMax = pesoMax;
 		this.attrezzi = new HashMap<>();
+		this.pesoCorrente = 0;
 	}
 
 	public int getPesoMax() {
@@ -27,10 +33,10 @@ public class Borsa {
 	}
 
 	public int getPeso() {
-		int peso = 0;
+		pesoCorrente = 0;
 		for (Attrezzo attr : attrezzi.values())
-			peso += attr.getPeso();
-		return peso;
+			pesoCorrente += attr.getPeso();
+		return pesoCorrente;
 	}
 
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
@@ -48,24 +54,28 @@ public class Borsa {
 	}
 
 	public boolean hasAttrezzo(Attrezzo attrezzo) {
-		return attrezzi.get(attrezzo.getNome()) != null;
+		if(this.isEmpty()) return false;
+		if(attrezzo == null) return false;
+		return attrezzi.containsValue(attrezzo);
 	}
 
 	public boolean removeAttrezzo(Attrezzo attrezzo) {
+		if(this.isEmpty()) return false;
+		if(attrezzo == null) return false;
 		return attrezzi.remove(attrezzo.getNome()) != null;
 	}
 
 	public List<Attrezzo> getContenutoOrdinatoPerPeso(){
-		
+		List<Attrezzo> list = new LinkedList<>(attrezzi.values());
+		Collections.sort(list, new ComparatoreAttrezziPerPeso());
+		return list;
 	}
 	
 	public SortedSet<Attrezzo> getContenutoOrdinatoPerNome(){
-		
+		return new TreeSet<Attrezzo>(attrezzi.values());
 	}
 	
-	public Map<Integer,Set<Attrezzo>> getContenutoRaggruppatoPerPeso(){
-		
-	}
+	public Map<Integer,Set<Attrezzo>> getContenutoRaggruppatoPerPeso(){}
 	
 	@Override
 	public String toString() {

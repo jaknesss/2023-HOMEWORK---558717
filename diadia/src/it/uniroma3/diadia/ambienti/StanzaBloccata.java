@@ -14,25 +14,25 @@ public class StanzaBloccata extends Stanza {
 		this.direzioneBloccata = direzioneBloccata;
 	}
 
-	@Override
-	public Stanza getStanzaAdiacente(String direzione) {
-		if (direzioneBloccata.equals(direzione) && !hasAttrezzo(oggettoChiave))
-			return this;
-		return super.getStanzaAdiacente(direzione);
-	}
-
 	public String getDescrizione(IO io) {
-		if (!this.hasAttrezzo(this.oggettoChiave))
+		if (!hasAttrezzo(getNomeAttrezzoChiave()))
 			io.mostraMessaggio("\nLa stanza a [" + direzioneBloccata + 
 			"] è bloccata, hai bisongo di [" + oggettoChiave.getNome() + "] !");
-		return super.toString();
+		return super.getDescrizione(io);
 	}
 
 	public String getNomeAttrezzoChiave() {
 		return oggettoChiave.getNome();
 	}
+	
 	public String getDirezioneBloccata() {
 		return direzioneBloccata;
 	}
-
+	
+	@Override
+	public Stanza getStanzaAdiacente(String direzione) {
+		if (direzioneBloccata.equals(direzione) && !hasAttrezzo(getNomeAttrezzoChiave()))
+			return this;
+		return super.getStanzaAdiacente(direzione);
+	}
 }

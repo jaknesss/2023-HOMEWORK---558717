@@ -2,13 +2,6 @@ package it.uniroma3.diadia.giocatore;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-/**
- * Classe che gestisce il giocatore che interagisce con la borsa
- * 
- * @author fra
- * @see Borsa
- */
-
 public class Giocatore {
 	static final private int CFU_INIZIALI = 10;
 	private int cfu;

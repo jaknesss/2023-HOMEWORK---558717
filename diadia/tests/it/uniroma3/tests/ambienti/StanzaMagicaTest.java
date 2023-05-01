@@ -55,7 +55,6 @@ class StanzaMagicaTest {
 		assertEquals(NOME_ATTR_INV, stanzaMagica.getAttrezzo(NOME_ATTR_INV).getNome());
 	}
 
-
 	private void raggiungiSogliaMagica() {
 		for (int i = 0; i < StanzaMagica.SOGLIA_MAGICA_DEFAULT - 1; i++)
 			stanzaMagica.addAttrezzo(attrezzo, io);

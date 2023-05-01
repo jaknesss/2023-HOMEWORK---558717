@@ -1,11 +1,7 @@
 package it.uniroma3.diadia.ambienti;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
@@ -14,13 +10,11 @@ public class Stanza {
 
 	private String nome;
 	private Map<String, Attrezzo> attrezzi;
-	private List<String> direzioniPossibili;
 	private Map<String, Stanza> stanzeAdiacenti;
 
 	public Stanza(String nome) {
 		this.nome = nome;
 		this.attrezzi = new HashMap<>();
-		this.direzioniPossibili = new LinkedList<>();
 		this.stanzeAdiacenti = new HashMap<>();
 	}
 
@@ -35,9 +29,9 @@ public class Stanza {
 	public HashMap<String, Attrezzo> getAttrezzi() {
 		return (HashMap<String, Attrezzo>) attrezzi;
 	}
-
-	public LinkedList<String> getDirezioni() {
-		return (LinkedList<String>) direzioniPossibili;
+	
+	public HashMap<String, Stanza> getStanzeAdiacenti(){
+		return (HashMap<String, Stanza>) stanzeAdiacenti;
 	}
 
 	public Stanza getStanzaAdiacente(String direzione) {
@@ -46,19 +40,17 @@ public class Stanza {
 	}
 
 	public void setStanzaAdiacente(String direzione, Stanza stanza) {
-		if (direzioniPossibili.contains(direzione)) {
-			stanzeAdiacenti.put(direzione, stanza);
-			return;
-		}
-		this.direzioniPossibili.add(direzione);
 		this.stanzeAdiacenti.put(direzione, stanza);
 	}
 
-	public boolean hasAttrezzo(Attrezzo attrezzo) {
-		return attrezzi.get(attrezzo.getNome()) != null;
+	public boolean hasAttrezzo(String nomeAttrezzo) {
+		if(attrezzi.isEmpty()) return false;
+		if(nomeAttrezzo == null) return false;
+		return attrezzi.containsKey(nomeAttrezzo);
 	}
 
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
+		if(attrezzi.isEmpty()) return null;
 		return attrezzi.get(nomeAttrezzo);
 	}
 
@@ -76,7 +68,7 @@ public class Stanza {
 		StringBuilder risultato = new StringBuilder();
 		risultato.append("\n" + this.nome);
 		risultato.append("\nUscite: ");
-		for (String direzione : this.direzioniPossibili)
+		for (String direzione : stanzeAdiacenti.keySet())
 			risultato.append("[" + direzione + "] ");
 		risultato.append("\nAttrezzi nella stanza: ");
 		for (Attrezzo attr : attrezzi.values())

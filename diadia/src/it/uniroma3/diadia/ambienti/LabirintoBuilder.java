@@ -10,16 +10,12 @@ public class LabirintoBuilder implements Labirinto {
 	private final int MAX_STANZE_ADIACENTI = 4;
 	private Stanza stanzaIniziale;
 	private Stanza stanzaVincente;
-	private Stanza stanzaCorrente;
+	private Stanza stanzaACuiAggiungere;
 	private Stanza ultimaStanzaAggiunta;
 	private Map<String, Stanza> stanze;
 
 	public LabirintoBuilder() {
 		stanze = new HashMap<>();
-	}
-	
-	public void setStanzaCorrente(Stanza stanza) {
-		this.ultimaStanzaAggiunta = stanza;
 	}
 
 	public LabirintoBuilder addStanzaIniziale(String nomeStanza) {
@@ -49,10 +45,10 @@ public class LabirintoBuilder implements Labirinto {
 	}
 
 	public LabirintoBuilder addAdiacenza(String stanzaCorr, String stanzaAdiacente, String dir) {
-		stanzaCorrente = stanze.get(stanzaCorr);
-		if (stanzaCorrente.getStanzeAdiacenti().size() == MAX_STANZE_ADIACENTI)
+		stanzaACuiAggiungere = stanze.get(stanzaCorr);
+		if (stanzaACuiAggiungere.getStanzeAdiacenti().size() == MAX_STANZE_ADIACENTI)
 			return this;
-		stanzaCorrente.setStanzaAdiacente(dir, stanze.get(stanzaAdiacente));
+		stanzaACuiAggiungere.setStanzaAdiacente(dir, stanze.get(stanzaAdiacente));
 		return this;
 	}
 
@@ -90,6 +86,14 @@ public class LabirintoBuilder implements Labirinto {
 		return (HashMap<String, Stanza>) stanze;
 	}
 	
+	public Stanza getStanza(String nomeStanza){
+		return this.getStanze().get(nomeStanza);
+	}
+	
+	public boolean hasStanza(String nomeStanza) {
+		return this.getStanze().containsKey(nomeStanza);
+	}
+	
 	@Override
 	public Stanza getStanzaIniziale() {
 		return this.stanzaIniziale;
@@ -99,7 +103,4 @@ public class LabirintoBuilder implements Labirinto {
 	public Stanza getStanzaVincente() {
 		return this.stanzaVincente;
 	}
-
-	
-	
 }

@@ -5,6 +5,6 @@ public interface Labirinto {
 	public Stanza getStanzaIniziale();
 	public Stanza getStanzaVincente();
 	public Stanza getUltimaStanza();
-	public void setStanzaCorrente(Stanza stanza);
-
+	public Stanza getStanza(String nomeStanza);
+	public boolean hasStanza(String nomeStanza);
 }	

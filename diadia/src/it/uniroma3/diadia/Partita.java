@@ -8,11 +8,13 @@ public class Partita {
 
 	private Labirinto lab;
 	private Giocatore giocatore;
+	private Stanza corrente;
 	private boolean finita;
 
 	public Partita(Labirinto lab, IO io) {
 		this.lab = lab;
 		this.giocatore = new Giocatore();
+		this.corrente = lab.getStanzaIniziale();
 		this.finita = false;
 	}
 
@@ -21,7 +23,7 @@ public class Partita {
 	}
 
 	public Stanza getStanzaCorrente() {
-		return lab.getUltimaStanza();
+		return this.corrente;
 	}
 
 	public Labirinto getLabirinto() {
@@ -50,7 +52,7 @@ public class Partita {
 	}
 	
 	public void setStanzaCorrente(Stanza stanzaCorrente) {
-		lab.setStanzaCorrente(stanzaCorrente);
+		if(lab.hasStanza(stanzaCorrente.getNome())) 
+			corrente = lab.getStanza(stanzaCorrente.getNome());
 	}
-
 }

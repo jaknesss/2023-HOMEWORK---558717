@@ -38,13 +38,13 @@ class PartitaTest {
 
 	@Test
 	public void testIsVinta() {
-		lab.setStanzaCorrente(lab.getStanzaVincente());
+		partita.setStanzaCorrente(lab.getStanzaVincente());
 		assertTrue(partita.isVinta());
 	}
 
 	@Test
 	public void testNonAncoraVinta() {
-		lab.setStanzaCorrente(lab.getStanzaIniziale());
+		partita.setStanzaCorrente(lab.getStanzaIniziale());
 		assertFalse(partita.isVinta());
 	}
 	
@@ -71,7 +71,7 @@ class PartitaTest {
 	public void testSetStanzaCorrente() {
 		Stanza vincente = lab.getStanzaVincente();
 		System.out.println(vincente);
-		lab.setStanzaCorrente(vincente);
+		partita.setStanzaCorrente(vincente);
 		assertEquals(vincente, partita.getStanzaCorrente());
 	}
 

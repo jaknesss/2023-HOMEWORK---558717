@@ -44,7 +44,7 @@ public class DiaDia {
 	public static void main(String[] argc) {
 		IO io = new IOConsole();
 		Labirinto lab = new LabirintoBuilder()
-							.addStanzaIniziale("LabCampusOne")
+							.addStanzaIniziale("LabCampusOne").addAttrezzo("bomba", 1)
 							.addStanzaVincente("Biblioteca")
 							.addAdiacenza("LabCampusOne", "Biblioteca", "ovest")
 							.getLabirinto();

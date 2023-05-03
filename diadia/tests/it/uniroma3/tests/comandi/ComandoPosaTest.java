@@ -27,12 +27,14 @@ class ComandoPosaTest {
 	private Stanza stanzaCorrente;
 	private Borsa borsa;
 	private Attrezzo attrezzo;
+	private LabirintoBuilder lab;
 	private IO io;
 
 	@BeforeEach
 	void setUp() {
 		io = new IOConsole();
-		partita = new Partita(new LabirintoBuilder(), io);
+		lab = new LabirintoBuilder().addStanzaIniziale("atrio");
+		partita = new Partita(lab, io);
 		stanzaCorrente = partita.getStanzaCorrente();
 		factory = new FabbricaDiComandiFisarmonica();
 		attrezzo = new Attrezzo(NOME_OGGETTO, PESO);
@@ -42,7 +44,7 @@ class ComandoPosaTest {
 
 	@Test
 	void testPosaOggettoNonPresenteNellaBorsa() {
-		assertTrue(borsa.hasAttrezzo(attrezzo));
+		assertTrue(borsa.hasAttrezzo(attrezzo.getNome()));
 		eseguiComando(COMANDO, "oggettoInesitstente");
 		assertEquals(attrezzo, borsa.getAttrezzo(attrezzo.getNome()));
 	}
@@ -50,9 +52,9 @@ class ComandoPosaTest {
 	
 	@Test
 	void testPosaOggetto() {
-		assertTrue(borsa.hasAttrezzo(attrezzo));
+		assertTrue(borsa.hasAttrezzo(attrezzo.getNome()));
 		eseguiComando(COMANDO, attrezzo.getNome());
-		assertFalse(borsa.hasAttrezzo(attrezzo));
+		assertFalse(borsa.hasAttrezzo(attrezzo.getNome()));
 		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo.getNome()));
 	}
 	

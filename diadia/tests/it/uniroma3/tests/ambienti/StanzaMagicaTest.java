@@ -52,7 +52,7 @@ class StanzaMagicaTest {
 	}
 
 	private void raggiungiSogliaMagica() {
-		for (int i = 0; i < StanzaMagica.SOGLIA_MAGICA_DEFAULT - 1; i++)
+		for (int i = 0; i < StanzaMagica.SOGLIA_MAGICA_DEFAULT; i++)
 			stanzaMagica.addAttrezzo(attrezzo);
 	}
 

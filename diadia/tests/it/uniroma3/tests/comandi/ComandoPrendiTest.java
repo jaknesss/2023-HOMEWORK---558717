@@ -12,6 +12,7 @@ import it.uniroma3.comandi.FabbricaDiComandiFisarmonica;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
@@ -21,6 +22,7 @@ class ComandoPrendiTest {
 
 	private final int PESO_OGGETTO = 1;
 	private final int PESO_OGGETTO_MAX = 10;
+	private final String NOME_STANZA = "atrio";
 	private final String COMANDO = "prendi";
 	private final String NOME_OGGETTO = "OggettoTest";
 	private FabbricaDiComandi factory;
@@ -29,16 +31,18 @@ class ComandoPrendiTest {
 	private Stanza stanzaCorrente;
 	private Borsa borsa;
 	private Attrezzo attrezzo;
+	private LabirintoBuilder lab;
 	private IO io;
 
 	@BeforeEach
 	void setUp() throws Exception {
 		io = new IOConsole();
-		partita = new Partita(new LabirintoBuilder(), io);
+		lab = new LabirintoBuilder().addStanzaIniziale(NOME_STANZA);
+		partita = new Partita(lab, io);
 		factory = new FabbricaDiComandiFisarmonica();
 		attrezzo = new Attrezzo(NOME_OGGETTO, PESO_OGGETTO);
 		borsa = partita.getGiocatore().getBorsa();
-		stanzaCorrente = partita.getStanzaCorrente();
+		stanzaCorrente = lab.getUltimaStanza();
 		stanzaCorrente.addAttrezzo(attrezzo);
 	}
 

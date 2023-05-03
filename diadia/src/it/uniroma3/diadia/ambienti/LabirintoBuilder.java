@@ -17,6 +17,10 @@ public class LabirintoBuilder implements Labirinto {
 	public LabirintoBuilder() {
 		stanze = new HashMap<>();
 	}
+	
+	public void setStanzaCorrente(Stanza stanza) {
+		this.ultimaStanzaAggiunta = stanza;
+	}
 
 	public LabirintoBuilder addStanzaIniziale(String nomeStanza) {
 		stanzaIniziale = new Stanza(nomeStanza);
@@ -78,7 +82,10 @@ public class LabirintoBuilder implements Labirinto {
 	}
 	
 	
-
+	public Stanza getUltimaStanza() {
+		return this.ultimaStanzaAggiunta;
+	}
+	
 	public HashMap<String, Stanza> getStanze(){
 		return (HashMap<String, Stanza>) stanze;
 	}

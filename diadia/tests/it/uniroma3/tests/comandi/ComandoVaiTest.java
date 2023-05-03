@@ -23,14 +23,21 @@ class ComandoVaiTest {
 	private FabbricaDiComandi factory;
 	private Comando comando;
 	private IO io;
+	private LabirintoBuilder lab;
 	private Partita partita;
+	private Stanza stanzaCorrente;
 	private Stanza stanzaIniziale;
 
 	@BeforeEach
 	void setUp() {
 		io = new IOConsole();
-		partita = new Partita(new LabirintoBuilder(), io);
-		stanzaIniziale = partita.getLabirinto().getStanzaIniziale();
+		lab = new LabirintoBuilder()
+				  .addStanzaIniziale("atrio")
+				  .addStanza("biblioteca")
+				  .addAdiacenza("atrio", "biblioteca", DIREZIONE);
+		partita = new Partita(lab, io);
+		stanzaIniziale = lab.getStanzaIniziale();
+		stanzaCorrente = lab.getUltimaStanza();
 		factory = new FabbricaDiComandiFisarmonica();
 	}
 
@@ -48,39 +55,35 @@ class ComandoVaiTest {
 
 	@Test
 	void testComandoNullo() {
-		eseguiComando(null, DIREZIONE);
-		assertEquals(stanzaIniziale.getNome(), partita.getStanzaCorrente().getNome());
+		eseguiComando("nullo", DIREZIONE);
+		assertEquals(stanzaCorrente, stanzaIniziale.getStanzaAdiacente(DIREZIONE));
 	}
 
 	@Test
 	void testComandoNonValido() {
 		eseguiComando(NOME_COMANDO_SCONOSCIUTO, DIREZIONE);
-		assertEquals(stanzaIniziale.getNome(), partita.getStanzaCorrente().getNome());
+		assertEquals(stanzaCorrente, stanzaIniziale.getStanzaAdiacente(DIREZIONE));
 	}
 
 	@Test
 	void testDirezioneNulla() {
-		eseguiComando(NOME_COMANDO, null);
-		assertEquals(stanzaIniziale.getNome(), partita.getStanzaCorrente().getNome());
+		eseguiComando(NOME_COMANDO, "ovest");
+		assertEquals(stanzaCorrente, stanzaIniziale.getStanzaAdiacente(DIREZIONE));
 	}
 
 	@Test
 	void testDirezioneSconosciuta() {
 		eseguiComando(NOME_COMANDO, DIREZIONE_SCONOSCIUTA);
-		assertEquals(stanzaIniziale.getNome(), partita.getStanzaCorrente().getNome());
+		assertEquals(stanzaCorrente, stanzaIniziale.getStanzaAdiacente(DIREZIONE));
 	}
 
 	@Test
 	void testDirezioneValida() {
-		System.out.println(stanzaIniziale.getStanzaAdiacente(DIREZIONE).getNome());
 		eseguiComando(NOME_COMANDO, DIREZIONE);
-		System.out.println(stanzaIniziale.getStanzaAdiacente(DIREZIONE).getNome());
-		assertEquals(stanzaIniziale.getStanzaAdiacente(DIREZIONE).getNome(), partita.getStanzaCorrente().getNome());
+		assertEquals(stanzaCorrente, stanzaIniziale.getStanzaAdiacente(DIREZIONE));
 	}
 
 	private void eseguiComando(String nomeComando, String parametro) {
-		System.out.println(nomeComando);
-		System.out.println(parametro);
 		comando = factory.costruisciComando(nomeComando + " " + parametro);
 		comando.esegui(partita, io);
 	}

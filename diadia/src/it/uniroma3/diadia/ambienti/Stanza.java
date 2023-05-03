@@ -90,6 +90,7 @@ public class Stanza {
 	@Override
 	public boolean equals(Object obj) {
 		Stanza that = (Stanza) obj;
+		if(that == null) return false;
 		return this.getNome().equals(that.getNome()) &&
 				this.getAttrezzi().equals(that.getAttrezzi()) &&
 				this.getStanzeAdiacenti().equals(that.getStanzeAdiacenti());

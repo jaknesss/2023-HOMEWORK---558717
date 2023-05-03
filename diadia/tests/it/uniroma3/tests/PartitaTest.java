@@ -12,6 +12,7 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.giocatore.Giocatore;
 
@@ -25,7 +26,7 @@ class PartitaTest {
 	@BeforeEach
 	public void setUp() {
 		io = new IOConsole();
-		partita = new Partita(io);
+		partita = new Partita(new LabirintoBuilder(), io);
 		giocatore = partita.getGiocatore();
 		lab = partita.getLabirinto();
 	}

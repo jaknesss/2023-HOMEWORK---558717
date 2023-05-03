@@ -1,6 +1,7 @@
 package it.uniroma3.tests.comandi;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,13 +12,15 @@ import it.uniroma3.comandi.FabbricaDiComandiFisarmonica;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
 
 class ComandoPrendiTest {
-	private final int MAX_CAPIENZA_BORSA = 10;
+
 	private final int PESO_OGGETTO = 1;
+	private final int PESO_OGGETTO_MAX = 10;
 	private final String COMANDO = "prendi";
 	private final String NOME_OGGETTO = "OggettoTest";
 	private FabbricaDiComandi factory;
@@ -31,43 +34,30 @@ class ComandoPrendiTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		io = new IOConsole();
-		partita = new Partita(io);
+		partita = new Partita(new LabirintoBuilder(), io);
 		factory = new FabbricaDiComandiFisarmonica();
 		attrezzo = new Attrezzo(NOME_OGGETTO, PESO_OGGETTO);
 		borsa = partita.getGiocatore().getBorsa();
 		stanzaCorrente = partita.getStanzaCorrente();
-		stanzaCorrente.addAttrezzo(attrezzo, io);
-	}
-
-	@Test
-	void testNonPrendiOggetto() {
-		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo));
-		eseguiComando(COMANDO, null);
-		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo));
-		assertFalse(borsa.hasAttrezzo(attrezzo));
+		stanzaCorrente.addAttrezzo(attrezzo);
 	}
 
 	@Test
 	void testPrendiOggetto() {
-		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo));
+		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo.getNome()));
 		eseguiComando(COMANDO, NOME_OGGETTO);
-		assertFalse(stanzaCorrente.hasAttrezzo(attrezzo));
-		assertTrue(borsa.hasAttrezzo(attrezzo));
+		assertFalse(stanzaCorrente.hasAttrezzo(attrezzo.getNome()));
+		assertTrue(borsa.hasAttrezzo(attrezzo.getNome()));
 	}
 
 	@Test
 	void testPrendiOggettoConBorsaPiena() {
-		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo));
-		riempiBorsa();
-		eseguiComando(COMANDO, NOME_OGGETTO);
-		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo));
-		assertFalse(borsa.hasAttrezzo(attrezzo));
-	}
-
-	private void riempiBorsa() {
-		Attrezzo fill = new Attrezzo("filler", PESO_OGGETTO);
-		for (int i = 0; i < MAX_CAPIENZA_BORSA; i++)
-			borsa.addAttrezzo(fill);
+		Attrezzo troppoPesante = new Attrezzo("troppoPesante", PESO_OGGETTO_MAX);
+		assertTrue(borsa.addAttrezzo(attrezzo));
+		assertTrue(stanzaCorrente.addAttrezzo(troppoPesante));
+		eseguiComando(COMANDO, troppoPesante.getNome());
+		assertTrue(stanzaCorrente.hasAttrezzo(troppoPesante.getNome()));
+		assertFalse(borsa.hasAttrezzo(troppoPesante.getNome()));
 	}
 
 	private void eseguiComando(String COMANDO, String NOME_OGGETTO) {

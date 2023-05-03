@@ -1,6 +1,5 @@
 package it.uniroma3.diadia.ambienti;
 
-import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class StanzaMagica extends Stanza{
@@ -19,17 +18,22 @@ public class StanzaMagica extends Stanza{
 		this.contatoreAttrezziPosati = 0;
 	}
 	
-	public boolean addAttrezzo(Attrezzo attrezzo, IO io) {
+	public boolean addAttrezzo(Attrezzo attrezzo) {
 		this.contatoreAttrezziPosati++;
-		if(this.contatoreAttrezziPosati >= this.sogliaMagica) {
+		if(this.contatoreAttrezziPosati > this.sogliaMagica)
 			attrezzo = this.modificaAttrezzo(attrezzo);
-			io.mostraMessaggio("E' successo qualcosa di strano!\n");
-		}
-		return super.addAttrezzo(attrezzo, io);
+		return super.addAttrezzo(attrezzo);
 	}
+	
+	public boolean isMagica() {
+		return true;
+	}
+	
 	private Attrezzo modificaAttrezzo(Attrezzo attrezzo) {
 		StringBuilder nomeDaInvertire = new StringBuilder(attrezzo.getNome());
 		String nomeInvertito = nomeDaInvertire.reverse().toString();
 		return new Attrezzo(nomeInvertito, attrezzo.getPeso() * 2);
 	}
+	
+	
 }

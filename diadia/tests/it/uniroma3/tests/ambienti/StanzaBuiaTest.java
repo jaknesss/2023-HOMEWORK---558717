@@ -20,8 +20,8 @@ class StanzaBuiaTest {
 	
 	@BeforeEach
 	void setUp(){
-		stanza = new StanzaBuia(NOME_STANZA, attrezzoChiave.getNome());
 		attrezzoChiave = new Attrezzo(NOME_OGG_CHIAVE, PESO_ATTR);
+		stanza = new StanzaBuia(NOME_STANZA, attrezzoChiave.getNome());
 		attrezzoGenerico = new Attrezzo("attrezzoGenerico", PESO_ATTR);
 	}
 	
@@ -36,7 +36,6 @@ class StanzaBuiaTest {
 	void testStanzaContieneOggChiave() {
 		assertTrue(stanza.addAttrezzo(attrezzoChiave));
 		assertTrue(stanza.hasAttrezzo(attrezzoChiave.getNome()));
-		assertEquals(attrezzoChiave.getNome(),
-				 	 stanza.getAttrezzi().get(attrezzoChiave.getNome()));
+		assertEquals(attrezzoChiave, stanza.getAttrezzi().get(attrezzoChiave.getNome()));
 	}
 }

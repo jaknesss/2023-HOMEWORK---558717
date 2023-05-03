@@ -20,25 +20,31 @@ class PartitaTest {
 
 	private Partita partita;
 	private Giocatore giocatore;
+	private final String INGRESSO = "atrio";
+	private final String USCITA = "biblioteca";
 	private Labirinto lab;
 	private IO io;
 
 	@BeforeEach
 	public void setUp() {
 		io = new IOConsole();
-		partita = new Partita(new LabirintoBuilder(), io);
+		lab = new LabirintoBuilder()
+				  .addStanzaIniziale(INGRESSO)
+				  .addStanzaVincente(USCITA)
+				  .addAdiacenza(INGRESSO, USCITA, "nord");
+		partita = new Partita(lab, io);
 		giocatore = partita.getGiocatore();
-		lab = partita.getLabirinto();
 	}
 
 	@Test
-	public void testVinta() {
+	public void testIsVinta() {
 		partita.setStanzaCorrente(lab.getStanzaVincente());
 		assertTrue(partita.isVinta());
 	}
 
 	@Test
 	public void testNonAncoraVinta() {
+		partita.setStanzaCorrente(lab.getStanzaIniziale());
 		assertFalse(partita.isVinta());
 	}
 	
@@ -50,7 +56,7 @@ class PartitaTest {
 	}
 
 	@Test
-	public void testIsFinitaCfuEsauriti() {
+	public void testIsFinita_CfuEsauriti() {
 		giocatore.setCfu(0);
 		assertTrue(partita.isFinita());
 	}
@@ -63,9 +69,10 @@ class PartitaTest {
 	
 	@Test
 	public void testSetStanzaCorrente() {
-		Stanza test = new Stanza("stanzaTest");
-		partita.setStanzaCorrente(test);
-		assertEquals(test, partita.getStanzaCorrente());
+		Stanza vincente = lab.getStanzaVincente();
+		System.out.println(vincente);
+		partita.setStanzaCorrente(vincente);
+		assertEquals(vincente, partita.getStanzaCorrente());
 	}
 
 	

@@ -8,14 +8,14 @@ public class Partita {
 
 	private Labirinto lab;
 	private Giocatore giocatore;
-	private Stanza stanzaCorrente;
+	private Stanza corrente;
 	private boolean finita;
 
 	public Partita(Labirinto lab, IO io) {
 		this.lab = lab;
 		this.giocatore = new Giocatore();
+		this.corrente = lab.getStanzaIniziale();
 		this.finita = false;
-		this.stanzaCorrente = lab.getStanzaIniziale();
 	}
 
 	public Giocatore getGiocatore() {
@@ -23,7 +23,7 @@ public class Partita {
 	}
 
 	public Stanza getStanzaCorrente() {
-		return this.stanzaCorrente;
+		return this.corrente;
 	}
 
 	public Labirinto getLabirinto() {
@@ -35,7 +35,7 @@ public class Partita {
 	}
 
 	public boolean isVinta() {
-		return this.stanzaCorrente == lab.getStanzaVincente();
+		return this.getStanzaCorrente().getNome().equals(lab.getStanzaVincente().getNome());
 	}
 	
 	
@@ -43,10 +43,6 @@ public class Partita {
 		return giocatore.getCfu() == 0;
 	}
 	
-	public void setStanzaCorrente(Stanza stanzaCorrente) {
-		this.stanzaCorrente = stanzaCorrente;
-	}
-
 	public void setLabirinto(Labirinto lab) {
 		this.lab = lab;
 	}
@@ -54,5 +50,9 @@ public class Partita {
 	public void setFinita() {
 		this.finita = true;
 	}
-
+	
+	public void setStanzaCorrente(Stanza stanzaCorrente) {
+		if(lab.hasStanza(stanzaCorrente.getNome())) 
+			corrente = lab.getStanza(stanzaCorrente.getNome());
+	}
 }

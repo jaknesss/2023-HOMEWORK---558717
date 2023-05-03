@@ -24,8 +24,8 @@ public class Giocatore {
 		return borsa.addAttrezzo(attrezzo);
 	}
 
-	public boolean removeAttrezzo(Attrezzo attrezzo) {
-		return borsa.removeAttrezzo(attrezzo);
+	public boolean removeAttrezzo(String nomeAttrezzo) {
+		return borsa.removeAttrezzo(nomeAttrezzo);
 	}
 
 	public Borsa getBorsa() {

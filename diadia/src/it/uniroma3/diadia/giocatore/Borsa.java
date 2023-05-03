@@ -34,10 +34,7 @@ public class Borsa {
 	}
 
 	public int getPeso() {
-		pesoCorrente = 0;
-		for (Attrezzo attr : attrezzi.values())
-			pesoCorrente += attr.getPeso();
-		return pesoCorrente;
+		return this.pesoCorrente;
 	}
 
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
@@ -47,6 +44,7 @@ public class Borsa {
 	public boolean addAttrezzo(Attrezzo attrezzo) {
 		if (this.getPeso() + attrezzo.getPeso() > this.getPesoMax())
 			return false;
+		pesoCorrente += attrezzo.getPeso();
 		return attrezzi.put(attrezzo.getNome(), attrezzo) == null;
 	}
 
@@ -54,16 +52,15 @@ public class Borsa {
 		return attrezzi.isEmpty();
 	}
 
-	public boolean hasAttrezzo(Attrezzo attrezzo) {
-		if(this.isEmpty()) return false;
-		if(attrezzo == null) return false;
-		return attrezzi.containsValue(attrezzo);
+	public boolean hasAttrezzo(String nomeAttrezzo) {
+		if(nomeAttrezzo == null) return false;
+		return attrezzi.containsKey(nomeAttrezzo);
 	}
 
-	public boolean removeAttrezzo(Attrezzo attrezzo) {
-		if(this.isEmpty()) return false;
-		if(attrezzo == null) return false;
-		return attrezzi.remove(attrezzo.getNome()) != null;
+	public boolean removeAttrezzo(String nomeAttrezzo) {
+		if(attrezzi.containsKey(nomeAttrezzo))
+			pesoCorrente -= attrezzi.get(nomeAttrezzo).getPeso();
+		return attrezzi.remove(nomeAttrezzo) != null;
 	}
 
 	public List<Attrezzo> getContenutoOrdinatoPerPeso(){
@@ -72,20 +69,31 @@ public class Borsa {
 		return list;
 	}
 	
-	public SortedSet<Attrezzo> getContenutoOrdinatoPerNome(){
+	public SortedSet<Attrezzo> getContenutoOrdinatoPer_Nome(){
 		return new TreeSet<Attrezzo>(attrezzi.values());
 	}
 	
+	public SortedSet<Attrezzo> getSortedSetOrdinatoPer_Peso(){
+		 SortedSet<Attrezzo> attrezziPerPeso = new TreeSet<>(new ComparatoreAttrezziPerPeso());
+		 attrezziPerPeso.addAll(attrezzi.values());
+		 return attrezziPerPeso;
+	}
+	
 	public Map<Integer, Set<Attrezzo>> getContenutoRaggruppatoPerPeso(){
-		Map<Integer, Set<Attrezzo>> map = new HashMap<>();
+		Map<Integer, Set<Attrezzo>> mappaPerPeso = new HashMap<>();
 		for(Attrezzo attr : attrezzi.values()) {
-			if(!map.containsKey(attr.getPeso())) {
-				Set<Attrezzo> currentSet = new HashSet<>();
-				currentSet.add(attr);
-				map.put(attr.getPeso(), currentSet);
-			}else map.get(attr.getPeso()).add(attr);
+			Set<Attrezzo> setPerPeso = mappaPerPeso.get(attr.getPeso());
+			if(setPerPeso == null) {
+				setPerPeso = new HashSet<>();
+				mappaPerPeso.put(attr.getPeso(), setPerPeso);
+			}
+			setPerPeso.add(attr);
 		}
-		return map;
+		return mappaPerPeso;
+	}
+	
+	public String getDescrizione() {
+		return this.toString();
 	}
 	
 	@Override
@@ -93,10 +101,11 @@ public class Borsa {
 		StringBuilder s = new StringBuilder();
 		if (!this.isEmpty()) {
 			s.append("\nContenuto borsa (" + this.getPeso() + "kg/" + this.getPesoMax() + "kg): ");
-			for (Attrezzo attr : attrezzi.values())
-				s.append(attr.toString() + " ");
+			s.append(getContenutoOrdinatoPerPeso().toString());
 		} else
 			s.append("\nBorsa vuota");
 		return s.toString();
 	}
+	
+	
 }

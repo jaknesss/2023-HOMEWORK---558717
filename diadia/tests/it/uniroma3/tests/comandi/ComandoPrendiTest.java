@@ -1,6 +1,7 @@
 package it.uniroma3.tests.comandi;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,7 @@ import it.uniroma3.comandi.FabbricaDiComandiFisarmonica;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
@@ -32,12 +34,12 @@ class ComandoPrendiTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		io = new IOConsole();
-		partita = new Partita(io);
+		partita = new Partita(new LabirintoBuilder(), io);
 		factory = new FabbricaDiComandiFisarmonica();
 		attrezzo = new Attrezzo(NOME_OGGETTO, PESO_OGGETTO);
 		borsa = partita.getGiocatore().getBorsa();
 		stanzaCorrente = partita.getStanzaCorrente();
-		stanzaCorrente.addAttrezzo(attrezzo, io);
+		stanzaCorrente.addAttrezzo(attrezzo);
 	}
 
 	@Test
@@ -45,17 +47,17 @@ class ComandoPrendiTest {
 		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo.getNome()));
 		eseguiComando(COMANDO, NOME_OGGETTO);
 		assertFalse(stanzaCorrente.hasAttrezzo(attrezzo.getNome()));
-		assertTrue(borsa.hasAttrezzo(attrezzo));
+		assertTrue(borsa.hasAttrezzo(attrezzo.getNome()));
 	}
 
 	@Test
 	void testPrendiOggettoConBorsaPiena() {
 		Attrezzo troppoPesante = new Attrezzo("troppoPesante", PESO_OGGETTO_MAX);
 		assertTrue(borsa.addAttrezzo(attrezzo));
-		assertTrue(stanzaCorrente.addAttrezzo(troppoPesante, io));
+		assertTrue(stanzaCorrente.addAttrezzo(troppoPesante));
 		eseguiComando(COMANDO, troppoPesante.getNome());
 		assertTrue(stanzaCorrente.hasAttrezzo(troppoPesante.getNome()));
-		assertFalse(borsa.hasAttrezzo(troppoPesante));
+		assertFalse(borsa.hasAttrezzo(troppoPesante.getNome()));
 	}
 
 	private void eseguiComando(String COMANDO, String NOME_OGGETTO) {

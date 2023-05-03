@@ -11,8 +11,8 @@ public class Partita {
 	private Stanza stanzaCorrente;
 	private boolean finita;
 
-	public Partita(IO io) {
-		this.lab = new Labirinto(io);
+	public Partita(Labirinto lab, IO io) {
+		this.lab = lab;
 		this.giocatore = new Giocatore();
 		this.finita = false;
 		this.stanzaCorrente = lab.getStanzaIniziale();
@@ -47,6 +47,10 @@ public class Partita {
 		this.stanzaCorrente = stanzaCorrente;
 	}
 
+	public void setLabirinto(Labirinto lab) {
+		this.lab = lab;
+	}
+	
 	public void setFinita() {
 		this.finita = true;
 	}

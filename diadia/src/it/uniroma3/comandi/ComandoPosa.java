@@ -27,8 +27,8 @@ public class ComandoPosa implements Comando {
 		Borsa borsa = partita.getGiocatore().getBorsa();
 		daPosare = borsa.getAttrezzo(parametro);
 		if (daPosare != null) {
-			stanzaCorrente.addAttrezzo(daPosare, io);
-			borsa.removeAttrezzo(daPosare);
+			stanzaCorrente.addAttrezzo(daPosare);
+			borsa.removeAttrezzo(daPosare.getNome());
 		} else
 			io.mostraMessaggio("Non hai questo oggetto nella borsa");
 	}

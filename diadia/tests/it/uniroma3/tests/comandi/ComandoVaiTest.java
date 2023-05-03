@@ -11,6 +11,7 @@ import it.uniroma3.comandi.FabbricaDiComandiFisarmonica;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 class ComandoVaiTest {
@@ -28,7 +29,7 @@ class ComandoVaiTest {
 	@BeforeEach
 	void setUp() {
 		io = new IOConsole();
-		partita = new Partita(io);
+		partita = new Partita(new LabirintoBuilder(), io);
 		stanzaIniziale = partita.getLabirinto().getStanzaIniziale();
 		factory = new FabbricaDiComandiFisarmonica();
 	}

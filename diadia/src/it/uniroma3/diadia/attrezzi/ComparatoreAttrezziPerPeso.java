@@ -4,10 +4,10 @@ import java.util.Comparator;
 
 public class ComparatoreAttrezziPerPeso implements Comparator<Attrezzo>{
 	
-	public int compare(Attrezzo o1, Attrezzo o2) {
-		if(o1.getPeso() == o2.getPeso()) 
-			return o1.getNome().compareTo(o2.getNome());
-		return o1.getPeso() - o2.getPeso();
-	}
+	public int compare(Attrezzo attr1, Attrezzo attr2) {
+		if(attr1.getPeso() == attr2.getPeso()) 
+			return attr1.getNome().compareTo(attr2.getNome());
+		return attr1.getPeso() - attr2.getPeso();
 	
+	}
 }

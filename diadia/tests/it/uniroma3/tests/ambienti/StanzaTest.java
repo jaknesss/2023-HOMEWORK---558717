@@ -19,13 +19,11 @@ class StanzaTest {
 	private final String DIR_NORD = "nord";
 	private Attrezzo attrezzo;
 	private Stanza stanza;
-	private IO io;
  	
 	@BeforeEach
 	public void setUp() throws Exception {
 		this.stanza = new Stanza(NOME_STANZA);
 		this.attrezzo = new Attrezzo(NOME_ATTREZZO, 1);
-		this.io = new IOConsole();
 	}
 
 	@Test
@@ -62,7 +60,7 @@ class StanzaTest {
 	
 	@Test
 	public void testAddAttrezzoSingolo() {
-		assertTrue(stanza.addAttrezzo(attrezzo, io));
+		assertTrue(stanza.addAttrezzo(attrezzo));
 		assertEquals(attrezzo, stanza.getAttrezzo(attrezzo.getNome()));
 	}
 	
@@ -74,14 +72,14 @@ class StanzaTest {
 	
 	@Test
 	public void testHasAttrezzo() {
-		stanza.addAttrezzo(attrezzo, io);
+		stanza.addAttrezzo(attrezzo);
 		assertTrue(stanza.hasAttrezzo(attrezzo.getNome()));
 	}
 	
 	@Test
 	public void testHasAttrezzoInesistente() {
 		Attrezzo attrezzoDaCercare = new Attrezzo("nonEsiste", 1);
-		stanza.addAttrezzo(attrezzo, io);
+		stanza.addAttrezzo(attrezzo);
 		assertFalse(stanza.hasAttrezzo(attrezzoDaCercare.getNome()));
 	}
 	

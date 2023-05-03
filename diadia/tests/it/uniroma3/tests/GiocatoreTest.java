@@ -44,21 +44,21 @@ class GiocatoreTest {
 	@Test
 	public void testRemoveAttrezzoBorsaVuota() {
 		Attrezzo attrezzoNonAggiunto = new Attrezzo("nonAggiunto", PESO);
-		assertFalse(giocatore.removeAttrezzo(attrezzoNonAggiunto));
+		assertFalse(giocatore.removeAttrezzo(attrezzoNonAggiunto.getNome()));
 	}
 	
 	@Test
 	public void testRemoveAttrezzoSingolo() {
 		giocatore.addAttrezzo(attrezzo);
-		assertTrue(borsa.hasAttrezzo(attrezzo));
-		assertTrue(giocatore.removeAttrezzo(attrezzo));
+		assertTrue(borsa.hasAttrezzo(attrezzo.getNome()));
+		assertTrue(giocatore.removeAttrezzo(attrezzo.getNome()));
 	}
 	
 	@Test
 	public void testRemoveAttrezzoInesistente() {
 		Attrezzo attrezzoNonAggiunto = new Attrezzo("nonAggiunto", 1);
 		giocatore.addAttrezzo(attrezzo);
-		assertFalse(giocatore.removeAttrezzo(attrezzoNonAggiunto));
+		assertFalse(giocatore.removeAttrezzo(attrezzoNonAggiunto.getNome()));
 	}
 	
 }

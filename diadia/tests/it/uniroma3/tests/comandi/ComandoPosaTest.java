@@ -11,6 +11,7 @@ import it.uniroma3.comandi.FabbricaDiComandiFisarmonica;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
@@ -31,12 +32,12 @@ class ComandoPosaTest {
 	@BeforeEach
 	void setUp() {
 		io = new IOConsole();
-		partita = new Partita(io);
+		partita = new Partita(new LabirintoBuilder(), io);
+		stanzaCorrente = partita.getStanzaCorrente();
 		factory = new FabbricaDiComandiFisarmonica();
 		attrezzo = new Attrezzo(NOME_OGGETTO, PESO);
 		borsa = partita.getGiocatore().getBorsa();
 		borsa.addAttrezzo(attrezzo);
-		stanzaCorrente = partita.getStanzaCorrente();
 	}
 
 	@Test
@@ -50,7 +51,7 @@ class ComandoPosaTest {
 	@Test
 	void testPosaOggetto() {
 		assertTrue(borsa.hasAttrezzo(attrezzo));
-		eseguiComando(COMANDO, NOME_OGGETTO);
+		eseguiComando(COMANDO, attrezzo.getNome());
 		assertFalse(borsa.hasAttrezzo(attrezzo));
 		assertTrue(stanzaCorrente.hasAttrezzo(attrezzo.getNome()));
 	}

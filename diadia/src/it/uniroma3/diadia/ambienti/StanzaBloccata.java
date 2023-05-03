@@ -1,28 +1,27 @@
 package it.uniroma3.diadia.ambienti;
 
 import it.uniroma3.diadia.IO;
-import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class StanzaBloccata extends Stanza {
 
-	private Attrezzo oggettoChiave;
+	private String nomeOggettoChiave;
 	private String direzioneBloccata;
 
-	public StanzaBloccata(String nome, Attrezzo oggettoChiave, String direzioneBloccata) {
+	public StanzaBloccata(String nome, String direzioneBloccata, String nomeOggettoChiave) {
 		super(nome);
-		this.oggettoChiave = oggettoChiave;
+		this.nomeOggettoChiave = nomeOggettoChiave;
 		this.direzioneBloccata = direzioneBloccata;
 	}
 
 	public String getDescrizione(IO io) {
 		if (!hasAttrezzo(getNomeAttrezzoChiave()))
 			io.mostraMessaggio("\nLa stanza a [" + direzioneBloccata + 
-			"] è bloccata, hai bisongo di [" + oggettoChiave.getNome() + "] !");
+			"] è bloccata, hai bisongo di [" + this.getNomeAttrezzoChiave() + "] !");
 		return super.getDescrizione(io);
 	}
 
 	public String getNomeAttrezzoChiave() {
-		return oggettoChiave.getNome();
+		return this.nomeOggettoChiave;
 	}
 	
 	public String getDirezioneBloccata() {

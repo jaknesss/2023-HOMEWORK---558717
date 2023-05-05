@@ -34,7 +34,6 @@ class StanzaBloccataTest {
 	void testStanzaContieneOggChiave() {
 		stanzaIniziale.addAttrezzo(attrezzoChiave);
 		assertTrue(stanzaIniziale.hasAttrezzo(NOME_OGG_CHIAVE));
-		System.out.println(stanzaIniziale.getStanzaAdiacente(DIR_BLOCCATA));
 		stanzaCorrente = stanzaIniziale.getStanzaAdiacente(DIR_BLOCCATA);
 		assertEquals(stanzaVincente, stanzaCorrente);
 	}

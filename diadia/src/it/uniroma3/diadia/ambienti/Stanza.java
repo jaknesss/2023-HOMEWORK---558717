@@ -1,6 +1,5 @@
 package it.uniroma3.diadia.ambienti;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -94,6 +93,11 @@ public class Stanza {
 		return this.getNome().equals(that.getNome()) &&
 				this.getAttrezzi().equals(that.getAttrezzi()) &&
 				this.getStanzeAdiacenti().equals(that.getStanzeAdiacenti());
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.nome.hashCode() + MAX_NUMERO_STANZE_ADIACENTI;
 	}
 	
 	@Override

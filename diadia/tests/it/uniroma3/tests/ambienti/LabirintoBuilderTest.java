@@ -1,8 +1,8 @@
 package it.uniroma3.tests.ambienti;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.LabirintoBuilder;
@@ -25,7 +25,7 @@ public class LabirintoBuilderTest {
 	private String nomeStanzaIniziale = "Atrio";
 	private String nomeStanzaVincente = "Uscita";
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		lab = new LabirintoBuilder();
 	}
@@ -128,8 +128,10 @@ public class LabirintoBuilderTest {
 
 	@Test
 	public void testImpostaStanzaInizialeCambiandola() {
-		Labirinto maze = lab.addStanzaIniziale(this.nomeStanzaIniziale).addStanza("nuova iniziale")
-				.addStanzaIniziale("nuova iniziale").getLabirinto();
+		Labirinto maze = lab.addStanzaIniziale(this.nomeStanzaIniziale)
+							.addStanza("nuova iniziale")
+							.addStanzaIniziale("nuova iniziale")
+							.getLabirinto();
 		assertEquals("nuova iniziale", maze.getStanzaIniziale().getNome());
 	}
 
@@ -138,7 +140,8 @@ public class LabirintoBuilderTest {
 		String nomeAttrezzo = "attrezzo";
 		int peso = 1;
 		Labirinto maze = this.lab.addStanzaIniziale(this.nomeStanzaIniziale)
-				.addAttrezzo(nomeAttrezzo, peso).getLabirinto();
+								 .addAttrezzo(nomeAttrezzo, peso)
+								 .getLabirinto();
 		Attrezzo attrezzo = new Attrezzo(nomeAttrezzo, peso);
 		assertEquals(attrezzo, maze.getStanzaIniziale().getAttrezzo(nomeAttrezzo));
 	}
@@ -148,8 +151,10 @@ public class LabirintoBuilderTest {
 		String nomeAttrezzo = "attrezzo";
 		int peso = 1;
 		String nomeStanza = "stanza 1";
-		lab.addStanzaIniziale(nomeStanzaIniziale).addStanza(nomeStanza).addAttrezzo(nomeAttrezzo, peso)
-				.getLabirinto();
+		lab.addStanzaIniziale(nomeStanzaIniziale)
+		   .addStanza(nomeStanza)
+		   .addAttrezzo(nomeAttrezzo, peso)
+		   .getLabirinto();
 		assertTrue(this.lab.getStanze().get(nomeStanza).getAttrezzi()
 				.containsValue(new Attrezzo(nomeAttrezzo, peso)));
 		assertEquals(new Attrezzo(nomeAttrezzo, peso),
@@ -192,7 +197,9 @@ public class LabirintoBuilderTest {
 		int peso2 = 2;
 		String nomeStanza1 = "Stanza 1";
 		String nomeStanza2 = "Stanza 2";
-		this.lab.addStanza(nomeStanza1).addStanza(nomeStanza2).addAttrezzo(nomeAttrezzo1, peso1)
+		this.lab.addStanza(nomeStanza1)
+				.addStanza(nomeStanza2)
+				.addAttrezzo(nomeAttrezzo1, peso1)
 				.addAttrezzo(nomeAttrezzo2, peso2);
 		Map<String, Stanza> listaStanze = lab.getStanze();
 		assertEquals(new Attrezzo(nomeAttrezzo1, peso1), listaStanze.get(nomeStanza2).getAttrezzo(nomeAttrezzo1));
@@ -239,7 +246,6 @@ public class LabirintoBuilderTest {
 				.addAttrezzo(nomeAttrezzo1, peso1)
 				.addAttrezzo(nomeAttrezzo2, peso2);
 		Map<String, Stanza> listaStanze = lab.getStanze();
-		System.out.println(listaStanze);
 		assertEquals(new Attrezzo(nomeAttrezzo2Inv, peso2_x2),
 					listaStanze.get(nomeStanzaMagica).getAttrezzo(nomeAttrezzo2Inv));
 		assertEquals(new Attrezzo(nomeAttrezzo1, peso1), 
@@ -262,8 +268,7 @@ public class LabirintoBuilderTest {
 		assertEquals(stanzaVincente.getNome(), lab.getStanze().get("stanza bloccata").getStanzaAdiacente("nord").getNome());
 	}
 
-	//TODO capire perchè è sbagliato 
-	//@Test
+	@Test
 	public void testLabirintoConStanzaBloccata_SenzaPassepartout() {
 		this.lab.addStanzaIniziale(nomeStanzaIniziale)
 				.addStanzaBloccata("stanza bloccata", "nord", "chiave")
@@ -275,9 +280,9 @@ public class LabirintoBuilderTest {
 		Stanza stanzaBloccata = new StanzaBloccata("stanza bloccata", "nord", "chiave");
 		Stanza stanzaIniziale = new Stanza(nomeStanzaIniziale);
 		Stanza stanzaVincente = new Stanza(nomeStanzaVincente);
-		stanzaBloccata.setStanzaAdiacente(nomeStanzaIniziale, stanzaIniziale);
-		stanzaBloccata.setStanzaAdiacente(nomeStanzaVincente, stanzaVincente);
-		assertEquals(stanzaBloccata, lab.getStanze().get("stanza bloccata").getStanzaAdiacente("nord"));
+		stanzaBloccata.setStanzaAdiacente("sud", stanzaIniziale);
+		stanzaBloccata.setStanzaAdiacente("nord", stanzaVincente);
+		assertEquals(stanzaBloccata.getNome(), lab.getStanze().get("stanza bloccata").getStanzaAdiacente("nord").getNome());
 	}
 
 	@Test

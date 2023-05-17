@@ -7,6 +7,7 @@ import java.util.Map;
 
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.personaggi.AbstractPersonaggio;
 
 public class Stanza {
 
@@ -14,7 +15,8 @@ public class Stanza {
 	public static final int MAX_STANZE_ADIACENTI = 4;
 	private Map<String, Attrezzo> attrezzi;
 	private Map<String, Stanza> stanzeAdiacenti;
-
+	private AbstractPersonaggio personaggio;
+	
 	public Stanza(String nome) {
 		this.nome = nome;
 		this.attrezzi = new HashMap<>();
@@ -50,7 +52,7 @@ public class Stanza {
 	public List<Stanza> getStanzeAdiacentiAsList(){
 		return new LinkedList<Stanza>(stanzeAdiacenti.values());
 	}
-
+	
 	public Stanza getStanzaAdiacente(String direzione) {
 		if(stanzeAdiacenti.isEmpty()) return null;
 		return stanzeAdiacenti.get(direzione);
@@ -81,6 +83,14 @@ public class Stanza {
 		return attrezzi.remove(attrezzo.getNome()) == null;
 	}
 
+	public void setPersonaggio(AbstractPersonaggio personaggio) {
+		this.personaggio = personaggio;
+	}
+	
+	public AbstractPersonaggio getPersonaggio() {
+		return this.personaggio;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		Stanza that = (Stanza) obj;

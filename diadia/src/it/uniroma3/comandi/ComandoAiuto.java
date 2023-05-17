@@ -7,7 +7,8 @@ public class ComandoAiuto extends AbstractComando{
 
 	private final String NOME_COMANDO = "aiuto";
 	private final String[] elencoComandi = {"vai", "aiuto", "fine", "posa", "prendi"};
-
+	
+	
 	@Override
 	public void esegui(Partita partita, IO io) {
 		StringBuilder risultato = new StringBuilder();

@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.comandi.Comando;
-import it.uniroma3.comandi.FabbricaDiComandiFisarmonica;
 import it.uniroma3.comandi.FabbricaDiComandiRiflessiva;
 
 class FabbricaDiComandiFisarmonicaTest {

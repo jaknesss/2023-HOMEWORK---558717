@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import it.uniroma3.comandi.Comando;
 import it.uniroma3.comandi.FabbricaDiComandi;
-import it.uniroma3.comandi.FabbricaDiComandiFisarmonica;
+import it.uniroma3.comandi.FabbricaDiComandiRiflessiva;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
@@ -38,7 +38,7 @@ class ComandoPrendiTest {
 		io = new IOConsole();
 		lab = new LabirintoBuilder().addStanzaIniziale(NOME_STANZA);
 		partita = new Partita(lab, io);
-		factory = new FabbricaDiComandiFisarmonica();
+		factory = new FabbricaDiComandiRiflessiva();
 		attrezzo = new Attrezzo(NOME_OGGETTO, PESO_OGGETTO);
 		borsa = partita.getGiocatore().getBorsa();
 		stanzaCorrente = lab.getUltimaStanza();

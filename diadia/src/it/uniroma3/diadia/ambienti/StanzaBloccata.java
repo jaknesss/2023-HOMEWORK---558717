@@ -34,4 +34,13 @@ public class StanzaBloccata extends Stanza {
 			return this;
 		return super.getStanzaAdiacente(direzione);
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		boolean check = super.equals(obj);
+		StanzaBloccata that = (StanzaBloccata) obj;
+		return check && 
+				this.getDirezioneBloccata().equals(that.getDirezioneBloccata()) && 
+				this.getNomeAttrezzoChiave().equals(that.getNomeAttrezzoChiave());
+	}
 }

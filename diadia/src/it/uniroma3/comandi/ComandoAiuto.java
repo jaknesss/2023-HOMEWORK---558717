@@ -3,7 +3,7 @@ package it.uniroma3.comandi;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 
-public class ComandoAiuto implements Comando {
+public class ComandoAiuto extends AbstractComando{
 
 	private final String NOME_COMANDO = "aiuto";
 	private final String[] elencoComandi = {"vai", "aiuto", "fine", "posa", "prendi"};
@@ -18,16 +18,7 @@ public class ComandoAiuto implements Comando {
 	}
 
 	@Override
-	public void setParametro(String parametro) {
-	}
-
-	@Override
 	public String getNome() {
 		return NOME_COMANDO;
-	}
-
-	@Override
-	public String getParam() {
-		return null;
 	}
 }

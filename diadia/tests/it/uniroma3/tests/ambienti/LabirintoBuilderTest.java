@@ -263,9 +263,11 @@ public class LabirintoBuilderTest {
 				.addAdiacenza("stanza bloccata", nomeStanzaVincente, "nord")
 				.addAdiacenza(nomeStanzaVincente, "stanza bloccata", "sud");
 		Stanza stanzaVincente = new Stanza(nomeStanzaVincente);
+		Stanza stanzaNormale = new Stanza("Atrio");
+		stanzaVincente.setStanzaAdiacente("sud", stanzaNormale);
 		// Asserisce che in presenza di passepartout, invocato il metodo
 		// getStanzaAdiacente(), la stanza bloccata ritorna la corretta adiacenza
-		assertEquals(stanzaVincente.getNome(), lab.getStanze().get("stanza bloccata").getStanzaAdiacente("nord").getNome());
+		assertEquals(stanzaVincente, lab.getStanze().get("stanza bloccata").getStanzaAdiacente("nord"));
 	}
 
 	@Test
@@ -282,7 +284,7 @@ public class LabirintoBuilderTest {
 		Stanza stanzaVincente = new Stanza(nomeStanzaVincente);
 		stanzaBloccata.setStanzaAdiacente("sud", stanzaIniziale);
 		stanzaBloccata.setStanzaAdiacente("nord", stanzaVincente);
-		assertEquals(stanzaBloccata.getNome(), lab.getStanze().get("stanza bloccata").getStanzaAdiacente("nord").getNome());
+		assertEquals(stanzaBloccata, lab.getStanze().get("stanza bloccata").getStanzaAdiacente("nord"));
 	}
 
 	@Test

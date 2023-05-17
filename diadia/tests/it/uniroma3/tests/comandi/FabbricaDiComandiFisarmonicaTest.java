@@ -1,17 +1,18 @@
 package it.uniroma3.tests.comandi;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.comandi.Comando;
-import it.uniroma3.comandi.FabbricaDiComandi;
 import it.uniroma3.comandi.FabbricaDiComandiFisarmonica;
+import it.uniroma3.comandi.FabbricaDiComandiRiflessiva;
 
 class FabbricaDiComandiFisarmonicaTest {
 	
-	private FabbricaDiComandiFisarmonica factory;
+	private FabbricaDiComandiRiflessiva factory;
 	private Comando comando;
 	private final String COMANDO = "vai";
 	private final String PARAM = "nord";
@@ -19,7 +20,7 @@ class FabbricaDiComandiFisarmonicaTest {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		factory = new FabbricaDiComandiFisarmonica();
+		factory = new FabbricaDiComandiRiflessiva();
 	}
 
 	@Test

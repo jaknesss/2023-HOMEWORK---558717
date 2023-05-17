@@ -1,13 +1,15 @@
 package it.uniroma3.tests.comandi;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.comandi.Comando;
 import it.uniroma3.comandi.FabbricaDiComandi;
-import it.uniroma3.comandi.FabbricaDiComandiFisarmonica;
+import it.uniroma3.comandi.FabbricaDiComandiRiflessiva;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
@@ -36,7 +38,7 @@ class ComandoPosaTest {
 		lab = new LabirintoBuilder().addStanzaIniziale("atrio");
 		partita = new Partita(lab, io);
 		stanzaCorrente = partita.getStanzaCorrente();
-		factory = new FabbricaDiComandiFisarmonica();
+		factory = new FabbricaDiComandiRiflessiva();
 		attrezzo = new Attrezzo(NOME_OGGETTO, PESO);
 		borsa = partita.getGiocatore().getBorsa();
 		borsa.addAttrezzo(attrezzo);

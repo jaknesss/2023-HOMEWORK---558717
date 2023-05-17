@@ -1,4 +1,4 @@
-package it.uniroma3.diadia.giocatore;
+	package it.uniroma3.diadia.giocatore;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -83,11 +83,10 @@ public class Borsa {
 		Map<Integer, Set<Attrezzo>> mappaPerPeso = new HashMap<>();
 		for(Attrezzo attr : attrezzi.values()) {
 			Set<Attrezzo> setPerPeso = mappaPerPeso.get(attr.getPeso());
-			if(setPerPeso == null) {
+			if(setPerPeso == null)
 				setPerPeso = new HashSet<>();
-				mappaPerPeso.put(attr.getPeso(), setPerPeso);
-			}
 			setPerPeso.add(attr);
+			mappaPerPeso.put(attr.getPeso(), setPerPeso);
 		}
 		return mappaPerPeso;
 	}

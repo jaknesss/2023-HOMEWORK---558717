@@ -1,6 +1,5 @@
 package it.uniroma3.diadia.ambienti;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,25 +11,22 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 public class Stanza {
 
 	private String nome;
-	private final int MAX_NUMERO_STANZE_ADIACENTI = 4;
+	public static final int MAX_STANZE_ADIACENTI = 4;
 	private Map<String, Attrezzo> attrezzi;
 	private Map<String, Stanza> stanzeAdiacenti;
-	private List<String> direzioni;
 
 	public Stanza(String nome) {
 		this.nome = nome;
 		this.attrezzi = new HashMap<>();
 		this.stanzeAdiacenti = new HashMap<>();
-		this.direzioni = new LinkedList<>();
 	}
 
 	public String getNome() {
 		return nome;
 	}
 
-	public LinkedList<String> getDirezioni(){
-		direzioni.addAll(stanzeAdiacenti.keySet());
-		return (LinkedList<String>) direzioni;
+	public List<String> getDirezioni(){
+		return new LinkedList<String>(stanzeAdiacenti.keySet()); 
 	}
 
 	
@@ -38,23 +34,21 @@ public class Stanza {
 		return this.toString();
 	}
 
-	public HashMap<String, Attrezzo> getAttrezzi() {
-		return (HashMap<String, Attrezzo>) attrezzi;
+	public Map<String, Attrezzo> getAttrezzi() {
+		return attrezzi;
 	}
 	
-	public LinkedList<Attrezzo> getAttrezziAsList() {
-		LinkedList<Attrezzo> attrezziList = new LinkedList<>(attrezzi.values());
-		return attrezziList;
+	public List<Attrezzo> getAttrezziAsList() {
+		return new LinkedList<Attrezzo>(attrezzi.values());
 	}
 	
 	
-	public HashMap<String, Stanza> getStanzeAdiacenti(){
-		return (HashMap<String, Stanza>) stanzeAdiacenti;
+	public Map<String, Stanza> getStanzeAdiacenti(){
+		return stanzeAdiacenti;
 	}
 	
-	public LinkedList<Stanza> getStanzeAdiacentiAsList(){
-		LinkedList<Stanza> stanzeAdiacentiList = new LinkedList<>(stanzeAdiacenti.values());
-		return stanzeAdiacentiList;
+	public List<Stanza> getStanzeAdiacentiAsList(){
+		return new LinkedList<Stanza>(stanzeAdiacenti.values());
 	}
 
 	public Stanza getStanzaAdiacente(String direzione) {
@@ -63,7 +57,7 @@ public class Stanza {
 	}
 
 	public void setStanzaAdiacente(String direzione, Stanza stanza) {
-		if(stanzeAdiacenti.size() == MAX_NUMERO_STANZE_ADIACENTI) return;	
+		if(stanzeAdiacenti.size() == MAX_STANZE_ADIACENTI) return;	
 		this.stanzeAdiacenti.put(direzione, stanza);
 	}
 
@@ -90,10 +84,17 @@ public class Stanza {
 	@Override
 	public boolean equals(Object obj) {
 		Stanza that = (Stanza) obj;
-		if(that == null) return false;
+		if(that == null || this.getClass() != that.getClass()) return false;
 		return this.getNome().equals(that.getNome()) &&
-				this.getAttrezzi().equals(that.getAttrezzi()) &&
-				this.getStanzeAdiacenti().equals(that.getStanzeAdiacenti());
+			   this.getAttrezzi().equals(that.getAttrezzi()) &&
+			   this.getDirezioni().equals(that.getDirezioni());
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.nome.hashCode() + 
+			   this.getAttrezzi().hashCode() + 
+			   this.getDirezioni().hashCode();	
 	}
 	
 	@Override

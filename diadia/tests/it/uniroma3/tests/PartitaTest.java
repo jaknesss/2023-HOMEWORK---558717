@@ -70,7 +70,6 @@ class PartitaTest {
 	@Test
 	public void testSetStanzaCorrente() {
 		Stanza vincente = lab.getStanzaVincente();
-		System.out.println(vincente);
 		partita.setStanzaCorrente(vincente);
 		assertEquals(vincente, partita.getStanzaCorrente());
 	}

@@ -8,6 +8,5 @@ public class ComparatoreAttrezziPerPeso implements Comparator<Attrezzo>{
 		if(attr1.getPeso() == attr2.getPeso()) 
 			return attr1.getNome().compareTo(attr2.getNome());
 		return attr1.getPeso() - attr2.getPeso();
-	
 	}
 }

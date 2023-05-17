@@ -2,7 +2,7 @@ package it.uniroma3.diadia;
 
 import it.uniroma3.comandi.Comando;
 import it.uniroma3.comandi.FabbricaDiComandi;
-import it.uniroma3.comandi.FabbricaDiComandiFisarmonica;
+import it.uniroma3.comandi.FabbricaDiComandiRiflessiva;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 
@@ -25,13 +25,14 @@ public class DiaDia {
 	public void gioca(IO io) {
 		io.mostraMessaggio(MESSAGGIO_BENVENUTO);
 		String istruzione;
+		
 		do {
 			istruzione = io.leggiRiga();
 		} while (!processaIstruzione(istruzione, io));
 	}
 
 	private boolean processaIstruzione(String istruzione, IO io) {
-		FabbricaDiComandi factory = new FabbricaDiComandiFisarmonica();
+		FabbricaDiComandi factory = new FabbricaDiComandiRiflessiva();
 		Comando comandoDaEseguire = factory.costruisciComando(istruzione);
 		comandoDaEseguire.esegui(this.partita, io);
 		if (this.partita.isVinta())

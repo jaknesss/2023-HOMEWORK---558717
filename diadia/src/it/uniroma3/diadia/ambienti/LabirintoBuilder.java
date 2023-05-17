@@ -7,12 +7,11 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class LabirintoBuilder implements Labirinto {
 
-	private final int MAX_STANZE_ADIACENTI = 4;
+	private Map<String, Stanza> stanze;
 	private Stanza stanzaIniziale;
 	private Stanza stanzaVincente;
-	private Stanza stanzaACuiAggiungere;
+	private Stanza stanzaACuiAggiungereAdiacenza;
 	private Stanza ultimaStanzaAggiunta;
-	private Map<String, Stanza> stanze;
 
 	public LabirintoBuilder() {
 		stanze = new HashMap<>();
@@ -45,10 +44,10 @@ public class LabirintoBuilder implements Labirinto {
 	}
 
 	public LabirintoBuilder addAdiacenza(String stanzaCorr, String stanzaAdiacente, String dir) {
-		stanzaACuiAggiungere = stanze.get(stanzaCorr);
-		if (stanzaACuiAggiungere.getStanzeAdiacenti().size() == MAX_STANZE_ADIACENTI)
+		stanzaACuiAggiungereAdiacenza = stanze.get(stanzaCorr);
+		if (stanzaACuiAggiungereAdiacenza.getStanzeAdiacenti().size() == Stanza.MAX_STANZE_ADIACENTI)
 			return this;
-		stanzaACuiAggiungere.setStanzaAdiacente(dir, stanze.get(stanzaAdiacente));
+		stanzaACuiAggiungereAdiacenza.setStanzaAdiacente(dir, stanze.get(stanzaAdiacente));
 		return this;
 	}
 

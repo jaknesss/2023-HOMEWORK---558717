@@ -1,13 +1,13 @@
 package it.uniroma3.tests.comandi;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.comandi.Comando;
 import it.uniroma3.comandi.FabbricaDiComandi;
-import it.uniroma3.comandi.FabbricaDiComandiFisarmonica;
+import it.uniroma3.comandi.FabbricaDiComandiRiflessiva;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
@@ -16,10 +16,6 @@ import it.uniroma3.diadia.ambienti.Stanza;
 
 class ComandoVaiTest {
 
-	private final String NOME_COMANDO = "vai";
-	private final String NOME_COMANDO_SCONOSCIUTO = "test";
-	private final String DIREZIONE = "sud";
-	private final String DIREZIONE_SCONOSCIUTA = "sud-est";
 	private FabbricaDiComandi factory;
 	private Comando comando;
 	private IO io;
@@ -27,6 +23,10 @@ class ComandoVaiTest {
 	private Partita partita;
 	private Stanza stanzaCorrente;
 	private Stanza stanzaIniziale;
+	private final String NOME_COMANDO = "vai";
+	private final String NOME_COMANDO_SCONOSCIUTO = "test";
+	private final String DIREZIONE = "sud";
+	private final String DIREZIONE_SCONOSCIUTA = "sud-est";
 
 	@BeforeEach
 	void setUp() {
@@ -38,7 +38,7 @@ class ComandoVaiTest {
 		partita = new Partita(lab, io);
 		stanzaIniziale = lab.getStanzaIniziale();
 		stanzaCorrente = lab.getUltimaStanza();
-		factory = new FabbricaDiComandiFisarmonica();
+		factory = new FabbricaDiComandiRiflessiva();
 	}
 
 	@Test

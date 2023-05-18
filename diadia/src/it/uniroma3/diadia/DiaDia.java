@@ -5,6 +5,10 @@ import it.uniroma3.comandi.FabbricaDiComandi;
 import it.uniroma3.comandi.FabbricaDiComandiRiflessiva;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.personaggi.Cane;
+import it.uniroma3.personaggi.Mago;
+import it.uniroma3.personaggi.Strega;
 
 public class DiaDia {
 
@@ -44,9 +48,19 @@ public class DiaDia {
 	public static void main(String[] argc) {
 		IO io = new IOConsole();
 		Labirinto lab = new LabirintoBuilder()
-							.addStanzaIniziale("LabCampusOne").addAttrezzo("bomba", 1)
+							.addStanzaIniziale("LabCampusOne")
+							.addAttrezzo("bomba", 1)
+							.addAttrezzo("osso", 1)
+							.addMago("Mago Merlino", Mago.DESCRIZIONE, new Attrezzo("ascia", 2))
+							.addStanza("Atrio")
+							.addStrega("Morgana", Strega.DESCRIZIONE)
+							.addStanza("N10")
 							.addStanzaVincente("Biblioteca")
-							.addAdiacenza("LabCampusOne", "Biblioteca", "ovest")
+							.addAdiacenza("LabCampusOne", "Atrio", "ovest")
+							.addAdiacenza("Atrio", "LabCampusOne", "est")
+							.addAdiacenza("Atrio", "N10", "sud")
+							.addAdiacenza("N10", "Atrio", "nord")
+							.addAdiacenza("Atrio", "Biblioteca", "ovest")
 							.getLabirinto();
 		DiaDia gioco = new DiaDia(lab, io);
 		gioco.gioca(io);

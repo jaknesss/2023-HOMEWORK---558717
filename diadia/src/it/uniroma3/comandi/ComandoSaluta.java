@@ -7,7 +7,7 @@ public class ComandoSaluta extends AbstractComando{
 
 	@Override
 	public void esegui(Partita partita, IO io) {
-		partita.getStanzaCorrente().getPersonaggio().saluta();
+		io.mostraMsg(partita.getStanzaCorrente().getPersonaggio().saluta());
 	}
 	
 }

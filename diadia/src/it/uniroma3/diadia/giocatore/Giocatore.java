@@ -3,7 +3,7 @@ package it.uniroma3.diadia.giocatore;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Giocatore {
-	static final private int CFU_INIZIALI = 10;
+	static int CFU_INIZIALI = 10;
 	private int cfu;
 	private Borsa borsa;
 

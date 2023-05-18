@@ -1,7 +1,6 @@
 package it.uniroma3.personaggi;
 
 import it.uniroma3.diadia.Partita;
-import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public abstract class AbstractPersonaggio {
 

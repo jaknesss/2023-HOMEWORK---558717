@@ -10,20 +10,15 @@ public class ComandoInteragisci extends AbstractComando {
 
 	@Override
 	public void esegui(Partita partita, IO io) {
-		AbstractPersonaggio personaggio;
-		personaggio = partita.getStanzaCorrente().getPersonaggio();
+		AbstractPersonaggio personaggio = partita.getStanzaCorrente().getPersonaggio();
 		if (personaggio != null) {
 			this.messaggio = personaggio.agisci(partita);
-			io.mostraMessaggio(this.messaggio);
-		} else
-			io.mostraMessaggio(MESSAGGIO_CON_CHI);
+			io.mostraMsg(this.messaggio);
+		} else io.mostraMsg(MESSAGGIO_CON_CHI);
 	}
 
 	public String getMessaggio() {
 		return this.messaggio;
 	}
 
-	@Override
-	public void setParametro(String parametro) {
-	}
 }

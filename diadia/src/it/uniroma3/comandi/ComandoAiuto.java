@@ -11,12 +11,16 @@ public class ComandoAiuto extends AbstractComando{
 	
 	@Override
 	public void esegui(Partita partita, IO io) {
-		StringBuilder risultato = new StringBuilder();
-		risultato.append("Comandi disponibili: ");
-		for (int i = 0; i < elencoComandi.length; i++)
-			risultato.append("["+elencoComandi[i]+"] ");
-		io.mostraMessaggio(risultato.toString());
+//		StringBuilder risultato = new StringBuilder();
+//		risultato.append("Comandi disponibili: ");
+//		for (int i = 0; i < elencoComandi.length; i++)
+//			risultato.append("["+elencoComandi[i]+"] ");
+//		io.mostraMessaggio(risultato.toString());
+		Package pkg = this.getClass().getPackage();
+		
+	
 	}
+		
 
 	@Override
 	public String getNome() {

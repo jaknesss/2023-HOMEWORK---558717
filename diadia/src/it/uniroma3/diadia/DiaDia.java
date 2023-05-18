@@ -23,9 +23,8 @@ public class DiaDia {
 	}
 
 	public void gioca(IO io) {
-		io.mostraMessaggio(MESSAGGIO_BENVENUTO);
+		io.mostraMsg(MESSAGGIO_BENVENUTO);
 		String istruzione;
-		
 		do {
 			istruzione = io.leggiRiga();
 		} while (!processaIstruzione(istruzione, io));
@@ -36,9 +35,9 @@ public class DiaDia {
 		Comando comandoDaEseguire = factory.costruisciComando(istruzione);
 		comandoDaEseguire.esegui(this.partita, io);
 		if (this.partita.isVinta())
-			io.mostraMessaggio("Hai vinto!");
+			io.mostraMsg("Hai vinto!");
 		if (this.partita.giocatoreIsMorto())
-			io.mostraMessaggio("Hai esaurito i CFU...");
+			io.mostraMsg("Hai esaurito i CFU...");
 		return this.partita.isFinita();
 	}
 

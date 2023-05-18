@@ -1,7 +1,5 @@
 package it.uniroma3.personaggi;
 
-import java.util.Collection;
-import java.util.Collections;
 
 import it.uniroma3.diadia.Partita;
 
@@ -17,24 +15,18 @@ public class Strega extends AbstractPersonaggio{
 		super(nome, presentazione);
 	}
 	
-	
-	
-	 
-	 
-//	@Override
-//	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
-//		
-//		return null;
-//	}
-
-
-
 	@Override
 	public String agisci(Partita partita) {
-		if(haSalutato()) {
-			
+		StringBuilder msg= new StringBuilder();
+		if(this.haSalutato()) {
+			partita.setStanzaCorrente(partita.getStanzaCorrente().getStanzaAdiacenteMaxOggetti());
+			msg.append("Visto che sei stato gentile ti ho fatto un bel regalo\n");
+			msg.append(MSG_SALUTATA);
+		}else {
+			partita.setStanzaCorrente(partita.getStanzaCorrente().getStanzaAdiacenteMinOggetti());
+			msg.append("Sei stato alquanto sgarbato\n");
+			msg.append(MSG_NON_SALUTATA);
 		}
-		return null;
+		return msg.toString();
 	}
-	
 }

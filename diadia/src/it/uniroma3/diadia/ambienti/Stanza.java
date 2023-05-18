@@ -1,5 +1,6 @@
 package it.uniroma3.diadia.ambienti;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,7 +10,7 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.personaggi.AbstractPersonaggio;
 
-public class Stanza {
+public class Stanza implements Comparable<Stanza>{
 
 	private String nome;
 	public static final int MAX_STANZE_ADIACENTI = 4;
@@ -91,13 +92,27 @@ public class Stanza {
 		return this.personaggio;
 	}
 	
+	public Stanza getStanzaAdiacenteMaxOggetti() {
+		List<Stanza> tempList = this.getStanzeAdiacentiAsList();
+		Collections.sort(tempList);
+		return tempList.get(getStanzeAdiacenti().size()-1);
+	}
+	
+	public Stanza getStanzaAdiacenteMinOggetti() {
+		List<Stanza> tempList = this.getStanzeAdiacentiAsList();
+		Collections.sort(tempList);
+		return tempList.get(0);
+	}
+	
+	
 	@Override
 	public boolean equals(Object obj) {
 		Stanza that = (Stanza) obj;
 		if(that == null || this.getClass() != that.getClass()) return false;
 		return this.getNome().equals(that.getNome()) &&
 			   this.getAttrezzi().equals(that.getAttrezzi()) &&
-			   this.getDirezioni().equals(that.getDirezioni());
+			   this.getDirezioni().equals(that.getDirezioni()) && 
+			   this.getAttrezzi().size() == that.getAttrezzi().size();
 	}
 	
 	@Override
@@ -118,5 +133,10 @@ public class Stanza {
 		for (Attrezzo attr : attrezzi.values())
 			risultato.append(attr.toString() + " ");
 		return risultato.toString();
+	}
+	
+	@Override
+	public int compareTo(Stanza that) {
+		return this.getAttrezzi().size() - that.getAttrezzi().size();
 	}
 }

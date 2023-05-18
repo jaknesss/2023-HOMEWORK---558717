@@ -17,13 +17,13 @@ public class ComandoVai implements Comando {
 	@Override
 	public void esegui(Partita partita, IO io) {
 		if (direzione == null) {
-			io.mostraMessaggio("Dove vuoi andare? Specifica la direzione");
+			io.mostraMsg("Dove vuoi andare? Specifica la direzione");
 			return;
 		}
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		Stanza prossimaStanza = stanzaCorrente.getStanzaAdiacente(direzione);
 		if (prossimaStanza == null) {
-			io.mostraMessaggio("Non c'e' una stanza in quella direzione!");
+			io.mostraMsg("Non c'e' una stanza in quella direzione!");
 			return;
 		}
 		partita.setStanzaCorrente(prossimaStanza);

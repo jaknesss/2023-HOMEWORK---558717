@@ -19,7 +19,6 @@ public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 			nomeClasse += nomeComando.substring(1);
 			comando = (Comando)Class.forName(nomeClasse).getDeclaredConstructor().newInstance();
 	        comando.setParametro(parametro);
-			
 		}catch(Exception e) {
 			comando = (AbstractComando) new ComandoNonValido();
 		}
@@ -32,5 +31,9 @@ public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 
 	public String getParam() {
 		return parametro;
+	}
+	@Override
+	public Comando getComando() {
+		return comando;
 	}
 }

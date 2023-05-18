@@ -9,7 +9,7 @@ public class ComandoGuarda extends AbstractComando{
 
 	@Override
 	public void esegui(Partita partita, IO io) {
-		io.mostraMessaggio(partita.getStanzaCorrente().getDescrizione(io) + 
+		io.mostraMsg(partita.getStanzaCorrente().getDescrizione(io) + 
 						   partita.getGiocatore().toString());
 	}
 	

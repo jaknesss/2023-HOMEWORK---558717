@@ -1,5 +1,6 @@
 package it.uniroma3.diadia.ambienti;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -7,14 +8,16 @@ import java.util.Map;
 
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.personaggi.AbstractPersonaggio;
 
-public class Stanza {
+public class Stanza implements Comparable<Stanza>{
 
 	private String nome;
 	public static final int MAX_STANZE_ADIACENTI = 4;
 	private Map<String, Attrezzo> attrezzi;
 	private Map<String, Stanza> stanzeAdiacenti;
-
+	private AbstractPersonaggio personaggio;
+	
 	public Stanza(String nome) {
 		this.nome = nome;
 		this.attrezzi = new HashMap<>();
@@ -50,7 +53,7 @@ public class Stanza {
 	public List<Stanza> getStanzeAdiacentiAsList(){
 		return new LinkedList<Stanza>(stanzeAdiacenti.values());
 	}
-
+	
 	public Stanza getStanzaAdiacente(String direzione) {
 		if(stanzeAdiacenti.isEmpty()) return null;
 		return stanzeAdiacenti.get(direzione);
@@ -81,13 +84,38 @@ public class Stanza {
 		return attrezzi.remove(attrezzo.getNome()) == null;
 	}
 
+	public void setPersonaggio(AbstractPersonaggio personaggio) {
+		this.personaggio = personaggio;
+	}
+	
+	public AbstractPersonaggio getPersonaggio() {
+		return this.personaggio;
+	}
+	
+	public Stanza getStanzaAdiacenteMaxOggetti() {
+		List<Stanza> tempList = this.getStanzeAdiacentiAsList();
+		Collections.sort(tempList);
+		return tempList.get(getStanzeAdiacenti().size()-1);
+	}
+	
+	public Stanza getStanzaAdiacenteMinOggetti() {
+		List<Stanza> tempList = this.getStanzeAdiacentiAsList();
+		Collections.sort(tempList);
+		for(Stanza i : tempList ) {
+			System.out.println(i.getNome() + i.getAttrezzi().size());
+		}
+		return tempList.get(0);
+	}
+	
+	
 	@Override
 	public boolean equals(Object obj) {
 		Stanza that = (Stanza) obj;
 		if(that == null || this.getClass() != that.getClass()) return false;
 		return this.getNome().equals(that.getNome()) &&
 			   this.getAttrezzi().equals(that.getAttrezzi()) &&
-			   this.getDirezioni().equals(that.getDirezioni());
+			   this.getDirezioni().equals(that.getDirezioni()) && 
+			   this.getAttrezzi().size() == that.getAttrezzi().size();
 	}
 	
 	@Override
@@ -104,9 +132,17 @@ public class Stanza {
 		risultato.append("\nUscite: ");
 		for (String direzione : stanzeAdiacenti.keySet())
 			risultato.append("[" + direzione + "] ");
+		risultato.append("\nNPC: ");
+		if(this.getPersonaggio() != null)
+			risultato.append(this.getPersonaggio().getNome());
 		risultato.append("\nAttrezzi nella stanza: ");
 		for (Attrezzo attr : attrezzi.values())
 			risultato.append(attr.toString() + " ");
 		return risultato.toString();
+	}
+	
+	@Override
+	public int compareTo(Stanza that) {
+		return this.getAttrezzi().size() - that.getAttrezzi().size();
 	}
 }

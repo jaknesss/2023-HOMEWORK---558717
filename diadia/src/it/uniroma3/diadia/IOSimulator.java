@@ -11,7 +11,7 @@ public class IOSimulator implements IO{
 	}
 	
 	@Override
-	public void mostraMessaggio(String msg) {
+	public void mostraMsg(String msg) {
 		System.out.println(msg);
 	}
 

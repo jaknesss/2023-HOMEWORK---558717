@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class IOConsole implements IO{
 	
 	@Override
-	public void mostraMessaggio(String msg) {
+	public void mostraMsg(String msg) {
 		System.out.println(msg);
 	}
 

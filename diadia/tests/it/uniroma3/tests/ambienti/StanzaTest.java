@@ -81,8 +81,26 @@ class StanzaTest {
 		assertFalse(stanza.hasAttrezzo(attrezzoDaCercare.getNome()));
 	}
 	
-	private Stanza creaStanzaEdImpostaAdiacente(Stanza diPartenza, String nomeStanza, String direzione){
-		Stanza adiacente = new Stanza(nomeStanza);
+	@Test
+	public void testStanzaAdiacenteMaxAttrezzi() {
+		Stanza ad1 = creaStanzaEdImpostaAdiacente(stanza, "ad1", DIR_NORD);
+		Stanza ad2 = creaStanzaEdImpostaAdiacente(stanza, "ad2", "sud");
+		ad1.addAttrezzo(attrezzo);
+		ad1.addAttrezzo(new Attrezzo("ascia", 1));
+		assertEquals(ad1, stanza.getStanzaAdiacenteMaxOggetti());
+	}
+	
+	@Test
+	public void testStanzaAdiacenteMinAttrezzi() {
+		Stanza ad1 = creaStanzaEdImpostaAdiacente(stanza, "ad1", DIR_NORD);
+		Stanza ad2 = creaStanzaEdImpostaAdiacente(stanza, "ad2", "sud");
+		ad1.addAttrezzo(attrezzo);
+		ad1.addAttrezzo(new Attrezzo("ascia", 1));
+		assertEquals(ad2, stanza.getStanzaAdiacenteMinOggetti());
+	}
+	
+	private Stanza creaStanzaEdImpostaAdiacente(Stanza diPartenza, String nomeStanzaAdiacente, String direzione){
+		Stanza adiacente = new Stanza(nomeStanzaAdiacente);
 		diPartenza.setStanzaAdiacente(direzione, adiacente);
 		return adiacente;
 	}		

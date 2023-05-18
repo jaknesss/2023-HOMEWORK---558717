@@ -3,9 +3,10 @@ package it.uniroma3.comandi;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 
-public abstract class AbstractComando {
-	
+public abstract class AbstractComando implements Comando{
+
 	private String param;
+	private String nome;
 	
 	public abstract void esegui(Partita partita, IO io);
 	
@@ -14,9 +15,9 @@ public abstract class AbstractComando {
 	}
 	
 	public String getNome() {
-		return this.getNome();
+		return this.nome;
 	}
 	public String getParam() {
-		return this.getParam();
+		return this.param;
 	}
 }

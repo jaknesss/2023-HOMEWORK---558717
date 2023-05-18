@@ -24,7 +24,7 @@ public class StanzaMagicaProtected extends StanzaProtected{
 		this.contatoreAttrezziPosati++;
 		if(contatoreAttrezziPosati >= sogliaMagica) {
 			attrezzo = this.modificaAttrezzo(attrezzo);
-			io.mostraMessaggio("E' successo qulacosa di strano!\n");
+			io.mostraMsg("E' successo qulacosa di strano!\n");
 		}
 		if (this.numeroAttrezzi >= attrezzi.length)
 			return false;

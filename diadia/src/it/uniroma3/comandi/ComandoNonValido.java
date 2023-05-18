@@ -9,8 +9,8 @@ public class ComandoNonValido extends AbstractComando{
 	
 	@Override
 	public void esegui(Partita partita, IO io) {
-		io.mostraMessaggio("Comando Sconosciuto\n" +
-	                       "Inserisci un nuovo comando da eseguire");
+		io.mostraMsg("Comando Sconosciuto\n" +
+	                 "Inserisci un nuovo comando da eseguire");
 	}
 	
 	@Override

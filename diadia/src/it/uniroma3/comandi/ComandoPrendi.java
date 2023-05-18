@@ -20,7 +20,7 @@ public class ComandoPrendi implements Comando {
 	@Override
 	public void esegui(Partita partita, IO io) {
 		if (nomeOggetto == null) {
-			io.mostraMessaggio("Cosa vuoi prendere?");
+			io.mostraMsg("Cosa vuoi prendere?");
 			return;
 		}
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
@@ -30,9 +30,9 @@ public class ComandoPrendi implements Comando {
 			if (borsa.addAttrezzo(daPrendere))
 				stanzaCorrente.removeAttrezzo(daPrendere);
 			else
-				io.mostraMessaggio("Borsa troppo pesante!");
+				io.mostraMsg("Borsa troppo pesante!");
 		} else
-			io.mostraMessaggio("Non c'è questo oggetto nella stanza");
+			io.mostraMsg("Non c'è questo oggetto nella stanza");
 	}
 	
 	@Override

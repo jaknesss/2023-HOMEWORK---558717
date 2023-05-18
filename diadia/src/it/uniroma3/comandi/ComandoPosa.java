@@ -20,7 +20,7 @@ public class ComandoPosa implements Comando {
 	@Override
 	public void esegui(Partita partita, IO io) {
 		if (parametro == null) {
-			io.mostraMessaggio("Cosa vuoi posare?");
+			io.mostraMsg("Cosa vuoi posare?");
 			return;
 		}
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
@@ -30,7 +30,7 @@ public class ComandoPosa implements Comando {
 			stanzaCorrente.addAttrezzo(daPosare);
 			borsa.removeAttrezzo(daPosare.getNome());
 		} else
-			io.mostraMessaggio("Non hai questo oggetto nella borsa");
+			io.mostraMsg("Non hai questo oggetto nella borsa");
 	}
 
 	@Override

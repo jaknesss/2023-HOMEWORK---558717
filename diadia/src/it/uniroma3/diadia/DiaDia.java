@@ -1,11 +1,11 @@
 package it.uniroma3.diadia;
 
-import it.uniroma3.comandi.Comando;
-import it.uniroma3.comandi.FabbricaDiComandi;
-import it.uniroma3.comandi.FabbricaDiComandiRiflessiva;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.comandi.Comando;
+import it.uniroma3.diadia.comandi.FabbricaDiComandi;
+import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
 import it.uniroma3.personaggi.Cane;
 import it.uniroma3.personaggi.Mago;
 import it.uniroma3.personaggi.Strega;
@@ -51,7 +51,7 @@ public class DiaDia {
 							.addStanzaIniziale("LabCampusOne")
 							.addAttrezzo("bomba", 1)
 							.addAttrezzo("osso", 1)
-							.addMago("Mago Merlino", Mago.DESCRIZIONE, new Attrezzo("ascia", 2))
+							.addMago("Mago Merlino", Mago.DESCRIZIONE, new Attrezzo("ascia", 3))
 							.addStanza("Atrio")
 							.addStrega("Morgana", Strega.DESCRIZIONE)
 							.addStanza("N10")

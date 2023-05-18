@@ -101,9 +101,6 @@ public class Stanza implements Comparable<Stanza>{
 	public Stanza getStanzaAdiacenteMinOggetti() {
 		List<Stanza> tempList = this.getStanzeAdiacentiAsList();
 		Collections.sort(tempList);
-		for(Stanza i : tempList ) {
-			System.out.println(i.getNome() + i.getAttrezzi().size());
-		}
 		return tempList.get(0);
 	}
 	

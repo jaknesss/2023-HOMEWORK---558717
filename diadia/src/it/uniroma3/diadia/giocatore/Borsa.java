@@ -38,7 +38,11 @@ public class Borsa {
 	}
 
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
-		return attrezzi.get(nomeAttrezzo);
+		return this.attrezzi.get(nomeAttrezzo);
+	}
+	
+	public Map<String, Attrezzo> getAttrezzi() {
+		return this.attrezzi;
 	}
 
 	public boolean addAttrezzo(Attrezzo attrezzo) {

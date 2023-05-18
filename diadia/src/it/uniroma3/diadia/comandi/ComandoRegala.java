@@ -1,8 +1,9 @@
-package it.uniroma3.comandi;
+package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.giocatore.Giocatore;
+import it.uniroma3.personaggi.AbstractPersonaggio;
 
 public class ComandoRegala extends AbstractComando{
 	
@@ -11,10 +12,9 @@ public class ComandoRegala extends AbstractComando{
 	@Override
 	public void esegui(Partita partita, IO io) {
 		Giocatore g = partita.getGiocatore();
-		if(g.getBorsa().hasAttrezzo(daRegalare)) {
-			io.mostraMsg(partita.getStanzaCorrente().getPersonaggio()
-				       			.riceviRegalo(g.getBorsa()
-						        .getAttrezzo(daRegalare), partita));
+		AbstractPersonaggio p = partita.getStanzaCorrente().getPersonaggio();
+		if(p != null && g.getBorsa().hasAttrezzo(daRegalare)) {
+			io.mostraMsg(p.riceviRegalo(g.getBorsa().getAttrezzo(daRegalare), partita));
 			g.getBorsa().removeAttrezzo(daRegalare);
 		}
 	}

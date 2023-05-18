@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import it.uniroma3.comandi.Comando;
-import it.uniroma3.comandi.FabbricaDiComandiRiflessiva;
+import it.uniroma3.diadia.comandi.Comando;
+import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
 
 class FabbricaDiComandiFisarmonicaTest {
 	

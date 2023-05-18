@@ -1,4 +1,4 @@
-package it.uniroma3.comandi;
+package it.uniroma3.diadia.comandi;
 
 import java.util.Scanner;
 
@@ -14,7 +14,7 @@ public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 		if (scannerDiParole.hasNext()) nomeComando = scannerDiParole.next();
 		if (scannerDiParole.hasNext()) parametro = scannerDiParole.next(); 
 		try {
-			String nomeClasse = "it.uniroma3.comandi.Comando";
+			String nomeClasse = "it.uniroma3.diadia.comandi.Comando";
 			nomeClasse += Character.toUpperCase(nomeComando.charAt(0));
 			nomeClasse += nomeComando.substring(1);
 			comando = (Comando)Class.forName(nomeClasse).getDeclaredConstructor().newInstance();

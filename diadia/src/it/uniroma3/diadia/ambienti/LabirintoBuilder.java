@@ -66,6 +66,13 @@ public class LabirintoBuilder implements Labirinto {
 		return this;
 	}
 	
+	public LabirintoBuilder addStanzaMagicaNoSoglia(String nomeStanza) {
+		Stanza magica = new StanzaMagica(nomeStanza);
+		stanze.put(nomeStanza, magica);
+		ultimaStanzaAggiunta = magica;
+		return this;
+	}
+	
 	public LabirintoBuilder addStanzaBloccata(String nomeStanza, String direzione, String nomeOggetto) {
 		Stanza bloccata = new StanzaBloccata(nomeStanza, direzione, nomeOggetto);
 		stanze.put(nomeStanza, bloccata);

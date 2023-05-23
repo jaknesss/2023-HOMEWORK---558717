@@ -43,5 +43,11 @@ public class Mago extends AbstractPersonaggio {
 			desc.append(this.getAttrezzo().toString());
 		return desc.toString();
 	}
+	@Override
+	public boolean equals(Object obj) {
+		Mago that = (Mago) obj;
+		return super.equals(obj) && this.getAttrezzo().equals(that.getAttrezzo());
+	}
+	
 	
 }

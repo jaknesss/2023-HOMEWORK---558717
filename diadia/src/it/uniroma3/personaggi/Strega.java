@@ -46,4 +46,8 @@ public class Strega extends AbstractPersonaggio{
 		
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
 }

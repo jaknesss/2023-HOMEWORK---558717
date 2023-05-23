@@ -45,4 +45,11 @@ public abstract class AbstractPersonaggio {
 	abstract public String agisci(Partita partita);
 	abstract public String riceviRegalo(Attrezzo attrezzo, Partita partita);
 	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null || this.getClass() != obj.getClass()) return false;
+		AbstractPersonaggio that = (AbstractPersonaggio) obj; 
+		return this.getNome().equals(that.getNome());
+	}
+	
 }

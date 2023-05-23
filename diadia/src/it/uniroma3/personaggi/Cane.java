@@ -7,7 +7,7 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 public class Cane extends AbstractPersonaggio{
 	
 	public static final String DESCRIZIONE = "  WOOOF WOOOF *non ti avvicinare* WOOOF WOOOF>>";
-	public static final String FURIOSO = "<<WOOOOF WOOOOF *t'ammazzo merda* WOOOOOF WOOOOOOF>>";
+	public static final String FURIOSO = "<<WOOOOF WOOOOF *t'ammazzo* WOOOOOF WOOOOOOF>>";
 	public static final String CONTENTO = "<<WOOOF WOOOF *scodinzola* WOOOF WOOOF>>";
 	
 	public Cane(String nome, String presentazione) {
@@ -44,6 +44,11 @@ public class Cane extends AbstractPersonaggio{
 		if(this.getAttrezzo() != null) 
 			desc.append("- Ha con se: " + this.getAttrezzo().toString());
 		return desc.toString();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
 	}
 	
 }

@@ -29,7 +29,6 @@ public class Mago extends AbstractPersonaggio {
 	@Override
 	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
 		Attrezzo attrModificato = new Attrezzo(attrezzo.getNome(), attrezzo.getPeso()/2);
-		System.out.println("qui");
 		partita.getStanzaCorrente().addAttrezzo(attrModificato);
 		return "Ecco a te!\n";
 	}

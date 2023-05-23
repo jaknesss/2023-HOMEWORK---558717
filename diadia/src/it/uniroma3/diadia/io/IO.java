@@ -1,4 +1,4 @@
-package it.uniroma3.diadia;
+package it.uniroma3.diadia.io;
 
 public interface IO {
 	public void mostraMsg(String messaggio);

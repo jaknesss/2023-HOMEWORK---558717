@@ -1,21 +1,20 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.io.IO;
 
 public class ComandoNonValido extends AbstractComando{
 	
-	private final String NOME_COMANDO = "nonValido";
+	private static final String NOME_COMANDO = "nonValido";
+	
+	public ComandoNonValido() {
+		super.setNome(NOME_COMANDO);
+	}
 	
 	@Override
 	public void esegui(Partita partita, IO io) {
 		io.mostraMsg("Comando Sconosciuto\n" +
 	                 "Inserisci un nuovo comando da eseguire");
-	}
-	
-	@Override
-	public String getNome() {
-		return this.NOME_COMANDO;
 	}
 	
 }

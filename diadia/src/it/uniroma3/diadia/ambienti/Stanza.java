@@ -6,8 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.io.IO;
 import it.uniroma3.personaggi.AbstractPersonaggio;
 
 public class Stanza implements Comparable<Stanza>{

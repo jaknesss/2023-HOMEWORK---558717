@@ -1,4 +1,4 @@
-package it.uniroma3.tests;
+package it.uniroma3.tests.partita;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

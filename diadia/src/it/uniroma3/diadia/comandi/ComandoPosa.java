@@ -1,46 +1,33 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
+import it.uniroma3.diadia.io.IO;
 
-public class ComandoPosa implements Comando {
+public class ComandoPosa extends AbstractComando {
 
-	private final String NOME_COMANDO = "posa";
-	private String parametro;
-	private Attrezzo daPosare;
+	private static final String NOME_COMANDO = "posa";
 
-	@Override
-	public void setParametro(String parametro) {
-		this.parametro = parametro;
+	public ComandoPosa() {
+		super.setNome(NOME_COMANDO);
 	}
 
 	@Override
 	public void esegui(Partita partita, IO io) {
-		if (parametro == null) {
+		if (this.getParam() == null) {
 			io.mostraMsg("Cosa vuoi posare?");
 			return;
 		}
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		Borsa borsa = partita.getGiocatore().getBorsa();
-		daPosare = borsa.getAttrezzo(parametro);
-		if (daPosare != null) {
-			stanzaCorrente.addAttrezzo(daPosare);
-			borsa.removeAttrezzo(daPosare.getNome());
-		} else
+		Attrezzo daPosare = borsa.getAttrezzo(this.getParam());
+		if (daPosare == null) {
 			io.mostraMsg("Non hai questo oggetto nella borsa");
+			return;
+		}
+		stanzaCorrente.addAttrezzo(daPosare);
+		borsa.removeAttrezzo(daPosare.getNome());
 	}
-
-	@Override
-	public String getNome() {
-		return NOME_COMANDO;
-	}
-
-	@Override
-	public String getParam() {
-		return parametro;
-	}
-
 }

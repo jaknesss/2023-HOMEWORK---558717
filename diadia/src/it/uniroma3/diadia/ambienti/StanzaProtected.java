@@ -1,7 +1,7 @@
 package it.uniroma3.diadia.ambienti;
 
-import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.io.IO;
 
 public class StanzaProtected {
 

@@ -6,6 +6,8 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandi;
 import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
+import it.uniroma3.diadia.io.IO;
+import it.uniroma3.diadia.io.IOConsole;
 import it.uniroma3.personaggi.Cane;
 import it.uniroma3.personaggi.Mago;
 import it.uniroma3.personaggi.Strega;

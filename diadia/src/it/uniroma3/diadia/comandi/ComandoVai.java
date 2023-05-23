@@ -1,21 +1,20 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.io.IO;
 
-public class ComandoVai implements Comando {
+public class ComandoVai extends AbstractComando{
 
-	private final String NOME_COMANDO = "vai";
-	private String direzione;
+	private static final String NOME_COMANDO = "vai";
 
-	@Override
-	public void setParametro(String direzione) {
-		this.direzione = direzione;
+	public ComandoVai() {
+		super.setNome(NOME_COMANDO);
 	}
-
+	
 	@Override
 	public void esegui(Partita partita, IO io) {
+		String direzione = this.getParam();
 		if (direzione == null) {
 			io.mostraMsg("Dove vuoi andare? Specifica la direzione");
 			return;
@@ -28,15 +27,5 @@ public class ComandoVai implements Comando {
 		}
 		partita.setStanzaCorrente(prossimaStanza);
 		partita.getGiocatore().setCfu(partita.getGiocatore().getCfu() - 1);
-	}
-
-	@Override
-	public String getNome() {
-		return NOME_COMANDO;
-	}
-
-	@Override
-	public String getParam() {
-		return direzione;
 	}
 }

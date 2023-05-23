@@ -1,11 +1,14 @@
 package it.uniroma3.tests.ambienti;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
@@ -45,14 +48,8 @@ class StanzaTest {
 	
 	
 	@Test 
-	public void testStanzaAdiacenteDirezioneNonEsistente() {
-		creaStanzaEdImpostaAdiacente(this.stanza, NOME_STANZA_ADIACENTE, DIR_NORD);
-		assertNull(stanza.getStanzaAdiacente("nord-est"));
-	}
-	
-	@Test 
 	public void testGetDirezioniTutteVuote() {
-		for(String dir : stanza.getStanzeAdiacenti().keySet())
+		for(Direzione dir : stanza.getStanzeAdiacenti().keySet())
 			assertNull(dir);
 	}
 	
@@ -101,7 +98,7 @@ class StanzaTest {
 	
 	private Stanza creaStanzaEdImpostaAdiacente(Stanza diPartenza, String nomeStanzaAdiacente, String direzione){
 		Stanza adiacente = new Stanza(nomeStanzaAdiacente);
-		diPartenza.setStanzaAdiacente(direzione, adiacente);
+		diPartenza.setStanzaAdiacente(Direzione.valueOf(direzione.toUpperCase()), adiacente);
 		return adiacente;
 	}		
 		

@@ -51,7 +51,7 @@ public class LabirintoBuilder implements Labirinto {
 		stanzaACuiAggiungereAdiacenza = stanze.get(stanzaCorr);
 		if (stanzaACuiAggiungereAdiacenza.getStanzeAdiacenti().size() == Stanza.MAX_STANZE_ADIACENTI)
 			return this;
-		stanzaACuiAggiungereAdiacenza.setStanzaAdiacente(dir, stanze.get(stanzaAdiacente));
+		stanzaACuiAggiungereAdiacenza.setStanzaAdiacente(Direzione.valueOf(dir.toUpperCase()), stanze.get(stanzaAdiacente));
 		return this;
 	}
 
@@ -73,8 +73,8 @@ public class LabirintoBuilder implements Labirinto {
 		return this;
 	}
 	
-	public LabirintoBuilder addStanzaBloccata(String nomeStanza, String direzione, String nomeOggetto) {
-		Stanza bloccata = new StanzaBloccata(nomeStanza, direzione, nomeOggetto);
+	public LabirintoBuilder addStanzaBloccata(String nomeStanza, String dir, String nomeOggetto) {
+		Stanza bloccata = new StanzaBloccata(nomeStanza, Direzione.valueOf(dir.toUpperCase()), nomeOggetto);
 		stanze.put(nomeStanza, bloccata);
 		ultimaStanzaAggiunta = bloccata;
 		return this;

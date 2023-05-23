@@ -1,10 +1,13 @@
 package it.uniroma3.tests.ambienti;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.ambienti.StanzaBloccata;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
@@ -15,7 +18,7 @@ class StanzaBloccataTest {
 	private Stanza stanzaVincente;
 	private Stanza stanzaCorrente;
 	private Attrezzo attrezzoChiave;
-	private final String DIR_BLOCCATA = "nord";
+	private Direzione DIR_BLOCCATA = Direzione.NORD;
 	private final String NOME_STANZA = "Ingresso";
 	private final String NOME_OGG_CHIAVE = "lanterna";
 	private final int PESO_ATTR = 1;
@@ -34,7 +37,7 @@ class StanzaBloccataTest {
 	void testStanzaContieneOggChiave() {
 		stanzaIniziale.addAttrezzo(attrezzoChiave);
 		assertTrue(stanzaIniziale.hasAttrezzo(NOME_OGG_CHIAVE));
-		stanzaCorrente = stanzaIniziale.getStanzaAdiacente(DIR_BLOCCATA);
+		stanzaCorrente = stanzaIniziale.getStanzaAdiacente("nord");
 		assertEquals(stanzaVincente, stanzaCorrente);
 	}
 	
@@ -43,14 +46,14 @@ class StanzaBloccataTest {
 		Attrezzo attrSbagliato = new Attrezzo("sbagliato", PESO_ATTR);
 		stanzaIniziale.addAttrezzo(attrSbagliato);
 		assertTrue(stanzaIniziale.hasAttrezzo(attrSbagliato.getNome()));
-		stanzaCorrente = stanzaIniziale.getStanzaAdiacente(DIR_BLOCCATA);
+		stanzaCorrente = stanzaIniziale.getStanzaAdiacente("nord");
 		assertEquals(stanzaIniziale, stanzaCorrente);
 	}
 	
 	@Test
 	void testStanzaNonContieneOggChiave() {
 		assertFalse(stanzaIniziale.hasAttrezzo(NOME_OGG_CHIAVE));
-		stanzaCorrente = stanzaIniziale.getStanzaAdiacente(DIR_BLOCCATA);
+		stanzaCorrente = stanzaIniziale.getStanzaAdiacente("nord");
 		assertEquals(stanzaIniziale, stanzaCorrente);
 	}
 }

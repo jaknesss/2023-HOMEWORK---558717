@@ -5,9 +5,9 @@ import it.uniroma3.diadia.io.IO;
 public class StanzaBloccata extends Stanza {
 
 	private String nomeOggettoChiave;
-	private String direzioneBloccata;
+	private Direzione direzioneBloccata;
 
-	public StanzaBloccata(String nome, String direzioneBloccata, String nomeOggettoChiave) {
+	public StanzaBloccata(String nome, Direzione direzioneBloccata, String nomeOggettoChiave) {
 		super(nome);
 		this.nomeOggettoChiave = nomeOggettoChiave;
 		this.direzioneBloccata = direzioneBloccata;
@@ -24,15 +24,16 @@ public class StanzaBloccata extends Stanza {
 		return this.nomeOggettoChiave;
 	}
 	
-	public String getDirezioneBloccata() {
+	public Direzione getDirezioneBloccata() {
 		return direzioneBloccata;
 	}
 	
 	@Override
-	public Stanza getStanzaAdiacente(String direzione) {
-		if (direzioneBloccata.equals(direzione) && !hasAttrezzo(getNomeAttrezzoChiave()))
+	public Stanza getStanzaAdiacente(String dir) {
+		if (direzioneBloccata.equals(Direzione.valueOf(dir.toUpperCase())) 
+			&& !hasAttrezzo(getNomeAttrezzoChiave()))
 			return this;
-		return super.getStanzaAdiacente(direzione);
+		return super.getStanzaAdiacente(dir);
 	}
 	
 	@Override

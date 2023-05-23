@@ -15,7 +15,7 @@ public class Stanza implements Comparable<Stanza>{
 	private String nome;
 	public static final int MAX_STANZE_ADIACENTI = 4;
 	private Map<String, Attrezzo> attrezzi;
-	private Map<String, Stanza> stanzeAdiacenti;
+	private Map<Direzione, Stanza> stanzeAdiacenti;
 	private AbstractPersonaggio personaggio;
 	
 	public Stanza(String nome) {
@@ -28,8 +28,8 @@ public class Stanza implements Comparable<Stanza>{
 		return nome;
 	}
 
-	public List<String> getDirezioni(){
-		return new LinkedList<String>(stanzeAdiacenti.keySet()); 
+	public LinkedList<Direzione> getDirezioni(){
+		return new LinkedList<Direzione>(stanzeAdiacenti.keySet()); 
 	}
 
 	
@@ -46,7 +46,7 @@ public class Stanza implements Comparable<Stanza>{
 	}
 	
 	
-	public Map<String, Stanza> getStanzeAdiacenti(){
+	public Map<Direzione, Stanza> getStanzeAdiacenti(){
 		return stanzeAdiacenti;
 	}
 	
@@ -54,12 +54,12 @@ public class Stanza implements Comparable<Stanza>{
 		return new LinkedList<Stanza>(stanzeAdiacenti.values());
 	}
 	
-	public Stanza getStanzaAdiacente(String direzione) {
+	public Stanza getStanzaAdiacente(String dir) {
 		if(stanzeAdiacenti.isEmpty()) return null;
-		return stanzeAdiacenti.get(direzione);
+		return stanzeAdiacenti.get(Direzione.valueOf(dir.toUpperCase()));
 	}
 
-	public void setStanzaAdiacente(String direzione, Stanza stanza) {
+	public void setStanzaAdiacente(Direzione direzione, Stanza stanza) {
 		if(stanzeAdiacenti.size() == MAX_STANZE_ADIACENTI) return;	
 		this.stanzeAdiacenti.put(direzione, stanza);
 	}
@@ -127,7 +127,7 @@ public class Stanza implements Comparable<Stanza>{
 		StringBuilder risultato = new StringBuilder();
 		risultato.append("\n" + this.nome);
 		risultato.append("\nUscite: ");
-		for (String direzione : stanzeAdiacenti.keySet())
+		for (Direzione direzione : stanzeAdiacenti.keySet())
 			risultato.append("[" + direzione + "] ");
 		risultato.append("\nNPC: ");
 		if(this.getPersonaggio() != null)

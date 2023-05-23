@@ -12,9 +12,10 @@ import java.util.TreeSet;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.attrezzi.ComparatoreAttrezziPerPeso;
+import it.uniroma3.diadia.io.ConfigurazioniIniziali;
 
 public class Borsa {
-	private final static int DEFAULT_PESO_MAX_BORSA = 10;
+	private final static int DEFAULT_PESO_MAX_BORSA = ConfigurazioniIniziali.getPesoMax();
 	private Map<String, Attrezzo> attrezzi;
 	private int pesoMax;
 	private int pesoCorrente;

@@ -39,7 +39,7 @@ public class Strega extends AbstractPersonaggio{
 	public String toString() {
 		StringBuilder desc = new StringBuilder();
 		desc.append(Strega.DESCRIZIONE);
-		desc.append("-Ha con se: ");
+		desc.append("\n-Ha con se: ");
 		if(this.getAttrezzo() != null) 
 			desc.append(this.getAttrezzo().toString());
 		return desc.toString();

@@ -13,6 +13,7 @@ public class ComandoFine extends AbstractComando{
 	
 	@Override
 	public void esegui(Partita partita, IO io) {
+		partita.setFinita();
 		io.mostraMsg("Grazie di aver giocato!");
 	}
 }

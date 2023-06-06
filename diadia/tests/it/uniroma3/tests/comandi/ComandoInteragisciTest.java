@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+import it.uniroma3.diadia.ambienti.Labirinto.LabirintoBuilder;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandi;
@@ -36,7 +36,8 @@ class ComandoInteragisciTest {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		lab = new LabirintoBuilder().addStanzaIniziale("iniziale");
+		lab = Labirinto.newBuilder()
+			  .addStanzaIniziale("iniziale");
 		io = new IOConsole();
 		partita = new Partita(lab, io);
 		attrezzo = new Attrezzo("ascia",1);

@@ -12,7 +12,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+import it.uniroma3.diadia.ambienti.Labirinto.LabirintoBuilder;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.personaggi.Cane;
 import it.uniroma3.personaggi.Mago;
@@ -33,8 +33,8 @@ public class CaricatoreLabirinto {
 	private static final String USCITE_MARKER = "Uscite:";
 	private static final int PESO_ATTR_MAGO = 4;
 
-	private LineNumberReader reader;
 	private Set<String> stanze;
+	private LineNumberReader reader;
 	private LabirintoBuilder builder;
 
 	public CaricatoreLabirinto(String nomeFile) throws FileNotFoundException {
@@ -44,7 +44,7 @@ public class CaricatoreLabirinto {
 	public CaricatoreLabirinto(Reader reader) {
 		this.stanze = new HashSet<>();
 		this.reader = new LineNumberReader(reader);
-		this.builder = new LabirintoBuilder();
+		this.builder = Labirinto.newBuilder();
 	}
 
 	public void carica() throws FormatoFileNonValidoException {
@@ -198,8 +198,7 @@ public class CaricatoreLabirinto {
 	}
 
 	private void leggiInizialeEvincente() throws FormatoFileNonValidoException {
-		String nomeStanzaIniziale = null;
-		nomeStanzaIniziale = this.leggiRigaCheCominciaPer(STANZA_INIZIALE_MARKER);
+		String nomeStanzaIniziale = this.leggiRigaCheCominciaPer(STANZA_INIZIALE_MARKER);
 		stanze.add(nomeStanzaIniziale);
 		builder.addStanzaIniziale(nomeStanzaIniziale);
 		String nomeStanzaVincente = this.leggiRigaCheCominciaPer(STANZA_VINCENTE_MARKER);
@@ -209,7 +208,6 @@ public class CaricatoreLabirinto {
 
 	private void leggiECollocaAttrezzi() throws FormatoFileNonValidoException {
 		String specificheAttrezzi = this.leggiRigaCheCominciaPer(ATTREZZI_MARKER);
-
 		for (String specificaAttrezzo : separaStringheAlleVirgole(specificheAttrezzi)) {
 			String nomeAttrezzo = null;
 			String pesoAttrezzo = null;

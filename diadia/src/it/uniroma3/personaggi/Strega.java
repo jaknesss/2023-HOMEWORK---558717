@@ -19,7 +19,7 @@ public class Strega extends AbstractPersonaggio{
 		StringBuilder msg= new StringBuilder();
 		if(this.haSalutato()) {
 			partita.setStanzaCorrente(partita.getStanzaCorrente().getStanzaAdiacenteMaxOggetti());
-			msg.append("Visto che sei stato gentile ti ho fatto un bel regalo\n");
+			msg.append("<<Visto che sei stato gentile ti ho fatto un bel regalo>>\n");
 			msg.append(MSG_SALUTATA);
 		}else {
 			partita.setStanzaCorrente(partita.getStanzaCorrente().getStanzaAdiacenteMinOggetti());

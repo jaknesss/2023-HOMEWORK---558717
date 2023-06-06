@@ -93,6 +93,7 @@ class CaricatoreLabirintoTest {
 		cl = new CaricatoreLabirinto(new StringReader(bilocaleConAttrezzi));
 		cl.carica();
 		Labirinto lab = cl.getLabirinto();
+		System.out.println(lab.getStanzaVincente());
 		assertEquals(new Attrezzo("osso", 1), lab.getStanzaIniziale().getAttrezzo("osso"));
 		assertEquals(new Attrezzo("ascia", 123), lab.getStanzaVincente().getAttrezzo("ascia"));
 	}

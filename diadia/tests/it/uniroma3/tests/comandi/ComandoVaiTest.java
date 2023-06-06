@@ -6,8 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.Partita;
-import it.uniroma3.diadia.ambienti.Direzione;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.Labirinto.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandi;
@@ -20,7 +20,7 @@ class ComandoVaiTest {
 	private FabbricaDiComandi factory;
 	private Comando comando;
 	private IO io;
-	private LabirintoBuilder lab;
+	private Labirinto lab;
 	private Partita partita;
 	private Stanza stanzaCorrente;
 	private Stanza stanzaIniziale;
@@ -32,7 +32,7 @@ class ComandoVaiTest {
 	@BeforeEach
 	void setUp() {
 		io = new IOConsole();
-		lab = new LabirintoBuilder()
+		lab = Labirinto.newBuilder()
 				  .addStanzaIniziale("atrio")
 				  .addStanza("biblioteca")
 				  .addAdiacenza("atrio", "biblioteca", DIREZIONE);

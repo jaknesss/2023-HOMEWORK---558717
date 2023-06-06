@@ -19,11 +19,11 @@ public class ComandoRegala extends AbstractComando {
 		AbstractPersonaggio p = partita.getStanzaCorrente().getPersonaggio();
 		String attrDaRegalare = this.getParam();
 		if (p == null) {
-			io.mostraMsg("Ma qui non c'è nessuno!");
+			io.mostraMsg("Ma qui non c'è nessuno!\n");
 			return;
 		}
 		if (!g.getBorsa().hasAttrezzo(attrDaRegalare)) {
-			io.mostraMsg("Non hai questo oggetto nella Borsa");
+			io.mostraMsg("Non hai questo oggetto nella Borsa\n");
 			return;
 		}
 		io.mostraMsg(p.riceviRegalo(g.getBorsa().getAttrezzo(attrDaRegalare), partita));

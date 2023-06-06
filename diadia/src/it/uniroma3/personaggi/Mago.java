@@ -30,7 +30,7 @@ public class Mago extends AbstractPersonaggio {
 	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
 		Attrezzo attrModificato = new Attrezzo(attrezzo.getNome(), attrezzo.getPeso()/2);
 		partita.getStanzaCorrente().addAttrezzo(attrModificato);
-		return "Ecco a te!\n";
+		return "<<Ecco a te!>>\n";
 	}
 	
 	

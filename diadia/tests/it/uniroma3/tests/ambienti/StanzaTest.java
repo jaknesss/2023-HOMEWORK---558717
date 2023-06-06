@@ -29,14 +29,17 @@ class StanzaTest {
 
 	@Test
 	public void testSetStanzaAdiacenteSingola() {
-		Stanza adiacente = creaStanzaEdImpostaAdiacente(this.stanza, NOME_STANZA_ADIACENTE, DIR_NORD);
+		Stanza adiacente = new Stanza(NOME_STANZA_ADIACENTE);
+		stanza.setStanzaAdiacente(Direzione.NORD, adiacente);
 		assertEquals(adiacente, stanza.getStanzaAdiacente("nord"));
 	}
 	
 	@Test
 	public void testCambioStanzaAdiacente() {
-		creaStanzaEdImpostaAdiacente(this.stanza, "daCambiare", DIR_NORD);
-		Stanza adiacente = creaStanzaEdImpostaAdiacente(this.stanza, "daCambiare", DIR_NORD);
+		Stanza daCambiare = new Stanza("daCambiare");
+		stanza.setStanzaAdiacente(Direzione.NORD, daCambiare);
+		Stanza adiacente = new Stanza("nuovaAdiacente");
+		stanza.setStanzaAdiacente(Direzione.NORD, adiacente);
 		assertEquals(adiacente, stanza.getStanzaAdiacente(DIR_NORD));
 	}
 	
@@ -80,28 +83,25 @@ class StanzaTest {
 	
 	@Test
 	public void testStanzaAdiacenteMaxAttrezzi() {
-		Stanza ad1 = creaStanzaEdImpostaAdiacente(stanza, "ad1", DIR_NORD);
-		Stanza ad2 = creaStanzaEdImpostaAdiacente(stanza, "ad2", "sud");
+		Stanza ad1 = new Stanza("adiacente");
+		stanza.setStanzaAdiacente(Direzione.NORD, ad1);
 		ad1.addAttrezzo(attrezzo);
-		ad1.addAttrezzo(new Attrezzo("ascia", 1));
+		ad1.addAttrezzo(new Attrezzo("ascia", 2));
 		assertEquals(ad1, stanza.getStanzaAdiacenteMaxOggetti());
 	}
 	
 	@Test
 	public void testStanzaAdiacenteMinAttrezzi() {
-		Stanza ad1 = creaStanzaEdImpostaAdiacente(stanza, "ad1", DIR_NORD);
-		Stanza ad2 = creaStanzaEdImpostaAdiacente(stanza, "ad2", "sud");
+		Stanza ad1 = new Stanza(NOME_STANZA_ADIACENTE);
+		Stanza ad2 = new Stanza("secondaAd");
+		stanza.setStanzaAdiacente(Direzione.NORD, ad1);
+		stanza.setStanzaAdiacente(Direzione.EST, ad2);
+		ad1.setStanzaAdiacente(Direzione.SUD, stanza);
 		ad1.addAttrezzo(attrezzo);
 		ad1.addAttrezzo(new Attrezzo("ascia", 1));
 		assertEquals(ad2, stanza.getStanzaAdiacenteMinOggetti());
 	}
 	
-	private Stanza creaStanzaEdImpostaAdiacente(Stanza diPartenza, String nomeStanzaAdiacente, String direzione){
-		Stanza adiacente = new Stanza(nomeStanzaAdiacente);
-		diPartenza.setStanzaAdiacente(Direzione.valueOf(direzione.toUpperCase()), adiacente);
-		return adiacente;
-	}		
-		
 }
 
 

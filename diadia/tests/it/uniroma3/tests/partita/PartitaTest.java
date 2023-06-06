@@ -1,6 +1,5 @@
 package it.uniroma3.tests.partita;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -10,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.giocatore.Giocatore;
 import it.uniroma3.diadia.io.IO;
@@ -28,7 +26,7 @@ class PartitaTest {
 	@BeforeEach
 	public void setUp() {
 		io = new IOConsole();
-		lab = new LabirintoBuilder()
+		lab = Labirinto.newBuilder()
 				  .addStanzaIniziale(INGRESSO)
 				  .addStanzaVincente(USCITA)
 				  .addAdiacenza(INGRESSO, USCITA, "nord");

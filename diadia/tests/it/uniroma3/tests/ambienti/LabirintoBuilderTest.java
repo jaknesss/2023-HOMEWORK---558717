@@ -1,7 +1,6 @@
 package it.uniroma3.tests.ambienti;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -15,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+import it.uniroma3.diadia.ambienti.Labirinto.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.ambienti.StanzaBloccata;
 import it.uniroma3.diadia.ambienti.StanzaBuia;
@@ -29,7 +28,7 @@ public class LabirintoBuilderTest {
 
 	@BeforeEach
 	public void setUp() throws Exception {
-		lab = new LabirintoBuilder();
+		lab = Labirinto.newBuilder();
 	}
 
 	@Test
@@ -67,9 +66,10 @@ public class LabirintoBuilderTest {
 
 	@Test
 	public void testBilocale() {
-		Labirinto bilocale = lab.addStanzaIniziale(nomeStanzaIniziale)
-				.addStanzaVincente(nomeStanzaVincente).addAdiacenza(nomeStanzaIniziale, nomeStanzaVincente, "nord")
-				.addAdiacenza(nomeStanzaVincente, nomeStanzaIniziale, "sud").getLabirinto();
+		Labirinto bilocale = lab
+				.addStanzaIniziale(nomeStanzaIniziale)
+				.addStanzaVincente(nomeStanzaVincente)
+				.addAdiacenza(nomeStanzaIniziale, nomeStanzaVincente, "nord").getLabirinto();
 		assertEquals(bilocale.getStanzaVincente(), bilocale.getStanzaIniziale().getStanzaAdiacente("nord"));
 		assertEquals(Collections.singletonList(Direzione.NORD), bilocale.getStanzaIniziale().getDirezioni());
 		assertEquals(Collections.singletonList(Direzione.SUD), bilocale.getStanzaVincente().getDirezioni());

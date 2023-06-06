@@ -1,7 +1,6 @@
 package it.uniroma3.diadia;
 
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandi;
@@ -48,7 +47,7 @@ public class DiaDia {
 
 	public static void main(String[] argc) {
 		IO io = new IOConsole();
-		Labirinto lab = new LabirintoBuilder()
+		Labirinto lab = Labirinto.newBuilder()
 							.addStanzaIniziale("LabCampusOne")
 							.addAttrezzo("bomba", 1)
 							.addAttrezzo("osso", 1)

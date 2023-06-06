@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.Partita;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.Comando;
@@ -30,13 +30,13 @@ class ComandoPrendiTest {
 	private Stanza stanzaCorrente;
 	private Borsa borsa;
 	private Attrezzo attrezzo;
-	private LabirintoBuilder lab;
+	private Labirinto lab;
 	private IO io;
 
 	@BeforeEach
 	void setUp() throws Exception {
 		io = new IOConsole();
-		lab = new LabirintoBuilder().addStanzaIniziale(NOME_STANZA);
+		lab = Labirinto.newBuilder().addStanzaIniziale(NOME_STANZA);
 		partita = new Partita(lab, io);
 		factory = new FabbricaDiComandiRiflessiva();
 		attrezzo = new Attrezzo(NOME_OGGETTO, PESO_OGGETTO);

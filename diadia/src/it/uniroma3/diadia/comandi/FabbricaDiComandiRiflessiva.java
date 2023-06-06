@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 
 	private Comando comando;
-	String nomeComando;
-	String parametro;
+	private String nomeComando;
+	private String parametro;
 
 	@Override
 	public Comando costruisciComando(String istruzione) {
@@ -26,14 +26,14 @@ public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 	}
 
 	public String getNome() {
-		return nomeComando;
+		return this.nomeComando;
 	}
 
 	public String getParam() {
-		return parametro;
+		return this.parametro;
 	}
 	@Override
 	public Comando getComando() {
-		return comando;
+		return this.comando;
 	}
 }
